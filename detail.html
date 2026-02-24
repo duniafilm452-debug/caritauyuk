@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detail Konten — Cari Tau Yuk!</title>
+  <meta name="description" content="Detail konten Cari Tau Yuk!"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <!-- Supabase JS v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/detail.css"/>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════
+       HEADER
+       ══════════════════════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-logo" href="index.html">Cari Tau <span>Yuk!</span></a>
+      <a class="back-btn" href="index.html">
+        <svg width="16" height="16" fill="none" stroke="currentColor"
+             stroke-width="2.5" viewBox="0 0 24 24">
+          <path d="M19 12H5M12 5l-7 7 7 7"/>
+        </svg>
+        Kembali
+      </a>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════
+       LOADING
+       ══════════════════════════════════════════════════════ -->
+  <div class="page-loading" id="pageLoading">
+    <div class="spinner"></div>
+    <span>Memuat konten…</span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       MAIN LAYOUT
+       ══════════════════════════════════════════════════════ -->
+  <div class="detail-wrapper" id="detailWrapper" style="display:none">
+
+    <!-- ── KOLOM KIRI: Konten utama ─────────────────────── -->
+    <main class="detail-main">
+
+      <!-- Media -->
+      <div class="detail-media" id="detailMedia"></div>
+
+      <!-- Info -->
+      <div class="detail-info">
+        <div id="detailBadge"></div>
+        <h1 class="detail-title" id="detailTitle"></h1>
+        <p  class="detail-meta"  id="detailMeta"></p>
+
+        <!-- Iklan di bawah judul (misal: AdSense horizontal) -->
+        <div class="ad-slot ad-slot--horizontal" id="adTop">
+          <span class="ad-label">Advertisement</span>
+          <!-- Paste kode AdSense Anda di sini -->
+          <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+          <!-- <ins class="adsbygoogle" ...></ins> -->
+        </div>
+
+        <div class="detail-tags" id="detailTags"></div>
+        <p class="detail-desc" id="detailDesc"></p>
+
+        <!-- Affiliate Block -->
+        <div class="affiliate-block hidden" id="affiliateBlock">
+          <span class="aff-badge" id="affiliateBadge">Partner</span>
+          <div class="aff-text">
+            <p id="affiliateDesc"></p>
+          </div>
+          <a class="aff-link" id="affiliateLink" href="#"
+             target="_blank" rel="noopener noreferrer sponsored">
+            <svg width="15" height="15" fill="none" stroke="currentColor"
+                 stroke-width="2.5" viewBox="0 0 24 24">
+              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+            <span id="affiliateLinkLabel">Kunjungi</span>
+          </a>
+        </div>
+
+        <!-- Iklan di bawah deskripsi -->
+        <div class="ad-slot ad-slot--horizontal" id="adMid">
+          <span class="ad-label">Advertisement</span>
+          <!-- Paste kode AdSense Anda di sini -->
+        </div>
+
+      </div><!-- /detail-info -->
+    </main>
+
+    <!-- ── KOLOM KANAN: Sidebar ──────────────────────────── -->
+    <aside class="detail-sidebar">
+
+      <!-- Iklan sidebar -->
+      <div class="ad-slot ad-slot--sidebar" id="adSidebar">
+        <span class="ad-label">Advertisement</span>
+        <!-- Paste kode AdSense Anda di sini -->
+      </div>
+
+      <!-- Konten terkait -->
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">Konten Terkait</h3>
+        <div id="relatedContent" class="related-list">
+          <div class="spinner" style="margin:1rem auto"></div>
+        </div>
+      </div>
+
+      <!-- Iklan sidebar bawah -->
+      <div class="ad-slot ad-slot--sidebar" id="adSidebar2">
+        <span class="ad-label">Advertisement</span>
+        <!-- Paste kode AdSense Anda di sini -->
+      </div>
+
+    </aside>
+
+  </div><!-- /detail-wrapper -->
+
+  <!-- ══════════════════════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    Dibuat dengan ❤️ oleh <span>Cari Tau Yuk!</span> &mdash; Belajar itu menyenangkan.
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/detail.js"></script>
+
+</body>
+</html>
