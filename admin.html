@@ -19,7 +19,7 @@
     <div class="spinner"></div>
 </div>
 
-<!-- ── Login ──────────────────────────────────────────────── -->
+<!-- LOGIN -->
 <div id="loginSection" class="login-container">
     <div class="login-card">
         <div class="login-header">
@@ -30,13 +30,11 @@
         <form id="loginForm">
             <div class="form-group" style="margin-bottom:1rem">
                 <label class="form-label"><i class="fas fa-envelope"></i> Email</label>
-                <input type="email" id="email" class="form-control"
-                       placeholder="admin@example.com" required autocomplete="email">
+                <input type="email" id="email" class="form-control" placeholder="admin@example.com" required autocomplete="email">
             </div>
             <div class="form-group" style="margin-bottom:1.5rem">
                 <label class="form-label"><i class="fas fa-lock"></i> Password</label>
-                <input type="password" id="password" class="form-control"
-                       placeholder="••••••••" required autocomplete="current-password">
+                <input type="password" id="password" class="form-control" placeholder="••••••••" required autocomplete="current-password">
             </div>
             <button type="submit" class="btn btn-primary btn-block">
                 <i class="fas fa-sign-in-alt"></i> Masuk
@@ -48,18 +46,17 @@
     </div>
 </div>
 
-<!-- ── Admin Panel ────────────────────────────────────────── -->
+<!-- ADMIN PANEL -->
 <div id="adminSection" class="admin-container hidden">
 
-    <!-- Sidebar Overlay (mobile) -->
+    <!-- Sidebar overlay (mobile) -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- Sidebar -->
     <aside class="admin-sidebar" id="adminSidebar">
         <div class="sidebar-header">
             <a href="index.html" class="sidebar-logo">
-                <i class="fas fa-compass"></i>
-                <span>Cari tau yuk</span>
+                <i class="fas fa-compass"></i><span>Cari tau yuk</span>
             </a>
             <div class="sidebar-user">
                 <div class="user-avatar" id="userAvatar">A</div>
@@ -71,36 +68,12 @@
         </div>
 
         <ul class="admin-nav">
-            <li class="admin-nav-item">
-                <a href="#" class="admin-nav-link active">
-                    <i class="fas fa-chart-pie"></i><span>Dashboard</span>
-                </a>
-            </li>
-            <li class="admin-nav-item">
-                <a href="#" class="admin-nav-link">
-                    <i class="fas fa-newspaper"></i><span>Kelola Konten</span>
-                </a>
-            </li>
-            <li class="admin-nav-item">
-                <a href="#" class="admin-nav-link">
-                    <i class="fas fa-tags"></i><span>Kategori</span>
-                </a>
-            </li>
-            <li class="admin-nav-item">
-                <a href="#" class="admin-nav-link">
-                    <i class="fas fa-users"></i><span>Pengguna</span>
-                </a>
-            </li>
-            <li class="admin-nav-item">
-                <a href="#" class="admin-nav-link">
-                    <i class="fas fa-chart-bar"></i><span>Statistik</span>
-                </a>
-            </li>
-            <li class="admin-nav-item">
-                <a href="#" class="admin-nav-link">
-                    <i class="fas fa-cog"></i><span>Pengaturan</span>
-                </a>
-            </li>
+            <li class="admin-nav-item"><a href="#" class="admin-nav-link active"><i class="fas fa-chart-pie"></i><span>Dashboard</span></a></li>
+            <li class="admin-nav-item"><a href="#" class="admin-nav-link"><i class="fas fa-newspaper"></i><span>Kelola Konten</span></a></li>
+            <li class="admin-nav-item"><a href="#" class="admin-nav-link"><i class="fas fa-tags"></i><span>Kategori</span></a></li>
+            <li class="admin-nav-item"><a href="#" class="admin-nav-link"><i class="fas fa-users"></i><span>Pengguna</span></a></li>
+            <li class="admin-nav-item"><a href="#" class="admin-nav-link"><i class="fas fa-chart-bar"></i><span>Statistik</span></a></li>
+            <li class="admin-nav-item"><a href="#" class="admin-nav-link"><i class="fas fa-cog"></i><span>Pengaturan</span></a></li>
         </ul>
 
         <div class="sidebar-footer">
@@ -115,7 +88,7 @@
 
         <!-- Mobile Topbar -->
         <div class="mobile-topbar">
-            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle menu">
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Buka menu">
                 <span></span><span></span><span></span>
             </button>
             <span class="mobile-title">Dashboard</span>
@@ -126,9 +99,7 @@
 
         <!-- Desktop Header -->
         <div class="admin-header">
-            <h1 class="admin-title">
-                <i class="fas fa-chart-pie"></i> Dashboard
-            </h1>
+            <h1 class="admin-title"><i class="fas fa-chart-pie"></i> Dashboard</h1>
             <div class="admin-actions">
                 <button id="addContentBtn" class="btn btn-primary">
                     <i class="fas fa-plus"></i> Tambah Konten
@@ -139,7 +110,7 @@
         <!-- Stats -->
         <div id="statsContainer" class="stats-grid"></div>
 
-        <!-- Filter Bar -->
+        <!-- Filter -->
         <div class="filter-bar">
             <div class="filter-search">
                 <i class="fas fa-search"></i>
@@ -161,31 +132,28 @@
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th>Thumbnail</th>
-                        <th>Judul</th>
-                        <th>Kategori</th>
-                        <th>Tahun</th>
-                        <th>Likes</th>
-                        <th>Dibuat</th>
-                        <th>Aksi</th>
+                        <th>Thumbnail</th><th>Judul</th><th>Kategori</th>
+                        <th>Tahun</th><th>Likes</th><th>Dibuat</th><th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody id="contentTable"></tbody>
             </table>
         </div>
-    </main>
-</div>
 
-<!-- ── Form Modal ─────────────────────────────────────────── -->
+    </main>
+</div><!-- /adminSection -->
+
+<!-- FORM MODAL -->
 <div id="formModal" class="modal">
     <div class="modal-content modal-large">
         <div class="modal-header">
             <h3 id="modalTitle" class="modal-title">Tambah Konten Baru</h3>
-            <button class="modal-close" aria-label="Tutup">&times;</button>
+            <button class="modal-close" id="formModalClose" aria-label="Tutup">&times;</button>
         </div>
         <form id="contentForm">
             <input type="hidden" id="contentId">
             <div class="modal-body">
+
                 <!-- Info Utama -->
                 <div class="form-section">
                     <h4 class="form-section-title"><i class="fas fa-info-circle"></i> Info Utama</h4>
@@ -216,14 +184,54 @@
                             <label class="form-label"><i class="fas fa-star"></i> Rating</label>
                             <input type="number" id="rating" class="form-control" step="0.1" min="0" max="10">
                         </div>
+
+                        <!-- Rich Text Editor -->
                         <div class="form-group full-width">
                             <label class="form-label"><i class="fas fa-align-left"></i> Deskripsi</label>
-                            <textarea id="description" class="form-control" rows="4"></textarea>
+                            <div class="rte-wrapper">
+                                <div class="rte-toolbar" id="rteToolbar">
+                                    <div class="rte-group">
+                                        <button type="button" class="rte-btn" data-cmd="formatBlock" data-val="H2" title="Judul Besar">H2</button>
+                                        <button type="button" class="rte-btn" data-cmd="formatBlock" data-val="H3" title="Judul Kecil">H3</button>
+                                        <button type="button" class="rte-btn" data-cmd="formatBlock" data-val="P"  title="Paragraf Normal"><i class="fas fa-paragraph"></i></button>
+                                    </div>
+                                    <div class="rte-divider"></div>
+                                    <div class="rte-group">
+                                        <button type="button" class="rte-btn" data-cmd="bold"          title="Tebal (Ctrl+B)"><b>B</b></button>
+                                        <button type="button" class="rte-btn" data-cmd="italic"        title="Miring (Ctrl+I)"><i>I</i></button>
+                                        <button type="button" class="rte-btn" data-cmd="underline"     title="Garis Bawah (Ctrl+U)"><u>U</u></button>
+                                        <button type="button" class="rte-btn" data-cmd="strikeThrough" title="Coret"><s>S</s></button>
+                                    </div>
+                                    <div class="rte-divider"></div>
+                                    <div class="rte-group">
+                                        <button type="button" class="rte-btn" data-cmd="justifyLeft"   title="Rata Kiri"><i class="fas fa-align-left"></i></button>
+                                        <button type="button" class="rte-btn" data-cmd="justifyCenter" title="Rata Tengah"><i class="fas fa-align-center"></i></button>
+                                        <button type="button" class="rte-btn" data-cmd="justifyRight"  title="Rata Kanan"><i class="fas fa-align-right"></i></button>
+                                    </div>
+                                    <div class="rte-divider"></div>
+                                    <div class="rte-group">
+                                        <button type="button" class="rte-btn" data-cmd="insertUnorderedList" title="Daftar Poin"><i class="fas fa-list-ul"></i></button>
+                                        <button type="button" class="rte-btn" data-cmd="insertOrderedList"   title="Daftar Bernomor"><i class="fas fa-list-ol"></i></button>
+                                        <button type="button" class="rte-btn" data-cmd="formatBlock" data-val="BLOCKQUOTE" title="Kutipan"><i class="fas fa-quote-right"></i></button>
+                                    </div>
+                                    <div class="rte-divider"></div>
+                                    <div class="rte-group">
+                                        <button type="button" class="rte-btn" id="rteLinkBtn"         title="Sisipkan Link"><i class="fas fa-link"></i></button>
+                                        <button type="button" class="rte-btn" data-cmd="unlink"       title="Hapus Link"><i class="fas fa-unlink"></i></button>
+                                        <button type="button" class="rte-btn" data-cmd="removeFormat" title="Hapus Format"><i class="fas fa-remove-format"></i></button>
+                                    </div>
+                                    <div class="rte-charcount" id="rteCharCount">0 karakter</div>
+                                </div>
+                                <div class="rte-editor" id="rteEditor" contenteditable="true"
+                                     data-placeholder="Tulis deskripsi konten di sini..."></div>
+                                <input type="hidden" id="description" name="description">
+                            </div>
                         </div>
+
                         <div class="form-group full-width">
                             <label class="form-label"><i class="fas fa-tags"></i> Tags</label>
                             <div class="tags-input-container">
-                                <input type="text" id="tags" class="tags-input" placeholder="Ketik lalu Enter…">
+                                <input type="text" id="tags" class="tags-input" placeholder="Ketik lalu tekan Enter…">
                             </div>
                             <small class="form-text">Pisahkan tag dengan koma atau tekan Enter</small>
                         </div>
@@ -236,7 +244,7 @@
                     <div class="form-grid">
                         <div class="form-group full-width">
                             <label class="form-label"><i class="fas fa-image"></i> URL Thumbnail</label>
-                            <input type="url" id="thumbnail_url" class="form-control" placeholder="https://…">
+                            <input type="url" id="thumbnail_url" class="form-control" placeholder="https://...">
                             <div id="thumbnailPreview" class="thumbnail-preview hidden">
                                 <img id="previewImage" src="" alt="Preview">
                             </div>
@@ -247,7 +255,7 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label"><i class="fas fa-video"></i> URL Video</label>
-                            <input type="url" id="video_url" class="form-control" placeholder="https://…">
+                            <input type="url" id="video_url" class="form-control" placeholder="https://...">
                         </div>
                     </div>
                 </div>
@@ -258,7 +266,7 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label class="form-label"><i class="fas fa-link"></i> URL Affiliasi</label>
-                            <input type="url" id="affiliate_url" class="form-control" placeholder="https://…">
+                            <input type="url" id="affiliate_url" class="form-control" placeholder="https://...">
                         </div>
                         <div class="form-group">
                             <label class="form-label"><i class="fas fa-tag"></i> Label Tombol</label>
@@ -274,10 +282,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
+
+            </div><!-- /modal-body -->
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline" onclick="closeAllModals()">Batal</button>
+                <button type="button" class="btn btn-outline" id="formCancelBtn">Batal</button>
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-save"></i> Simpan Konten
                 </button>
@@ -286,7 +295,7 @@
     </div>
 </div>
 
-<!-- ── Delete Modal ───────────────────────────────────────── -->
+<!-- DELETE MODAL -->
 <div id="deleteModal" class="modal">
     <div class="modal-content modal-sm">
         <div class="modal-header">
@@ -294,7 +303,7 @@
                 <i class="fas fa-exclamation-triangle" style="color:var(--error)"></i>
                 Konfirmasi Hapus
             </h3>
-            <button class="modal-close" aria-label="Tutup">&times;</button>
+            <button class="modal-close" id="deleteModalClose" aria-label="Tutup">&times;</button>
         </div>
         <div class="modal-body">
             <p>Apakah Anda yakin ingin menghapus konten ini?</p>
@@ -304,7 +313,7 @@
             </p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-outline" onclick="closeAllModals()">Batal</button>
+            <button type="button" class="btn btn-outline" id="deleteCancelBtn">Batal</button>
             <button type="button" id="confirmDelete" class="btn btn-danger">
                 <i class="fas fa-trash"></i> Hapus
             </button>
@@ -312,46 +321,13 @@
     </div>
 </div>
 
-<!-- Toast -->
 <div id="toastContainer" class="toast-container"></div>
 
-<!-- FIX: app.js DIHAPUS — admin hanya butuh utils.js untuk showToast dll -->
+<!-- Scripts — semua event listener ada di admin.js, tidak ada duplikasi inline -->
 <script src="js/config.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/db.js"></script>
 <script src="js/admin.js"></script>
 
-<!-- Mobile Sidebar Toggle -->
-<script>
-    const hamburgerBtn       = document.getElementById('hamburgerBtn');
-    const adminSidebar       = document.getElementById('adminSidebar');
-    const sidebarOverlay     = document.getElementById('sidebarOverlay');
-    const addContentBtnMobile= document.getElementById('addContentBtnMobile');
-
-    function toggleSidebar() {
-        adminSidebar.classList.toggle('show');
-        sidebarOverlay.classList.toggle('show');
-        document.body.classList.toggle('sidebar-open');
-    }
-
-    if (hamburgerBtn)    hamburgerBtn.addEventListener('click', toggleSidebar);
-    if (sidebarOverlay)  sidebarOverlay.addEventListener('click', toggleSidebar);
-    if (addContentBtnMobile) {
-        addContentBtnMobile.addEventListener('click', () => {
-            if (typeof openFormModal === 'function') openFormModal();
-        });
-    }
-
-    // Tutup sidebar saat nav link diklik (mobile)
-    document.querySelectorAll('.admin-nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth < 1024) {
-                adminSidebar.classList.remove('show');
-                sidebarOverlay.classList.remove('show');
-                document.body.classList.remove('sidebar-open');
-            }
-        });
-    });
-</script>
 </body>
 </html>
