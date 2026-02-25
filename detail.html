@@ -1,142 +1,101 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Detail Konten — Cari Tau Yuk!</title>
-  <meta name="description" content="Detail konten Cari Tau Yuk!"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Konten — Cari tau yuk</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- Supabase JS v2 -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="caritauyuk/css/style.css"/>
-  <link rel="stylesheet" href="caritauyuk/css/detail.css"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/detail.css">
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════════════════════
-       HEADER
-       ══════════════════════════════════════════════════════ -->
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="site-logo" href="index.html">Cari Tau <span>Yuk!</span></a>
-      <a class="back-btn" href="index.html">
-        <svg width="16" height="16" fill="none" stroke="currentColor"
-             stroke-width="2.5" viewBox="0 0 24 24">
-          <path d="M19 12H5M12 5l-7 7 7 7"/>
-        </svg>
-        Kembali
-      </a>
+<!-- ── Header ────────────────────────────────────────────── -->
+<header class="header">
+    <div class="container header-content">
+        <a href="index.html" class="logo">
+            <i class="fas fa-compass"></i> Cari tau yuk
+        </a>
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" class="search-input"
+                   placeholder="Cari judul atau deskripsi…"
+                   onkeypress="if(event.key==='Enter')window.location.href='index.html?search='+encodeURIComponent(this.value)">
+        </div>
+        <nav>
+            <a href="admin.html" style="color:var(--text-secondary);font-weight:600;font-size:.9rem">
+                <i class="fas fa-user-cog"></i> Admin
+            </a>
+        </nav>
     </div>
-  </header>
+</header>
 
-  <!-- ══════════════════════════════════════════════════════
-       LOADING
-       ══════════════════════════════════════════════════════ -->
-  <div class="page-loading" id="pageLoading">
-    <div class="spinner"></div>
-    <span>Memuat konten…</span>
-  </div>
+<!-- ── Main ──────────────────────────────────────────────── -->
+<main class="container" style="padding-top:var(--sp-xl)">
+    <a href="#" class="back-button">
+        <i class="fas fa-arrow-left"></i> Kembali
+    </a>
 
-  <!-- ══════════════════════════════════════════════════════
-       MAIN LAYOUT
-       ══════════════════════════════════════════════════════ -->
-  <div class="detail-wrapper" id="detailWrapper" style="display:none">
+    <div class="detail-container">
+        <div class="detail-main"></div>
+        <aside class="detail-sidebar"></aside>
+    </div>
 
-    <!-- ── KOLOM KIRI: Konten utama ─────────────────────── -->
-    <main class="detail-main">
+    <div class="comments-section"></div>
 
-      <!-- Media -->
-      <div class="detail-media" id="detailMedia"></div>
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+</main>
 
-      <!-- Info -->
-      <div class="detail-info">
-        <div id="detailBadge"></div>
-        <h1 class="detail-title" id="detailTitle"></h1>
-        <p  class="detail-meta"  id="detailMeta"></p>
-
-        <!-- Iklan di bawah judul (misal: AdSense horizontal) -->
-        <div class="ad-slot ad-slot--horizontal" id="adTop">
-          <span class="ad-label">Advertisement</span>
-          <!-- Paste kode AdSense Anda di sini -->
-          <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
-          <!-- <ins class="adsbygoogle" ...></ins> -->
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer>
+    <div class="container">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--sp-xl)">
+            <div>
+                <h5>Tentang Kami</h5>
+                <p style="color:var(--text-secondary);font-size:.9rem">
+                    Cari tau yuk adalah platform berbagi informasi menarik seputar film,
+                    teknologi, keuangan, dan kesehatan.
+                </p>
+            </div>
+            <div>
+                <h5>Kategori Populer</h5>
+                <ul style="list-style:none">
+                    <li><a href="index.html?category=Film">🎬 Film Terbaru</a></li>
+                    <li><a href="index.html?category=Teknologi">💻 Review Teknologi</a></li>
+                    <li><a href="index.html?category=Keuangan">💰 Tips Investasi</a></li>
+                    <li><a href="index.html?category=Kesehatan">🏥 Hidup Sehat</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>Ikuti Kami</h5>
+                <div style="display:flex;gap:var(--sp-md)">
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
         </div>
+        <hr style="margin:var(--sp-xl) 0;border:none;border-top:1px solid var(--border)">
+        <p style="text-align:center;color:var(--text-light);font-size:.85rem">
+            &copy; 2025 Cari tau yuk. All rights reserved.
+        </p>
+    </div>
+</footer>
 
-        <div class="detail-tags" id="detailTags"></div>
-        <p class="detail-desc" id="detailDesc"></p>
+<!-- Toast -->
+<div id="toastContainer" class="toast-container"></div>
 
-        <!-- Affiliate Block -->
-        <div class="affiliate-block hidden" id="affiliateBlock">
-          <span class="aff-badge" id="affiliateBadge">Partner</span>
-          <div class="aff-text">
-            <p id="affiliateDesc"></p>
-          </div>
-          <a class="aff-link" id="affiliateLink" href="#"
-             target="_blank" rel="noopener noreferrer sponsored">
-            <svg width="15" height="15" fill="none" stroke="currentColor"
-                 stroke-width="2.5" viewBox="0 0 24 24">
-              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-              <polyline points="15 3 21 3 21 9"/>
-              <line x1="10" y1="14" x2="21" y2="3"/>
-            </svg>
-            <span id="affiliateLinkLabel">Kunjungi</span>
-          </a>
-        </div>
-
-        <!-- Iklan di bawah deskripsi -->
-        <div class="ad-slot ad-slot--horizontal" id="adMid">
-          <span class="ad-label">Advertisement</span>
-          <!-- Paste kode AdSense Anda di sini -->
-        </div>
-
-      </div><!-- /detail-info -->
-    </main>
-
-    <!-- ── KOLOM KANAN: Sidebar ──────────────────────────── -->
-    <aside class="detail-sidebar">
-
-      <!-- Iklan sidebar -->
-      <div class="ad-slot ad-slot--sidebar" id="adSidebar">
-        <span class="ad-label">Advertisement</span>
-        <!-- Paste kode AdSense Anda di sini -->
-      </div>
-
-      <!-- Konten terkait -->
-      <div class="sidebar-section">
-        <h3 class="sidebar-title">Konten Terkait</h3>
-        <div id="relatedContent" class="related-list">
-          <div class="spinner" style="margin:1rem auto"></div>
-        </div>
-      </div>
-
-      <!-- Iklan sidebar bawah -->
-      <div class="ad-slot ad-slot--sidebar" id="adSidebar2">
-        <span class="ad-label">Advertisement</span>
-        <!-- Paste kode AdSense Anda di sini -->
-      </div>
-
-    </aside>
-
-  </div><!-- /detail-wrapper -->
-
-  <!-- ══════════════════════════════════════════════════════
-       FOOTER
-       ══════════════════════════════════════════════════════ -->
-  <footer class="site-footer">
-    Dibuat dengan ❤️ oleh <span>Cari Tau Yuk!</span> &mdash; Belajar itu menyenangkan.
-  </footer>
-
-  <!-- Scripts -->
-  <script src="caritauyuk/js/config.js"></script>
-  <script src="caritauyuk/js/db.js"></script>
-  <script src="caritauyuk/js/detail.js"></script>
-
+<!-- FIX: app.js DIHAPUS — tidak dibutuhkan di halaman detail -->
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/db.js"></script>
+<script src="js/detail.js"></script>
 </body>
 </html>

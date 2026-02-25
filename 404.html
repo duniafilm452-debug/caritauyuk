@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Tidak Ditemukan — Cari tau yuk</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .error-page {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--sp-xxl) 0;
+        }
+
+        .error-code {
+            font-size: clamp(5rem, 18vw, 10rem);
+            font-weight: 800;
+            background: var(--grad-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: var(--sp-lg);
+            animation: bounce 2.5s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-18px); }
+        }
+
+        .error-icon {
+            font-size: 3.5rem;
+            margin-bottom: var(--sp-lg);
+            animation: shake 3s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0%,100%  { transform: rotate(0deg); }
+            10%, 30% { transform: rotate(-8deg); }
+            20%, 40% { transform: rotate(8deg); }
+            50%      { transform: rotate(0deg); }
+        }
+
+        .error-title {
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            margin-bottom: var(--sp-md);
+            color: var(--text-primary);
+        }
+
+        .error-message {
+            color: var(--text-secondary);
+            margin-bottom: var(--sp-xl);
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: var(--sp-md);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--sp-xl);
+        }
+
+        .error-btn {
+            padding: 12px 28px;
+            border-radius: var(--r-full);
+            font-weight: 700;
+            font-size: .95rem;
+            transition: all .2s var(--spring);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .error-btn-primary {
+            background: var(--grad-hero);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(74,144,226,.35);
+        }
+        .error-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(74,144,226,.45);
+            color: #fff;
+        }
+
+        .error-btn-secondary {
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            border: 2px solid var(--border);
+        }
+        .error-btn-secondary:hover {
+            background: var(--border);
+            transform: translateY(-3px);
+            color: var(--text-primary);
+        }
+
+        .search-suggestion {
+            margin-top: var(--sp-xl);
+            padding-top: var(--sp-xl);
+            border-top: 1px solid var(--border);
+            animation: fadeIn .6s .3s var(--ease) both;
+        }
+
+        .category-suggestions {
+            display: flex;
+            gap: var(--sp-sm);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--sp-md);
+        }
+
+        .category-suggestion {
+            padding: 8px 20px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: var(--r-full);
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: .88rem;
+            transition: all .2s var(--ease);
+        }
+        .category-suggestion:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Header ────────────────────────────────────────────── -->
+<header class="header">
+    <div class="container header-content">
+        <a href="index.html" class="logo">
+            <i class="fas fa-compass"></i> Cari tau yuk
+        </a>
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <!-- FIX: Hapus atribut onkeypress — listener sudah ada di script bawah -->
+            <input type="text" id="searchInput" class="search-input"
+                   placeholder="Cari judul atau deskripsi…">
+        </div>
+        <nav>
+            <a href="admin.html" style="color:var(--text-secondary);font-weight:600;font-size:.9rem">
+                <i class="fas fa-user-cog"></i> Admin
+            </a>
+        </nav>
+    </div>
+</header>
+
+<!-- ── 404 Content ────────────────────────────────────────── -->
+<div class="error-page">
+    <div class="container">
+        <div class="error-icon">🧭</div>
+        <div class="error-code">404</div>
+        <h1 class="error-title">Halaman Tidak Ditemukan</h1>
+        <p class="error-message">
+            Maaf, halaman yang Anda cari mungkin telah dipindahkan,
+            dihapus, atau tidak pernah ada sebelumnya.
+        </p>
+
+        <div class="error-actions">
+            <a href="index.html" class="error-btn error-btn-primary">
+                <i class="fas fa-home"></i> Kembali ke Beranda
+            </a>
+            <a href="#" class="error-btn error-btn-secondary"
+               onclick="window.history.back(); return false;">
+                <i class="fas fa-arrow-left"></i> Halaman Sebelumnya
+            </a>
+        </div>
+
+        <div class="search-suggestion">
+            <p style="color:var(--text-secondary);margin-bottom:var(--sp-md);font-weight:500">
+                Atau jelajahi kategori populer:
+            </p>
+            <div class="category-suggestions">
+                <a href="index.html?category=Film"      class="category-suggestion">🎬 Film</a>
+                <a href="index.html?category=Teknologi" class="category-suggestion">💻 Teknologi</a>
+                <a href="index.html?category=Keuangan"  class="category-suggestion">💰 Keuangan</a>
+                <a href="index.html?category=Kesehatan" class="category-suggestion">🏥 Kesehatan</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer>
+    <div class="container">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--sp-xl)">
+            <div>
+                <h5>Tentang Kami</h5>
+                <p style="color:var(--text-secondary);font-size:.9rem">
+                    Cari tau yuk adalah platform berbagi informasi menarik.
+                </p>
+            </div>
+            <div>
+                <h5>Kategori Populer</h5>
+                <ul style="list-style:none">
+                    <li><a href="index.html?category=Film">🎬 Film Terbaru</a></li>
+                    <li><a href="index.html?category=Teknologi">💻 Review Teknologi</a></li>
+                    <li><a href="index.html?category=Keuangan">💰 Tips Investasi</a></li>
+                    <li><a href="index.html?category=Kesehatan">🏥 Hidup Sehat</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>Ikuti Kami</h5>
+                <div style="display:flex;gap:var(--sp-md)">
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr style="margin:var(--sp-xl) 0;border:none;border-top:1px solid var(--border)">
+        <p style="text-align:center;color:var(--text-light);font-size:.85rem">
+            &copy; 2025 Cari tau yuk. All rights reserved.
+        </p>
+    </div>
+</footer>
+
+<script>
+    // FIX: Satu event listener saja (tidak ada atribut onkeypress di input)
+    function searchFrom404() {
+        const query = document.getElementById('searchInput').value.trim();
+        if (query) {
+            window.location.href = 'index.html?search=' + encodeURIComponent(query);
+        }
+    }
+
+    document.getElementById('searchInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') searchFrom404();
+    });
+</script>
+</body>
+</html>
