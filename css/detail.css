@@ -433,3 +433,83 @@
     .comments-section  { padding: var(--sp-lg); }
     .affiliate-block   { padding: var(--sp-lg); }
 }
+
+/* ============================================================
+   PROSE — Render HTML dari Rich Text Editor
+   (styles untuk .content-description)
+   ============================================================ */
+
+.content-description {
+    font-size: .97rem;
+    line-height: 1.85;
+    color: var(--text-secondary);
+}
+
+.content-description h2 {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 1.25em 0 .4em;
+    padding-bottom: .3em;
+    border-bottom: 2px solid var(--border);
+    line-height: 1.25;
+}
+.content-description h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 1em 0 .35em;
+}
+
+.content-description p {
+    margin-bottom: .85em;
+}
+.content-description p:last-child { margin-bottom: 0; }
+
+.content-description strong,
+.content-description b {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+.content-description em,
+.content-description i { font-style: italic; }
+
+.content-description u { text-decoration: underline; }
+
+.content-description s,
+.content-description strike {
+    text-decoration: line-through;
+    color: var(--text-light);
+}
+
+.content-description a {
+    color: var(--primary);
+    text-decoration: underline;
+    font-weight: 600;
+    transition: color .2s;
+}
+.content-description a:hover { color: var(--secondary); }
+
+.content-description ul,
+.content-description ol {
+    padding-left: 1.5em;
+    margin: .6em 0 .85em;
+}
+.content-description li {
+    margin-bottom: .35em;
+    line-height: 1.7;
+}
+.content-description ul li::marker { color: var(--primary); }
+.content-description ol li::marker { color: var(--primary); font-weight: 700; }
+
+.content-description blockquote {
+    border-left: 4px solid var(--primary);
+    background: rgba(74,144,226,.06);
+    margin: 1em 0;
+    padding: .75em 1.25em;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: .96rem;
+}
+.content-description blockquote p { margin-bottom: 0; }
