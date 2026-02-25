@@ -1,214 +1,154 @@
-// Detail page logic
+// ============================================================
+// detail.js — Logika halaman detail konten
+// ============================================================
 
-// Tunggu hingga DOM dan contentDB siap
 document.addEventListener('DOMContentLoaded', async () => {
     if (typeof window.contentDB === 'undefined') {
         console.error('contentDB tidak ditemukan. Pastikan db.js dimuat dengan benar.');
         return;
     }
-
     await initializeDetail();
 });
 
-// Get content ID from URL
+// ── URL Params ────────────────────────────────────────────────
 const urlParams = new URLSearchParams(window.location.search);
 const contentId = urlParams.get('id');
 
-// DOM Elements
-const detailMain = document.querySelector('.detail-main');
+// ── DOM Elements ──────────────────────────────────────────────
+const detailMain    = document.querySelector('.detail-main');
 const detailSidebar = document.querySelector('.detail-sidebar');
 const loadingSpinner = document.getElementById('loadingSpinner');
-const backButton = document.querySelector('.back-button');
 
-// Initialize detail page
+// ── Init ──────────────────────────────────────────────────────
 async function initializeDetail() {
     if (!contentId) {
         window.location.href = '404.html';
         return;
     }
-
     await loadContentDetail();
     setupEventListeners();
 }
 
-// Setup event listeners
 function setupEventListeners() {
-    // Back button
-    if (backButton) {
-        backButton.addEventListener('click', (e) => {
+    const backBtn = document.querySelector('.back-button');
+    if (backBtn) {
+        backBtn.addEventListener('click', (e) => {
             e.preventDefault();
             window.history.back();
         });
     }
-
-    // Share buttons
     setupShareButtons();
 }
 
-// Load content detail
+// ── Load Detail ───────────────────────────────────────────────
 async function loadContentDetail() {
     showLoading(true);
 
-    // Get content data
     const { data: content, error } = await window.contentDB.getContentById(contentId);
-
     if (error || !content) {
         showLoading(false);
         window.location.href = '404.html';
         return;
     }
 
-    // Check like status
-    const sessionId = window.getSessionId ? window.getSessionId() : getSessionId();
+    const sessionId = window.getSessionId();
     const { liked } = await window.contentDB.checkLikeStatus(contentId, sessionId);
+    const { data: related } = await window.contentDB.getRelatedContent(content.category, contentId, 5);
 
-    // Get related content
-    const { data: relatedContent } = await window.contentDB.getRelatedContent(
-        content.category, 
-        contentId, 
-        5
-    );
-
-    // Render main content
     renderMainContent(content, liked);
-
-    // Render sidebar
-    renderSidebar(relatedContent || []);
-
-    // Render comments section
+    renderSidebar(related || []);
     renderComments(content);
 
     showLoading(false);
 }
 
-// Render main content
+// ── Render Main ───────────────────────────────────────────────
 function renderMainContent(content, liked) {
     if (!detailMain) return;
 
-    const mediaHtml = renderMedia(content);
-    const affiliateHtml = renderAffiliateBlock(content);
-
     detailMain.innerHTML = `
         <div class="media-player">
-            ${mediaHtml}
+            ${renderMedia(content)}
         </div>
-        
         <div class="content-info">
             <h1 class="content-title">${content.title}</h1>
-            
             <div class="content-meta">
-                <span class="meta-item">
-                    <i class="fas fa-film"></i> ${content.category}
-                </span>
-                <span class="meta-item">
-                    <i class="far fa-calendar"></i> ${content.year || 'N/A'}
-                </span>
-                <span class="meta-item">
-                    <i class="far fa-clock"></i> ${content.duration || 'N/A'}
-                </span>
-                <span class="meta-item">
-                    <i class="fas fa-star" style="color: gold;"></i> ${content.rating || 'N/A'}
-                </span>
+                <span class="meta-item"><i class="fas fa-film"></i> ${content.category}</span>
+                <span class="meta-item"><i class="far fa-calendar"></i> ${content.year || 'N/A'}</span>
+                <span class="meta-item"><i class="far fa-clock"></i> ${content.duration || 'N/A'}</span>
+                <span class="meta-item"><i class="fas fa-star" style="color:#F5A623"></i> ${content.rating || 'N/A'}</span>
             </div>
-            
-            <div class="content-description">
-                ${content.description || 'Tidak ada deskripsi.'}
-            </div>
-            
+            <div class="content-description">${content.description || 'Tidak ada deskripsi.'}</div>
             <div class="content-tags">
-                ${(content.tags || []).map(tag => 
-                    `<span class="tag">#${tag}</span>`
-                ).join('')}
+                ${(content.tags || []).map(t => `<span class="tag">#${t}</span>`).join('')}
             </div>
-            
             <div class="content-actions">
-                <button class="btn btn-like ${liked ? 'liked' : ''}" 
+                <button class="btn btn-like ${liked ? 'liked' : ''}"
                         onclick="handleLike('${content.id}', this)">
                     <i class="${liked ? 'fas' : 'far'} fa-heart"></i>
                     <span class="like-count">${content.likes || 0}</span>
                     Suka
                 </button>
-                
                 <button class="btn btn-outline" onclick="shareContent()">
                     <i class="fas fa-share-alt"></i> Bagikan
                 </button>
             </div>
-            
-            ${affiliateHtml}
-        </div>
-    `;
+            ${renderAffiliateBlock(content)}
+        </div>`;
 
-    // Add share buttons after content
     addShareButtons();
 }
 
-// Render media (YouTube/video/image)
 function renderMedia(content) {
     if (content.youtube_id) {
         return `
-            <iframe 
-                src="https://www.youtube.com/embed/${content.youtube_id}" 
+            <iframe src="https://www.youtube.com/embed/${content.youtube_id}"
                 title="${content.title}"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
-        `;
-    } else if (content.video_url) {
+                allowfullscreen></iframe>`;
+    }
+    if (content.video_url) {
         return `
             <video controls>
                 <source src="${content.video_url}" type="video/mp4">
                 Browser Anda tidak mendukung tag video.
-            </video>
-        `;
-    } else if (content.thumbnail_url) {
-        return `<img src="${content.thumbnail_url}" alt="${content.title}">`;
-    } else {
-        return `
-            <div class="media-placeholder">
-                <i class="fas fa-play-circle"></i>
-                <h3>${content.title}</h3>
-                <p>Klik tombol play untuk menonton</p>
-            </div>
-        `;
+            </video>`;
     }
+    if (content.thumbnail_url) {
+        return `<img src="${content.thumbnail_url}" alt="${content.title}">`;
+    }
+    return `
+        <div class="media-placeholder">
+            <i class="fas fa-play-circle"></i>
+            <h3>${content.title}</h3>
+            <p>Klik tombol play untuk menonton</p>
+        </div>`;
 }
 
-// Render affiliate block
 function renderAffiliateBlock(content) {
-    if (!content.affiliate_url || !content.affiliate_label) {
-        return '';
-    }
-
+    if (!content.affiliate_url || !content.affiliate_label) return '';
     return `
         <div class="affiliate-block">
-            ${content.affiliate_badge ? 
-                `<span class="affiliate-badge">${content.affiliate_badge}</span>` : 
-                ''}
+            ${content.affiliate_badge ? `<span class="affiliate-badge">${content.affiliate_badge}</span>` : ''}
             <h3 class="affiliate-title">${content.affiliate_label}</h3>
-            ${content.affiliate_desc ? 
-                `<p class="affiliate-desc">${content.affiliate_desc}</p>` : 
-                ''}
-            <a href="${content.affiliate_url}" 
-               class="affiliate-link" 
-               target="_blank" 
+            ${content.affiliate_desc ? `<p class="affiliate-desc">${content.affiliate_desc}</p>` : ''}
+            <a href="${content.affiliate_url}"
+               class="affiliate-link"
+               target="_blank"
                rel="nofollow sponsored">
                 ${content.affiliate_label} <i class="fas fa-arrow-right"></i>
             </a>
-        </div>
-    `;
+        </div>`;
 }
 
-// Render sidebar with related content
+// ── Render Sidebar ────────────────────────────────────────────
 function renderSidebar(relatedContent) {
     if (!detailSidebar) return;
 
-    // AdSense slot HTML
     const adHtml = `
         <div class="ad-slot sidebar-widget">
-            <!-- Iklan 300x250 -->
             <span>Iklan 300x250</span>
-        </div>
-    `;
+        </div>`;
 
     let relatedHtml = '';
     if (relatedContent.length > 0) {
@@ -218,46 +158,38 @@ function renderSidebar(relatedContent) {
                 <ul class="related-list">
                     ${relatedContent.map(item => `
                         <li class="related-item">
-                            <img src="${item.thumbnail_url || DEFAULT_THUMBNAIL}" 
+                            <img src="${item.thumbnail_url || DEFAULT_THUMBNAIL}"
                                  alt="${item.title}"
                                  class="related-thumbnail"
                                  onerror="this.src='${DEFAULT_THUMBNAIL}'">
                             <div class="related-info">
-                                <a href="detail.html?id=${item.id}" class="related-title">
-                                    ${item.title}
-                                </a>
+                                <a href="detail.html?id=${item.id}" class="related-title">${item.title}</a>
                                 <div class="related-meta">
-                                    <span><i class="fas fa-eye"></i> ${item.likes || 0}</span>
+                                    <span><i class="fas fa-heart"></i> ${item.likes || 0}</span>
                                     <span><i class="far fa-clock"></i> ${item.duration || 'N/A'}</span>
                                 </div>
                             </div>
-                        </li>
-                    `).join('')}
+                        </li>`).join('')}
                 </ul>
-            </div>
-        `;
+            </div>`;
     }
 
     detailSidebar.innerHTML = adHtml + relatedHtml + adHtml;
 }
 
-// Render comments section (placeholder)
+// ── Render Comments ───────────────────────────────────────────
 function renderComments(content) {
-    const commentsSection = document.querySelector('.comments-section');
-    if (!commentsSection) return;
+    const section = document.querySelector('.comments-section');
+    if (!section) return;
 
-    commentsSection.innerHTML = `
+    section.innerHTML = `
         <h4 class="sidebar-title">Komentar (0)</h4>
-        
         <div class="comment-form">
-            <textarea class="comment-input" 
-                      placeholder="Tulis komentar Anda..." 
-                      rows="3"></textarea>
+            <textarea class="comment-input" placeholder="Tulis komentar Anda..." rows="3"></textarea>
             <button class="btn btn-primary" onclick="postComment()">
-                Kirim Komentar
+                <i class="fas fa-paper-plane"></i> Kirim Komentar
             </button>
         </div>
-        
         <ul class="comment-list">
             <li class="comment-item">
                 <div class="comment-avatar">A</div>
@@ -271,133 +203,100 @@ function renderComments(content) {
                     </div>
                 </div>
             </li>
-        </ul>
-    `;
+        </ul>`;
 }
 
-// Handle like button click
-async function handleLike(contentId, buttonElement) {
+// ── Like Handler ──────────────────────────────────────────────
+async function handleLike(contentId, buttonEl) {
     try {
-        const sessionId = window.getSessionId ? window.getSessionId() : getSessionId();
+        const sessionId = window.getSessionId();
         const { liked, error } = await window.contentDB.likeContent(contentId, sessionId);
-        
-        if (error) {
-            showToast('Gagal memproses like', 'error');
-            return;
-        }
-        
-        // Update UI
-        const likeIcon = buttonElement.querySelector('i');
-        const likeCount = buttonElement.querySelector('.like-count');
-        const currentLikes = parseInt(likeCount.textContent);
-        
+
+        if (error) { window.showToast('Gagal memproses like', 'error'); return; }
+
+        const icon  = buttonEl.querySelector('i');
+        const count = buttonEl.querySelector('.like-count');
+        const cur   = parseInt(count.textContent);
+
         if (liked) {
-            buttonElement.classList.add('liked');
-            likeIcon.classList.remove('far');
-            likeIcon.classList.add('fas');
-            likeCount.textContent = currentLikes + 1;
-            showToast('Konten disukai!', 'success');
+            buttonEl.classList.add('liked');
+            icon.className = 'fas fa-heart';
+            count.textContent = cur + 1;
+            window.showToast('Konten disukai! ❤️', 'success');
         } else {
-            buttonElement.classList.remove('liked');
-            likeIcon.classList.remove('fas');
-            likeIcon.classList.add('far');
-            likeCount.textContent = currentLikes - 1;
-            showToast('Like dibatalkan', 'info');
+            buttonEl.classList.remove('liked');
+            icon.className = 'far fa-heart';
+            count.textContent = cur - 1;
+            window.showToast('Like dibatalkan', 'info');
         }
-    } catch (error) {
-        console.error('Error handling like:', error);
-        showToast('Terjadi kesalahan', 'error');
+    } catch (err) {
+        console.error('Error handling like:', err);
+        window.showToast('Terjadi kesalahan', 'error');
     }
 }
 
-// Add share buttons
+// ── Share ─────────────────────────────────────────────────────
 function addShareButtons() {
-    const shareContainer = document.createElement('div');
-    shareContainer.className = 'share-buttons';
-    shareContainer.innerHTML = `
-        <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" 
-           target="_blank" 
-           class="share-btn share-facebook">
+    const container = document.createElement('div');
+    container.className = 'share-buttons';
+    container.innerHTML = `
+        <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}"
+           target="_blank" class="share-btn share-facebook" title="Bagikan ke Facebook">
             <i class="fab fa-facebook-f"></i>
         </a>
-        <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(document.title)}" 
-           target="_blank" 
-           class="share-btn share-twitter">
+        <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(document.title)}"
+           target="_blank" class="share-btn share-twitter" title="Bagikan ke Twitter">
             <i class="fab fa-twitter"></i>
         </a>
-        <a href="https://wa.me/?text=${encodeURIComponent(document.title + ' ' + window.location.href)}" 
-           target="_blank" 
-           class="share-btn share-whatsapp">
+        <a href="https://wa.me/?text=${encodeURIComponent(document.title + ' ' + window.location.href)}"
+           target="_blank" class="share-btn share-whatsapp" title="Bagikan ke WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
-        <a href="https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(document.title)}" 
-           target="_blank" 
-           class="share-btn share-telegram">
+        <a href="https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(document.title)}"
+           target="_blank" class="share-btn share-telegram" title="Bagikan ke Telegram">
             <i class="fab fa-telegram-plane"></i>
-        </a>
-    `;
+        </a>`;
 
-    const contentActions = document.querySelector('.content-actions');
-    if (contentActions) {
-        contentActions.after(shareContainer);
-    }
+    const actions = document.querySelector('.content-actions');
+    if (actions) actions.after(container);
 }
 
-// Setup share buttons
 function setupShareButtons() {
-    window.shareContent = async () => {
-        if (navigator.share) {
-            try {
-                await navigator.share({
-                    title: document.title,
-                    text: document.querySelector('.content-description')?.textContent || '',
-                    url: window.location.href
-                });
-                showToast('Terima kasih telah berbagi!', 'success');
-            } catch (error) {
-                if (error.name !== 'AbortError') {
-                    console.error('Error sharing:', error);
-                }
-            }
-        } else {
-            // Fallback: copy link
-            copyToClipboard(window.location.href);
+    // FIX: Dideklarasikan sebagai function biasa, bukan hanya window property
+    // sehingga tidak terjadi ReferenceError saat dipanggil via window.shareContent = shareContent
+}
+
+// FIX: shareContent dideklarasikan sebagai function expression yang di-assign ke window
+// (tidak ada referensi lokal yang belum ada)
+window.shareContent = async function () {
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: document.title,
+                text: document.querySelector('.content-description')?.textContent || '',
+                url: window.location.href,
+            });
+            window.showToast('Terima kasih telah berbagi!', 'success');
+        } catch (err) {
+            if (err.name !== 'AbortError') console.error('Error sharing:', err);
         }
-    };
-}
+    } else {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            window.showToast('Link disalin ke clipboard!', 'success');
+        }).catch(() => {
+            window.showToast('Gagal menyalin link', 'error');
+        });
+    }
+};
 
-// Copy to clipboard
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        showToast('Link disalin ke clipboard!', 'success');
-    }).catch(() => {
-        showToast('Gagal menyalin link', 'error');
-    });
-}
-
-// Post comment (placeholder)
 function postComment() {
-    showToast('Fitur komentar akan segera hadir!', 'info');
+    window.showToast('Fitur komentar akan segera hadir!', 'info');
 }
 
-// Show/hide loading
 function showLoading(show) {
-    if (loadingSpinner) {
-        loadingSpinner.classList.toggle('hidden', !show);
-    }
+    if (loadingSpinner) loadingSpinner.classList.toggle('hidden', !show);
 }
 
-// Fallback getSessionId
-function getSessionId() {
-    let sessionId = localStorage.getItem('session_id');
-    if (!sessionId) {
-        sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
-        localStorage.setItem('session_id', sessionId);
-    }
-    return sessionId;
-}
-
-// Make functions globally available
-window.handleLike = handleLike;
-window.shareContent = shareContent;
-window.postComment = postComment;
+// Expose globally
+window.handleLike   = handleLike;
+window.postComment  = postComment;
