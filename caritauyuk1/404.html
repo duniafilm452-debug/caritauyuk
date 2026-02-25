@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Tidak Ditemukan - Cari tau yuk</title>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        .error-page {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--spacing-xxl) 0;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+            margin-bottom: var(--spacing-md);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .error-title {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+        }
+        
+        .error-message {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xl);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .error-btn {
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: var(--border-radius-md);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+        
+        .error-btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .error-btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+        }
+        
+        .error-btn-secondary {
+            background-color: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .error-btn-secondary:hover {
+            background-color: var(--border-color);
+            transform: translateY(-2px);
+        }
+        
+        .search-suggestion {
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-xl);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .category-suggestions {
+            display: flex;
+            gap: var(--spacing-sm);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--spacing-md);
+        }
+        
+        .category-suggestion {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-xl);
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+        
+        .category-suggestion:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <i class="fas fa-compass"></i> Cari tau yuk
+            </a>
+            
+            <div class="search-container">
+                <input type="text" 
+                       id="searchInput" 
+                       class="search-input" 
+                       placeholder="Cari judul atau deskripsi..."
+                       onkeypress="if(event.key === 'Enter') searchFrom404()">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            
+            <nav>
+                <a href="admin.html" class="admin-link" style="color: var(--text-secondary);">
+                    <i class="fas fa-user-cog"></i> Admin
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Error Page Content -->
+    <div class="error-page">
+        <div class="container">
+            <div class="error-code">404</div>
+            <h1 class="error-title">Halaman Tidak Ditemukan</h1>
+            <p class="error-message">
+                Maaf, halaman yang Anda cari mungkin telah dipindahkan, 
+                dihapus, atau tidak pernah ada.
+            </p>
+            
+            <div class="error-actions">
+                <a href="index.html" class="error-btn error-btn-primary">
+                    <i class="fas fa-home"></i> Kembali ke Beranda
+                </a>
+                <a href="#" class="error-btn error-btn-secondary" onclick="window.history.back(); return false;">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Halaman Sebelumnya
+                </a>
+            </div>
+            
+            <div class="search-suggestion">
+                <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">
+                    Atau coba jelajahi kategori populer:
+                </p>
+                <div class="category-suggestions">
+                    <a href="index.html?category=Film" class="category-suggestion">🎬 Film</a>
+                    <a href="index.html?category=Teknologi" class="category-suggestion">💻 Teknologi</a>
+                    <a href="index.html?category=Keuangan" class="category-suggestion">💰 Keuangan</a>
+                    <a href="index.html?category=Kesehatan" class="category-suggestion">🏥 Kesehatan</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background-color: var(--bg-primary); padding: var(--spacing-xl) 0; margin-top: var(--spacing-xxl); border-top: 1px solid var(--border-color);">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-xl);">
+                <div>
+                    <h5>Tentang Kami</h5>
+                    <p style="color: var(--text-secondary);">
+                        Cari tau yuk adalah platform berbagi informasi menarik seputar film, 
+                        teknologi, keuangan, dan kesehatan.
+                    </p>
+                </div>
+                <div>
+                    <h5>Kategori Populer</h5>
+                    <ul style="list-style: none;">
+                        <li><a href="index.html?category=Film" style="color: var(--text-secondary);">🎬 Film Terbaru</a></li>
+                        <li><a href="index.html?category=Teknologi" style="color: var(--text-secondary);">💻 Review Teknologi</a></li>
+                        <li><a href="index.html?category=Keuangan" style="color: var(--text-secondary);">💰 Tips Investasi</a></li>
+                        <li><a href="index.html?category=Kesehatan" style="color: var(--text-secondary);">🏥 Hidup Sehat</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Ikuti Kami</h5>
+                    <div style="display: flex; gap: var(--spacing-md);">
+                        <a href="#" style="color: var(--text-secondary); font-size: 1.5rem;">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" style="color: var(--text-secondary); font-size: 1.5rem;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" style="color: var(--text-secondary); font-size: 1.5rem;">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" style="color: var(--text-secondary); font-size: 1.5rem;">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr style="margin: var(--spacing-xl) 0; border-color: var(--border-color);">
+            <div style="text-align: center; color: var(--text-light);">
+                <p>&copy; 2024 Cari tau yuk. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to search from 404 page
+        function searchFrom404() {
+            const query = document.getElementById('searchInput').value;
+            if (query.trim()) {
+                window.location.href = `index.html?search=${encodeURIComponent(query)}`;
+            }
+        }
+
+        // Handle search on enter
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchFrom404();
+            }
+        });
+    </script>
+</body>
+</html>
