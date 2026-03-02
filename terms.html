@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syarat &amp; Ketentuan — Cari tau yuk</title>
+    <meta name="description" content="Syarat dan Ketentuan penggunaan layanan Cari tau yuk.">
+    <link rel="canonical" href="https://yukcaritau.my.id/terms.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-hero{background:var(--grad-hero);color:#fff;padding:var(--sp-xxl) 0 var(--sp-xl);text-align:center;position:relative;overflow:hidden}
+        .page-hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+        .page-hero::after{content:'';position:absolute;width:300px;height:300px;background:rgba(255,255,255,.07);border-radius:50%;bottom:-100px;right:-60px;pointer-events:none}
+        .page-hero-icon{font-size:3rem;margin-bottom:var(--sp-md);animation:heroIn .6s var(--ease) both}
+        .page-hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;margin-bottom:var(--sp-sm);animation:heroIn .7s var(--ease) both}
+        .page-hero p{opacity:.88;animation:heroIn .85s var(--ease) both;margin:0}
+        @keyframes heroIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        .content-wrapper{max-width:1060px;margin:var(--sp-xxl) auto;padding:0 var(--sp-lg);display:grid;grid-template-columns:240px 1fr;gap:var(--sp-xl);align-items:start}
+        @media(max-width:820px){.content-wrapper{grid-template-columns:1fr}.toc-sidebar{display:none}}
+        .toc-sidebar{position:sticky;top:80px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);padding:var(--sp-lg);box-shadow:var(--shadow-card);animation:cardIn .5s var(--ease) both}
+        .toc-sidebar h3{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-light);margin-bottom:var(--sp-md);font-weight:700}
+        .toc-list{list-style:none;padding:0;margin:0}
+        .toc-list li{margin-bottom:3px}
+        .toc-list a{display:flex;align-items:center;gap:8px;color:var(--text-secondary);font-size:.84rem;font-weight:500;padding:6px 10px;border-radius:var(--r-sm);transition:background .2s,color .2s;text-decoration:none}
+        .toc-list a:hover,.toc-list a.active{background:rgba(74,144,226,.1);color:var(--primary)}
+        .toc-num{width:20px;height:20px;background:var(--bg-secondary);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--text-light);flex-shrink:0;transition:background .2s,color .2s}
+        .toc-list a:hover .toc-num,.toc-list a.active .toc-num{background:var(--primary);color:#fff}
+        @keyframes cardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+        .terms-body{min-width:0}
+        .updated-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(74,144,226,.1);color:var(--primary);border-radius:var(--r-full);padding:5px 14px;font-size:.82rem;font-weight:600;margin-bottom:var(--sp-lg)}
+        .terms-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-card);padding:var(--sp-xl);margin-bottom:var(--sp-lg);scroll-margin-top:90px;animation:cardIn .5s var(--ease) both}
+        .terms-card h2{font-size:1.12rem;color:var(--text-primary);margin-bottom:var(--sp-md);display:flex;align-items:center;gap:var(--sp-sm);padding-bottom:var(--sp-md);border-bottom:2px solid var(--bg-secondary)}
+        .section-icon{width:36px;height:36px;background:var(--grad-hero);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.88rem;flex-shrink:0;box-shadow:0 4px 12px rgba(74,144,226,.25)}
+        .terms-card p,.terms-card li{color:var(--text-secondary);line-height:1.78;font-size:.95rem}
+        .terms-card ul,.terms-card ol{padding-left:var(--sp-lg);margin:var(--sp-md) 0}
+        .terms-card li{margin-bottom:var(--sp-sm)}
+        .terms-card strong{color:var(--text-primary)}
+        .terms-card a{color:var(--primary);font-weight:600}
+        .highlight-box{background:linear-gradient(135deg,rgba(74,144,226,.07),rgba(108,92,231,.07));border-left:4px solid var(--primary);border-radius:0 var(--r-md) var(--r-md) 0;padding:var(--sp-md) var(--sp-lg);margin:var(--sp-md) 0}
+        .highlight-box p{margin:0;font-size:.9rem}
+        .warning-box{background:rgba(221,107,32,.07);border-left:4px solid var(--warning);border-radius:0 var(--r-md) var(--r-md) 0;padding:var(--sp-md) var(--sp-lg);margin:var(--sp-md) 0;display:flex;gap:var(--sp-sm);align-items:flex-start}
+        .warning-box i{color:var(--warning);margin-top:3px;flex-shrink:0}
+        .warning-box p{margin:0;font-size:.9rem}
+        .terms-table{width:100%;border-collapse:collapse;margin:var(--sp-md) 0;font-size:.88rem}
+        .terms-table th{background:var(--bg-secondary);padding:10px 14px;text-align:left;font-weight:700;color:var(--text-primary);border-bottom:2px solid var(--border)}
+        .terms-table td{padding:10px 14px;color:var(--text-secondary);border-bottom:1px solid var(--border);vertical-align:top}
+        .terms-table tr:last-child td{border-bottom:none}
+        .terms-table tr:hover td{background:var(--bg-secondary)}
+        .agreement-cta{background:var(--grad-hero);border-radius:var(--r-lg);padding:var(--sp-xl);text-align:center;color:#fff;margin-top:var(--sp-lg);box-shadow:0 8px 28px rgba(74,144,226,.3)}
+        .agreement-cta h3{color:#fff;font-size:1.3rem;margin-bottom:var(--sp-sm)}
+        .agreement-cta p{opacity:.88;margin-bottom:var(--sp-lg);font-size:.95rem}
+        .btn-white{display:inline-flex;align-items:center;gap:var(--sp-sm);background:#fff;color:var(--primary);padding:12px 28px;border-radius:var(--r-full);font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:transform .2s var(--ease),box-shadow .2s}
+        .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2);color:var(--primary)}
+        .btn-outline-white{display:inline-flex;align-items:center;gap:var(--sp-sm);background:transparent;color:#fff;padding:11px 24px;border-radius:var(--r-full);font-weight:700;font-size:.95rem;text-decoration:none;border:2px solid rgba(255,255,255,.6);margin-left:var(--sp-md);transition:all .2s}
+        .btn-outline-white:hover{background:rgba(255,255,255,.15);color:#fff}
+        @media(max-width:480px){.btn-outline-white{margin-left:0;margin-top:var(--sp-md)}}
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="container header-content">
+        <a href="index.html" class="logo"><i class="fas fa-compass"></i> Cari tau yuk</a>
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" placeholder="Cari judul atau deskripsi…"
+                   onkeypress="if(event.key==='Enter')window.location.href='index.html?search='+encodeURIComponent(this.value)">
+        </div>
+        <nav>
+            <a href="admin.html" style="color:var(--text-secondary);font-weight:600;font-size:.9rem;">
+                <i class="fas fa-user-cog"></i> Admin
+            </a>
+        </nav>
+    </div>
+</header>
+
+<!-- Hero -->
+<section class="page-hero">
+    <div class="container">
+        <div class="page-hero-icon">📄</div>
+        <h1>Syarat &amp; Ketentuan</h1>
+        <p>Harap baca syarat dan ketentuan ini sebelum menggunakan layanan kami</p>
+    </div>
+</section>
+
+<main>
+    <div class="content-wrapper">
+
+        <!-- Sidebar TOC -->
+        <aside class="toc-sidebar">
+            <h3>Daftar Isi</h3>
+            <ul class="toc-list">
+                <li><a href="#penerimaan"><span class="toc-num">1</span> Penerimaan Syarat</a></li>
+                <li><a href="#layanan"><span class="toc-num">2</span> Deskripsi Layanan</a></li>
+                <li><a href="#pengguna"><span class="toc-num">3</span> Kewajiban Pengguna</a></li>
+                <li><a href="#konten"><span class="toc-num">4</span> Konten &amp; HKI</a></li>
+                <li><a href="#iklan"><span class="toc-num">5</span> Iklan &amp; Pihak Ketiga</a></li>
+                <li><a href="#larangan"><span class="toc-num">6</span> Konten Terlarang</a></li>
+                <li><a href="#disclaimer"><span class="toc-num">7</span> Penafian</a></li>
+                <li><a href="#tanggung-jawab"><span class="toc-num">8</span> Batasan Tanggung Jawab</a></li>
+                <li><a href="#privasi"><span class="toc-num">9</span> Privasi</a></li>
+                <li><a href="#perubahan"><span class="toc-num">10</span> Perubahan Layanan</a></li>
+                <li><a href="#hukum"><span class="toc-num">11</span> Hukum yang Berlaku</a></li>
+                <li><a href="#kontak"><span class="toc-num">12</span> Hubungi Kami</a></li>
+            </ul>
+        </aside>
+
+        <!-- Terms Content -->
+        <div class="terms-body">
+
+            <div style="margin-bottom:var(--sp-xl)">
+                <span class="updated-badge">
+                    <i class="fas fa-calendar-alt"></i> Terakhir diperbarui: 2 maret 2026
+                </span>
+                <div class="highlight-box">
+                    <p><strong>Ringkasan:</strong> Dengan mengakses atau menggunakan situs web
+                    <strong>Cari tau yuk</strong>, Anda menyetujui Syarat &amp; Ketentuan ini.
+                    Jika tidak setuju, harap hentikan penggunaan situs ini.</p>
+                </div>
+            </div>
+
+            <!-- 1 -->
+            <div class="terms-card" id="penerimaan">
+                <h2><span class="section-icon"><i class="fas fa-handshake"></i></span> 1. Penerimaan Syarat</h2>
+                <p>Selamat datang di <strong>Cari tau yuk</strong>. Dengan mengakses situs web ini (<strong>yukcaritau.my.id</strong>), Anda menyatakan bahwa:</p>
+                <ul>
+                    <li>Anda telah membaca, memahami, dan menyetujui Syarat &amp; Ketentuan ini.</li>
+                    <li>Anda berusia minimal <strong>13 tahun</strong> atau telah mendapat persetujuan orang tua/wali hukum Anda.</li>
+                    <li>Anda memiliki kapasitas hukum untuk mengikatkan diri dalam perjanjian ini.</li>
+                </ul>
+                <p>Syarat &amp; Ketentuan ini berlaku bagi semua pengunjung, pengguna, dan pihak lain yang mengakses atau menggunakan layanan kami.</p>
+            </div>
+
+            <!-- 2 -->
+            <div class="terms-card" id="layanan" style="animation-delay:.04s">
+                <h2><span class="section-icon"><i class="fas fa-globe"></i></span> 2. Deskripsi Layanan</h2>
+                <p><strong>Cari tau yuk</strong> adalah platform konten digital berbahasa Indonesia yang menyajikan artikel, ulasan, dan informasi pada kategori berikut:</p>
+                <table class="terms-table">
+                    <thead><tr><th>Kategori</th><th>Jenis Konten</th></tr></thead>
+                    <tbody>
+                        <tr><td>🎬 Film</td><td>Ulasan film, rekomendasi, sinopsis, dan info bioskop</td></tr>
+                        <tr><td>💻 Teknologi</td><td>Review gadget, tutorial, tren AI, dan berita digital</td></tr>
+                        <tr><td>💰 Keuangan</td><td>Tips investasi, manajemen keuangan, dan literasi finansial</td></tr>
+                        <tr><td>🏥 Kesehatan</td><td>Gaya hidup sehat, tips kesehatan, dan informasi medis umum</td></tr>
+                    </tbody>
+                </table>
+                <p>Layanan ini disediakan secara gratis dan dapat berubah sewaktu-waktu tanpa pemberitahuan sebelumnya.</p>
+            </div>
+
+            <!-- 3 -->
+            <div class="terms-card" id="pengguna" style="animation-delay:.08s">
+                <h2><span class="section-icon"><i class="fas fa-user-check"></i></span> 3. Kewajiban Pengguna</h2>
+                <p>Sebagai pengguna situs kami, Anda setuju untuk:</p>
+                <ul>
+                    <li>Menggunakan situs hanya untuk tujuan yang <strong>sah dan tidak melanggar hukum</strong>.</li>
+                    <li>Tidak mengganggu atau merusak keamanan, integritas, atau kinerja situs.</li>
+                    <li>Tidak mencoba mendapatkan akses tidak sah ke bagian situs yang dibatasi.</li>
+                    <li>Memberikan informasi yang <strong>akurat dan jujur</strong> saat mengisi formulir.</li>
+                    <li>Tidak menggunakan situs untuk menyebarkan spam, malware, atau konten berbahaya.</li>
+                    <li>Mematuhi semua hukum dan peraturan yang berlaku di wilayah hukum Anda.</li>
+                </ul>
+                <div class="warning-box">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Pelanggaran terhadap ketentuan ini dapat mengakibatkan pemblokiran akses dan tindakan hukum yang diperlukan.</p>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="terms-card" id="konten" style="animation-delay:.12s">
+                <h2><span class="section-icon"><i class="fas fa-copyright"></i></span> 4. Konten &amp; Hak Kekayaan Intelektual</h2>
+                <p>Seluruh konten di <strong>Cari tau yuk</strong> — termasuk teks, gambar, grafik, logo, dan tata letak — dilindungi oleh hukum hak cipta yang berlaku.</p>
+                <p><strong>Anda diperbolehkan untuk:</strong></p>
+                <ul>
+                    <li>Membaca konten untuk keperluan pribadi dan non-komersial.</li>
+                    <li>Berbagi tautan artikel kami dengan menyertakan sumber yang jelas.</li>
+                    <li>Mengutip sebagian kecil konten dengan mencantumkan atribusi yang tepat.</li>
+                </ul>
+                <p><strong>Anda tidak diperbolehkan untuk:</strong></p>
+                <ul>
+                    <li>Menyalin atau menerbitkan ulang konten kami secara keseluruhan tanpa izin tertulis.</li>
+                    <li>Menggunakan konten kami untuk tujuan komersial tanpa persetujuan sebelumnya.</li>
+                    <li>Menghapus atau mengubah pemberitahuan hak cipta dalam konten kami.</li>
+                </ul>
+                <div class="highlight-box">
+                    <p>Untuk permintaan kerja sama konten, hubungi kami melalui <a href="contact.html">halaman kontak</a>.</p>
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="terms-card" id="iklan" style="animation-delay:.16s">
+                <h2><span class="section-icon"><i class="fas fa-ad"></i></span> 5. Iklan &amp; Layanan Pihak Ketiga</h2>
+                <p>Situs ini menggunakan <strong>Google AdSense</strong> untuk menampilkan iklan. Dengan menggunakan situs ini, Anda memahami bahwa:</p>
+                <ul>
+                    <li>Iklan dikelola oleh pihak ketiga dan bukan merupakan endorsement dari kami.</li>
+                    <li>Google AdSense menggunakan cookies untuk menyajikan iklan yang dipersonalisasi berdasarkan riwayat penelusuran Anda.</li>
+                    <li>Kami tidak bertanggung jawab atas konten, akurasi, atau praktik iklan pihak ketiga.</li>
+                    <li>Setiap transaksi dengan pengiklan adalah tanggung jawab Anda dan pengiklan tersebut.</li>
+                </ul>
+                <p>Anda dapat menonaktifkan iklan yang dipersonalisasi melalui <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Pengaturan Iklan Google</a>.</p>
+            </div>
+
+            <!-- 6 -->
+            <div class="terms-card" id="larangan" style="animation-delay:.20s">
+                <h2><span class="section-icon"><i class="fas fa-ban"></i></span> 6. Konten &amp; Perilaku Terlarang</h2>
+                <p>Pengguna dilarang keras melakukan aktivitas berikut:</p>
+                <ul>
+                    <li>Menyebarkan konten yang melanggar hukum, mengandung kebencian, pornografi, atau kekerasan.</li>
+                    <li>Melecehkan, mengancam, atau merendahkan pengguna lain maupun tim kami.</li>
+                    <li>Menyebarkan informasi palsu (<em>hoaks</em>) yang dapat merugikan orang lain.</li>
+                    <li>Melakukan scraping atau pengambilan data massal tanpa izin tertulis dari kami.</li>
+                    <li>Menggunakan bot atau skrip otomatis untuk mengakses situs secara tidak wajar.</li>
+                    <li>Melakukan serangan siber, injeksi kode, atau upaya merusak sistem kami.</li>
+                    <li>Menyamar sebagai pihak lain atau memberikan identitas yang menyesatkan.</li>
+                </ul>
+                <div class="warning-box">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Kami berhak melaporkan aktivitas ilegal kepada pihak berwenang sesuai hukum yang berlaku di Indonesia.</p>
+                </div>
+            </div>
+
+            <!-- 7 -->
+            <div class="terms-card" id="disclaimer" style="animation-delay:.24s">
+                <h2><span class="section-icon"><i class="fas fa-info"></i></span> 7. Penafian (Disclaimer)</h2>
+                <p>Konten di situs ini disajikan <strong>"sebagaimana adanya"</strong> hanya untuk tujuan informasi umum:</p>
+                <ul>
+                    <li>Kami <strong>tidak menjamin</strong> keakuratan, kelengkapan, atau kesesuaian konten untuk tujuan tertentu.</li>
+                    <li>Konten <strong>Kesehatan</strong> bukan merupakan nasihat medis profesional. Konsultasikan kondisi kesehatan Anda kepada tenaga medis yang kompeten.</li>
+                    <li>Konten <strong>Keuangan</strong> bukan merupakan saran investasi profesional. Setiap keputusan investasi adalah tanggung jawab Anda sepenuhnya.</li>
+                    <li>Kami tidak bertanggung jawab atas kerugian akibat mengandalkan informasi di situs ini.</li>
+                </ul>
+                <div class="highlight-box">
+                    <p><strong>Penting:</strong> Untuk keputusan medis, keuangan, atau hukum yang serius, selalu konsultasikan dengan profesional yang berwenang.</p>
+                </div>
+            </div>
+
+            <!-- 8 -->
+            <div class="terms-card" id="tanggung-jawab" style="animation-delay:.28s">
+                <h2><span class="section-icon"><i class="fas fa-shield-alt"></i></span> 8. Batasan Tanggung Jawab</h2>
+                <p>Sejauh diizinkan hukum, <strong>Cari tau yuk</strong> tidak bertanggung jawab atas:</p>
+                <ul>
+                    <li>Kerugian langsung, tidak langsung, insidental, atau konsekuensial akibat penggunaan situs ini.</li>
+                    <li>Gangguan layanan, ketidaktersediaan situs, atau kehilangan data.</li>
+                    <li>Kerugian akibat akses tidak sah oleh pihak ketiga.</li>
+                    <li>Konten atau layanan pihak ketiga yang diakses melalui tautan di situs kami.</li>
+                    <li>Kesalahan teknis, bug, atau kerusakan perangkat akibat penggunaan situs ini.</li>
+                </ul>
+            </div>
+
+            <!-- 9 -->
+            <div class="terms-card" id="privasi" style="animation-delay:.32s">
+                <h2><span class="section-icon"><i class="fas fa-lock"></i></span> 9. Privasi &amp; Data Pengguna</h2>
+                <p>Penggunaan situs ini juga tunduk pada <a href="privacy-policy.html">Kebijakan Privasi</a> kami yang merupakan bagian tidak terpisahkan dari Syarat &amp; Ketentuan ini. Kebijakan Privasi menjelaskan:</p>
+                <ul>
+                    <li>Jenis data yang kami kumpulkan dari pengguna.</li>
+                    <li>Cara kami menggunakan dan melindungi data tersebut.</li>
+                    <li>Penggunaan cookies dan teknologi pelacak, termasuk untuk keperluan iklan.</li>
+                    <li>Hak-hak Anda atas data pribadi Anda.</li>
+                </ul>
+                <p>Dengan menggunakan situs ini, Anda juga menyetujui <a href="privacy-policy.html">Kebijakan Privasi</a> kami.</p>
+            </div>
+
+            <!-- 10 -->
+            <div class="terms-card" id="perubahan" style="animation-delay:.36s">
+                <h2><span class="section-icon"><i class="fas fa-sync-alt"></i></span> 10. Perubahan Layanan &amp; Syarat</h2>
+                <p>Kami berhak untuk:</p>
+                <ul>
+                    <li>Mengubah, memperbarui, atau menghentikan layanan kapan saja tanpa pemberitahuan terlebih dahulu.</li>
+                    <li>Merevisi Syarat &amp; Ketentuan ini sewaktu-waktu. Versi terbaru akan selalu tersedia di halaman ini.</li>
+                </ul>
+                <p>Penggunaan Anda yang berkelanjutan atas situs ini setelah perubahan dipublikasikan dianggap sebagai persetujuan Anda terhadap syarat yang telah diperbarui.</p>
+            </div>
+
+            <!-- 11 -->
+            <div class="terms-card" id="hukum" style="animation-delay:.40s">
+                <h2><span class="section-icon"><i class="fas fa-gavel"></i></span> 11. Hukum yang Berlaku</h2>
+                <p>Syarat &amp; Ketentuan ini diatur berdasarkan <strong>hukum Republik Indonesia</strong>. Sengketa diselesaikan melalui:</p>
+                <ul>
+                    <li>Musyawarah mufakat antara para pihak sebagai langkah pertama.</li>
+                    <li>Apabila tidak tercapai kesepakatan, melalui pengadilan yang berwenang di Indonesia.</li>
+                </ul>
+                <p>Referensi hukum yang relevan meliputi UU No. 11 Tahun 2008 tentang ITE dan perubahannya, serta peraturan terkait perlindungan data pribadi.</p>
+            </div>
+
+            <!-- 12 -->
+            <div class="terms-card" id="kontak" style="animation-delay:.44s">
+                <h2><span class="section-icon"><i class="fas fa-envelope"></i></span> 12. Hubungi Kami</h2>
+                <p>Jika ada pertanyaan terkait Syarat &amp; Ketentuan ini, silakan hubungi kami:</p>
+                <div style="background:linear-gradient(135deg,rgba(74,144,226,.08),rgba(108,92,231,.08));border:1px solid rgba(74,144,226,.2);border-radius:var(--r-md);padding:var(--sp-lg);margin-top:var(--sp-md)">
+                    <p style="margin:0;color:var(--text-secondary)">
+                        <i class="fas fa-globe" style="color:var(--primary);margin-right:8px"></i>
+                        <a href="contact.html">caritauyuk.com/contact.html</a><br><br>
+                        <i class="fas fa-envelope" style="color:var(--primary);margin-right:8px"></i>
+                        <a href="mailto:halo@caritauyuk.com">halo@caritauyuk.com</a><br><br>
+                        <i class="fas fa-map-marker-alt" style="color:var(--primary);margin-right:8px"></i>
+                        Indonesia 🇮🇩
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bottom CTA -->
+            <div class="agreement-cta">
+                <h3>Anda Telah Membaca Syarat &amp; Ketentuan Kami 🎉</h3>
+                <p>Dengan terus menggunakan situs ini, Anda menyetujui seluruh ketentuan di atas.</p>
+                <div>
+                    <a href="index.html" class="btn-white">
+                        <i class="fas fa-compass"></i> Mulai Jelajahi
+                    </a>
+                    <a href="privacy-policy.html" class="btn-outline-white">
+                        <i class="fas fa-lock"></i> Kebijakan Privasi
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--sp-xl)">
+            <div>
+                <h5>Tentang Kami</h5>
+                <p style="color:var(--text-secondary);font-size:.9rem">Cari tau yuk adalah platform berbagi informasi menarik seputar film, teknologi, keuangan, dan kesehatan.</p>
+            </div>
+            <div>
+                <h5>Navigasi</h5>
+                <ul style="list-style:none">
+                    <li><a href="index.html">🏠 Beranda</a></li>
+                    <li><a href="about.html">👋 Tentang Kami</a></li>
+                    <li><a href="contact.html">📬 Hubungi Kami</a></li>
+                    <li><a href="privacy-policy.html">🔒 Kebijakan Privasi</a></li>
+                    <li><a href="terms.html">📄 Syarat &amp; Ketentuan</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>Kategori</h5>
+                <ul style="list-style:none">
+                    <li><a href="index.html?category=Film">🎬 Film Terbaru</a></li>
+                    <li><a href="index.html?category=Teknologi">💻 Review Teknologi</a></li>
+                    <li><a href="index.html?category=Keuangan">💰 Tips Investasi</a></li>
+                    <li><a href="index.html?category=Kesehatan">🏥 Hidup Sehat</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr style="margin:var(--sp-xl) 0;border:none;border-top:1px solid var(--border)">
+        <p style="text-align:center;color:var(--text-light);font-size:.85rem">
+            &copy; 2025 Cari tau yuk. All rights reserved. |
+            <a href="privacy-policy.html" style="color:var(--text-light)">Kebijakan Privasi</a> |
+            <a href="terms.html" style="color:var(--text-light)">Syarat &amp; Ketentuan</a>
+        </p>
+    </div>
+</footer>
+
+<div id="toastContainer" class="toast-container"></div>
+
+<script>
+    // Highlight active TOC item on scroll
+    const sections = document.querySelectorAll('.terms-card[id]');
+    const tocLinks  = document.querySelectorAll('.toc-list a');
+    const observer  = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                tocLinks.forEach(l => l.classList.remove('active'));
+                const active = document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);
+                if (active) active.classList.add('active');
+            }
+        });
+    }, { rootMargin: '-80px 0px -60% 0px' });
+    sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

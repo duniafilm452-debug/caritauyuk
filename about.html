@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami — Cari tau yuk</title>
+    <meta name="description" content="Kenali lebih dekat Cari tau yuk — platform informasi menarik seputar Film, Teknologi, Keuangan, dan Kesehatan untuk pembaca Indonesia.">
+    
+    <link rel="icon" type="image/png" href="https://vidhot.yukcaritau.my.id/logo%20cari%20tau%20yuk.png">
+    
+    <link rel="canonical" href="https://yukcaritau.my.id/about.html">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .page-hero {
+            background: var(--grad-hero);
+            color: #fff;
+            padding: var(--sp-xxl) 0 var(--sp-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            width: 300px; height: 300px;
+            background: rgba(255,255,255,.07);
+            border-radius: 50%;
+            bottom: -100px; right: -60px;
+            pointer-events: none;
+        }
+        .page-hero-icon { font-size: 3rem; margin-bottom: var(--sp-md); animation: heroIn .6s var(--ease) both; }
+        .page-hero h1  { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; margin-bottom: var(--sp-sm); animation: heroIn .7s var(--ease) both; }
+        .page-hero p   { opacity: .88; max-width: 540px; margin: 0 auto; animation: heroIn .85s var(--ease) both; }
+        @keyframes heroIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+        .content-wrapper {
+            max-width: 900px;
+            margin: var(--sp-xxl) auto;
+            padding: 0 var(--sp-lg);
+        }
+
+        /* Mission Cards */
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--sp-lg);
+            margin: var(--sp-xl) 0;
+        }
+        .mission-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: var(--sp-xl) var(--sp-lg);
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            transition: transform .28s var(--ease), box-shadow .28s var(--ease);
+            animation: cardIn .5s var(--ease) both;
+        }
+        .mission-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+        @keyframes cardIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+        .mission-icon {
+            width: 64px; height: 64px;
+            background: var(--grad-hero);
+            border-radius: var(--r-lg);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem;
+            margin: 0 auto var(--sp-md);
+            box-shadow: 0 6px 20px rgba(74,144,226,.3);
+        }
+        .mission-card h3 { font-size: 1.1rem; margin-bottom: var(--sp-sm); }
+        .mission-card p  { color: var(--text-secondary); font-size: .9rem; line-height: 1.65; margin: 0; }
+
+        /* Section heading */
+        .section-heading {
+            text-align: center;
+            margin: var(--sp-xxl) 0 var(--sp-xl);
+        }
+        .section-heading h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--grad-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--sp-sm);
+        }
+        .section-heading p { color: var(--text-secondary); max-width: 520px; margin: 0 auto; }
+
+        /* Story section */
+        .story-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: var(--sp-xl) var(--sp-xxl);
+            box-shadow: var(--shadow-card);
+            margin-bottom: var(--sp-lg);
+        }
+        @media (max-width: 600px) { .story-card { padding: var(--sp-lg); } }
+        .story-card p { color: var(--text-secondary); line-height: 1.8; font-size: .97rem; }
+
+        /* Category highlight */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--sp-md);
+            margin: var(--sp-lg) 0;
+        }
+        .cat-item {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: var(--sp-lg);
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all .25s var(--ease);
+            display: block;
+        }
+        .cat-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            color: var(--text-primary);
+        }
+        .cat-item .emoji { font-size: 2rem; display: block; margin-bottom: var(--sp-sm); }
+        .cat-item strong { font-weight: 700; display: block; margin-bottom: 4px; }
+        .cat-item span   { font-size: .82rem; color: var(--text-secondary); }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--sp-lg);
+            margin: var(--sp-xl) 0;
+        }
+        .stat-card {
+            background: var(--grad-hero);
+            border-radius: var(--r-lg);
+            padding: var(--sp-xl) var(--sp-md);
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(74,144,226,.3);
+        }
+        .stat-number { font-size: 2.2rem; font-weight: 800; display: block; line-height: 1; }
+        .stat-label  { font-size: .85rem; opacity: .85; margin-top: 6px; display: block; }
+
+        /* CTA */
+        .cta-box {
+            background: linear-gradient(135deg, rgba(74,144,226,.08), rgba(108,92,231,.08));
+            border: 1px solid rgba(74,144,226,.2);
+            border-radius: var(--r-lg);
+            padding: var(--sp-xl);
+            text-align: center;
+            margin-top: var(--sp-xl);
+        }
+        .cta-box h3 { font-size: 1.4rem; margin-bottom: var(--sp-sm); }
+        .cta-box p  { color: var(--text-secondary); margin-bottom: var(--sp-lg); }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-sm);
+            background: var(--grad-hero);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: var(--r-full);
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(74,144,226,.35);
+            transition: transform .2s var(--ease), box-shadow .2s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(74,144,226,.45); color: #fff; }
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-sm);
+            background: transparent;
+            color: var(--primary);
+            padding: 11px 24px;
+            border-radius: var(--r-full);
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            border: 2px solid var(--primary);
+            margin-left: var(--sp-md);
+            transition: all .2s;
+        }
+        .btn-outline:hover { background: var(--primary); color: #fff; }
+        @media (max-width: 480px) { .btn-outline { margin-left: 0; margin-top: var(--sp-md); } }
+    </style>
+</head>
+<body>
+
+<!-- ── Header ────────────────────────────────────────────── -->
+<header class="header">
+    <div class="container header-content">
+        <a href="index.html" class="logo">
+            <i class="fas fa-compass"></i> Cari tau yuk
+        </a>
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input"
+                   placeholder="Cari judul atau deskripsi…"
+                   onkeypress="if(event.key==='Enter')window.location.href='index.html?search='+encodeURIComponent(this.value)">
+        </div>
+        <nav>
+            <a href="admin.html" style="color:var(--text-secondary);font-weight:600;font-size:.9rem;">
+                <i class="fas fa-user-cog"></i> Admin
+            </a>
+        </nav>
+    </div>
+</header>
+
+<!-- ── Hero ──────────────────────────────────────────────── -->
+<section class="page-hero">
+    <div class="container">
+        <div class="page-hero-icon">👋</div>
+        <h1>Tentang Cari tau yuk</h1>
+        <p>Platform informasi terpercaya untuk pembaca Indonesia yang ingin selalu update</p>
+    </div>
+</section>
+
+<main>
+    <div class="content-wrapper">
+
+        <!-- Misi -->
+        <div class="section-heading">
+            <h2>Apa yang Kami Tawarkan?</h2>
+            <p>Konten berkualitas yang dikurasi dengan teliti untuk kebutuhan informasi sehari-hari Anda</p>
+        </div>
+
+        <div class="mission-grid">
+            <div class="mission-card" style="animation-delay:.05s">
+                <div class="mission-icon">🎯</div>
+                <h3>Informasi Tepat Sasaran</h3>
+                <p>Konten yang kami sajikan dipilih secara selektif - relevan, akurat, dan mudah dipahami oleh siapapun.</p>
+            </div>
+            <div class="mission-card" style="animation-delay:.10s">
+                <div class="mission-icon">🔄</div>
+                <h3>Selalu Diperbarui</h3>
+                <p>Kami rutin memperbarui konten agar Anda mendapatkan informasi terkini dari berbagai bidang.</p>
+            </div>
+            <div class="mission-card" style="animation-delay:.15s">
+                <div class="mission-icon">🤝</div>
+                <h3>Untuk Semua Orang</h3>
+                <p>Ditulis dalam bahasa yang ringan dan mudah dicerna, cocok untuk semua kalangan usia.</p>
+            </div>
+        </div>
+
+        <!-- Statistik -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">4+</span>
+                <span class="stat-label">Kategori Konten</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Konten Original</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">🇮🇩</span>
+                <span class="stat-label">Berbahasa Indonesia</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Dapat Diakses</span>
+            </div>
+        </div>
+
+        <!-- Cerita Kami -->
+        <div class="section-heading">
+            <h2>Cerita Kami</h2>
+            <p>Dari mana Cari tau yuk berasal</p>
+        </div>
+
+        <div class="story-card">
+            <p>
+                <strong>Cari tau yuk</strong> lahir dari kegelisahan sederhana: susahnya menemukan informasi berkualitas
+                dalam bahasa Indonesia yang disajikan dengan cara yang menarik dan mudah dipahami. Banyak platform
+                luar negeri yang informasinya bagus, tapi tidak semua orang nyaman membaca dalam bahasa asing.
+            </p>
+            <p>
+                Kami hadir untuk menjembatani kebutuhan tersebut. Dengan fokus pada empat bidang utama —
+                <strong>Film, Teknologi, Keuangan, dan Kesehatan</strong> — kami menyajikan konten yang tidak
+                hanya informatif tetapi juga menghibur dan menginspirasi.
+            </p>
+            <p>
+                Setiap artikel yang kami terbitkan melalui proses riset dan penulisan yang cermat, memastikan
+                bahwa setiap kata yang Anda baca memiliki nilai dan manfaat. Kami percaya bahwa pengetahuan
+                seharusnya mudah diakses oleh semua orang - tanpa batas dan tanpa biaya.
+            </p>
+            <p>
+                Bergabunglah bersama ribuan pembaca yang sudah menjadikan <strong>Cari tau yuk</strong> sebagai
+                sumber informasi andalan mereka setiap hari. Karena pengetahuan adalah kekuatan, dan berbagi
+                pengetahuan adalah kebaikan. 🌟
+            </p>
+        </div>
+
+        <!-- Kategori -->
+        <div class="section-heading">
+            <h2>Jelajahi Kategori Kami</h2>
+            <p>Pilih topik yang paling Anda minati</p>
+        </div>
+
+        <div class="category-grid">
+            <a href="index.html?category=Film" class="cat-item">
+                <span class="emoji">🎬</span>
+                <strong>Film</strong>
+                <span>Review & rekomendasi film terbaru</span>
+            </a>
+            <a href="index.html?category=Teknologi" class="cat-item">
+                <span class="emoji">💻</span>
+                <strong>Teknologi</strong>
+                <span>Gadget, AI, dan tren digital</span>
+            </a>
+            <a href="index.html?category=Keuangan" class="cat-item">
+                <span class="emoji">💰</span>
+                <strong>Keuangan</strong>
+                <span>Tips investasi & manajemen uang</span>
+            </a>
+            <a href="index.html?category=Kesehatan" class="cat-item">
+                <span class="emoji">🏥</span>
+                <strong>Kesehatan</strong>
+                <span>Gaya hidup sehat & tips wellness</span>
+            </a>
+        </div>
+
+        <!-- Nilai Kami -->
+        <div class="section-heading" style="margin-top:var(--sp-xxl)">
+            <h2>Nilai-Nilai Kami</h2>
+        </div>
+
+        <div class="story-card">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--sp-lg)">
+                <div>
+                    <h4 style="color:var(--primary);margin-bottom:var(--sp-sm)">
+                        <i class="fas fa-check-circle" style="margin-right:6px"></i>Akurasi
+                    </h4>
+                    <p style="font-size:.9rem;color:var(--text-secondary);margin:0">
+                        Setiap informasi yang kami sajikan telah melalui verifikasi dan riset mendalam.
+                    </p>
+                </div>
+                <div>
+                    <h4 style="color:var(--primary);margin-bottom:var(--sp-sm)">
+                        <i class="fas fa-users" style="margin-right:6px"></i>Inklusivitas
+                    </h4>
+                    <p style="font-size:.9rem;color:var(--text-secondary);margin:0">
+                        Konten kami dirancang untuk semua orang, tanpa memandang latar belakang.
+                    </p>
+                </div>
+                <div>
+                    <h4 style="color:var(--primary);margin-bottom:var(--sp-sm)">
+                        <i class="fas fa-leaf" style="margin-right:6px"></i>Transparansi
+                    </h4>
+                    <p style="font-size:.9rem;color:var(--text-secondary);margin:0">
+                        Kami terbuka tentang cara kami mendapatkan pendapatan, termasuk melalui iklan.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-box">
+            <h3>Siap Mulai Belajar? 🚀</h3>
+            <p>Jelajahi ratusan artikel informatif yang sudah menunggu untuk Anda baca</p>
+            <div>
+                <a href="index.html" class="btn-primary">
+                    <i class="fas fa-compass"></i> Jelajahi Konten
+                </a>
+                <a href="contact.html" class="btn-outline">
+                    <i class="fas fa-envelope"></i> Hubungi Kami
+                </a>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer>
+    <div class="container">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--sp-xl)">
+            <div>
+                <h5>Tentang Kami</h5>
+                <p style="color:var(--text-secondary);font-size:.9rem">
+                    Cari tau yuk adalah platform berbagi informasi menarik seputar film,
+                    teknologi, keuangan, dan kesehatan.
+                </p>
+            </div>
+            <div>
+                <h5>Navigasi</h5>
+                <ul style="list-style:none">
+                    <li><a href="index.html">🏠 Beranda</a></li>
+                    <li><a href="about.html">👋 Tentang Kami</a></li>
+                    <li><a href="contact.html">📬 Hubungi Kami</a></li>
+                    <li><a href="privacy-policy.html">🔒 Kebijakan Privasi</a></li>
+                    <li><a href="terms.html">📄 Syarat & Ketentuan</a></li>
+                </ul>
+            </div>
+            <!--
+            <div>
+                <h5>Ikuti Kami</h5>
+                <div style="display:flex;gap:var(--sp-md)">
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-youtube"></i></a>
+                </div> -->
+            </div>
+        </div>
+        <hr style="margin:var(--sp-xl) 0;border:none;border-top:1px solid var(--border)">
+        <p style="text-align:center;color:var(--text-light);font-size:.85rem">
+            &copy; 2026 Cari tau yuk. All rights reserved. |
+            <a href="privacy-policy.html" style="color:var(--text-light)">Kebijakan Privasi</a> |
+            <a href="terms.html" style="color:var(--text-light)">Syarat & Ketentuan</a>
+        </p>
+    </div>
+</footer>
+
+<div id="toastContainer" class="toast-container"></div>
+</body>
+</html>

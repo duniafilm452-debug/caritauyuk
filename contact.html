@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubungi Kami — Cari tau yuk</title>
+    <meta name="description" content="Ada pertanyaan atau masukan? Hubungi tim Cari tau yuk. Kami senang mendengar dari Anda!">
+    
+    <link rel="icon" type="image/png" href="https://vidhot.yukcaritau.my.id/logo%20cari%20tau%20yuk.png">
+    
+    <link rel="canonical" href="https://yukcaritau.my.id/contact.html">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .page-hero {
+            background: var(--grad-hero);
+            color: #fff;
+            padding: var(--sp-xxl) 0 var(--sp-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        .page-hero::after {
+            content: ''; position: absolute;
+            width: 300px; height: 300px;
+            background: rgba(255,255,255,.07);
+            border-radius: 50%;
+            bottom: -100px; right: -60px;
+            pointer-events: none;
+        }
+        .page-hero-icon { font-size: 3rem; margin-bottom: var(--sp-md); animation: heroIn .6s var(--ease) both; }
+        .page-hero h1  { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; margin-bottom: var(--sp-sm); animation: heroIn .7s var(--ease) both; }
+        .page-hero p   { opacity: .88; max-width: 500px; margin: 0 auto; animation: heroIn .85s var(--ease) both; }
+        @keyframes heroIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+        .content-wrapper {
+            max-width: 1000px;
+            margin: var(--sp-xxl) auto;
+            padding: 0 var(--sp-lg);
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: var(--sp-xl);
+            align-items: start;
+        }
+        @media (max-width: 720px) { .contact-layout { grid-template-columns: 1fr; } }
+
+        /* Info Cards */
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: var(--sp-xl);
+            box-shadow: var(--shadow-card);
+            animation: cardIn .5s var(--ease) both;
+        }
+        @keyframes cardIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+        .info-card h2 {
+            font-size: 1.25rem;
+            margin-bottom: var(--sp-lg);
+            color: var(--text-primary);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--sp-md);
+            padding: var(--sp-md) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .contact-item:last-of-type { border-bottom: none; }
+        .contact-item-icon {
+            width: 44px; height: 44px;
+            background: rgba(74,144,226,.1);
+            border-radius: var(--r-md);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .contact-item-text strong { display: block; font-size: .9rem; color: var(--text-primary); margin-bottom: 2px; }
+        .contact-item-text span  { font-size: .88rem; color: var(--text-secondary); }
+        .contact-item-text a     { font-size: .88rem; color: var(--primary); }
+
+        .response-badge {
+            display: flex;
+            align-items: center;
+            gap: var(--sp-sm);
+            background: rgba(56,161,105,.1);
+            border: 1px solid rgba(56,161,105,.2);
+            border-radius: var(--r-md);
+            padding: var(--sp-md);
+            margin-top: var(--sp-lg);
+            font-size: .88rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: var(--sp-xl);
+            box-shadow: var(--shadow-card);
+            animation: cardIn .5s .05s var(--ease) both;
+        }
+        .form-card h2 { font-size: 1.25rem; margin-bottom: var(--sp-lg); }
+
+        .form-group { margin-bottom: var(--sp-lg); }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: .9rem;
+            color: var(--text-primary);
+            margin-bottom: var(--sp-sm);
+        }
+        .form-group label span { color: var(--error); margin-left: 2px; }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: var(--r-md);
+            font-size: .95rem;
+            font-family: var(--font);
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            transition: border-color .2s, box-shadow .2s, background .2s;
+            outline: none;
+        }
+        .form-control:focus {
+            border-color: var(--primary);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(74,144,226,.1);
+        }
+        .form-control::placeholder { color: var(--text-light); }
+        textarea.form-control { resize: vertical; min-height: 140px; }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--sp-lg);
+        }
+        @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+
+        .topic-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a0aec0' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; cursor: pointer; }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--grad-hero);
+            color: #fff;
+            border: none;
+            border-radius: var(--r-md);
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: var(--font);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp-sm);
+            transition: transform .2s var(--ease), box-shadow .2s;
+            box-shadow: 0 4px 16px rgba(74,144,226,.35);
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(74,144,226,.45); }
+        .submit-btn:active { transform: scale(.98); }
+        .submit-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+        /* Success State */
+        .success-state {
+            display: none;
+            text-align: center;
+            padding: var(--sp-xl);
+        }
+        .success-state.show { display: block; animation: cardIn .5s var(--ease); }
+        .success-icon {
+            width: 80px; height: 80px;
+            background: rgba(56,161,105,.1);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.2rem;
+            color: var(--success);
+            margin: 0 auto var(--sp-lg);
+        }
+
+        /* FAQ */
+        .faq-section { margin-top: var(--sp-xxl); }
+        .faq-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+        }
+        .faq-section h2 {
+            text-align: center;
+            font-size: 1.6rem;
+            margin-bottom: var(--sp-xl);
+            background: var(--grad-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .faq-item { border-bottom: 1px solid var(--border); }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: var(--sp-lg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--sp-md);
+            cursor: pointer;
+            font-family: var(--font);
+            font-weight: 600;
+            font-size: .95rem;
+            color: var(--text-primary);
+            text-align: left;
+            transition: background .2s;
+        }
+        .faq-question:hover { background: var(--bg-secondary); }
+        .faq-question i { color: var(--primary); transition: transform .3s; flex-shrink: 0; }
+        .faq-question.open i { transform: rotate(45deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .35s ease, padding .35s;
+            padding: 0 var(--sp-lg);
+            font-size: .92rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        .faq-answer.open { max-height: 300px; padding: 0 var(--sp-lg) var(--sp-lg); }
+    </style>
+</head>
+<body>
+
+<!-- ── Header ────────────────────────────────────────────── -->
+<header class="header">
+    <div class="container header-content">
+        <a href="index.html" class="logo">
+            <i class="fas fa-compass"></i> Cari tau yuk
+        </a>
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input"
+                   placeholder="Cari judul atau deskripsi…"
+                   onkeypress="if(event.key==='Enter')window.location.href='index.html?search='+encodeURIComponent(this.value)">
+        </div>
+        <nav>
+            <a href="admin.html" style="color:var(--text-secondary);font-weight:600;font-size:.9rem;">
+                <i class="fas fa-user-cog"></i> Admin
+            </a>
+        </nav>
+    </div>
+</header>
+
+<!-- ── Hero ──────────────────────────────────────────────── -->
+<section class="page-hero">
+    <div class="container">
+        <div class="page-hero-icon">📬</div>
+        <h1>Hubungi Kami</h1>
+        <p>Ada pertanyaan, saran, atau ingin berkolaborasi? Kami senang mendengar dari Anda!</p>
+    </div>
+</section>
+
+<main>
+    <div class="content-wrapper">
+
+        <div class="contact-layout">
+
+            <!-- Info Kontak -->
+            <div class="info-card">
+                <h2>Informasi Kontak</h2>
+
+                <div class="contact-item">
+                    <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="contact-item-text">
+                        <strong>Email</strong>
+                        <a href="https://formspree.io/f/mpqjgwlz">yukcaritau1@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-icon"><i class="fas fa-globe"></i></div>
+                    <div class="contact-item-text">
+                        <strong>Website</strong>
+                        <a href="index.html">cari tau yuk</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="contact-item-text">
+                        <strong>Lokasi</strong>
+                        <span>Indonesia 🇮🇩</span>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-icon"><i class="fas fa-clock"></i></div>
+                    <div class="contact-item-text">
+                        <strong>Jam Operasional</strong>
+                        <span>Senin – Jumat, 09.00 – 17.00 WIB</span>
+                    </div>
+                </div>
+
+                <div class="response-badge">
+                    <i class="fas fa-bolt"></i>
+                    Rata-rata respons: 1–2 hari kerja
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="form-card">
+                <h2>Kirim Pesan 💬</h2>
+                
+                <!-- FORM DENGAN FORMSPREE -->
+                <form action="https://formspree.io/f/mpqjgwlz" method="POST">
+                    
+                    <!-- Nama Depan & Belakang -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">Nama Depan <span>*</span></label>
+                            <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Budi" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Nama Belakang</label>
+                            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Santoso">
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">Alamat Email <span>*</span></label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="budi@email.com" required>
+                    </div>
+
+                    <!-- Topik -->
+                    <div class="form-group">
+                        <label for="topic">Topik Pesan <span>*</span></label>
+                        <select id="topic" name="topic" class="form-control topic-select" required>
+                            <option value="">-- Pilih Topik --</option>
+                            <option value="Pertanyaan Umum">❓ Pertanyaan Umum</option>
+                            <option value="Permintaan Konten">📝 Permintaan Konten</option>
+                            <option value="Kerja Sama / Iklan">📢 Pemasangan Iklan / Kerja Sama</option>
+                            <option value="Laporan Bug">🐛 Laporan Bug / Masalah Teknis</option>
+                            <option value="Privasi & Data">🔒 Pertanyaan Privasi & Data</option>
+                            <option value="Lainnya">💬 Lainnya</option>
+                        </select>
+                    </div>
+
+                    <!-- Pesan -->
+                    <div class="form-group">
+                        <label for="message">Pesan <span>*</span></label>
+                        <textarea id="message" name="message" class="form-control" placeholder="Tuliskan pesan Anda di sini…" required></textarea>
+                    </div>
+
+                    <!-- Checkbox Privasi -->
+                    <div class="form-group" style="display:flex;align-items:flex-start;gap:var(--sp-sm);margin-bottom:var(--sp-xl)">
+                        <input type="checkbox" id="agreePrivacy" name="agreePrivacy" value="yes" style="margin-top:3px;flex-shrink:0;width:16px;height:16px;cursor:pointer" required>
+                        <label for="agreePrivacy" style="font-weight:400;font-size:.88rem;color:var(--text-secondary);cursor:pointer;margin-bottom:0">
+                            Saya menyetujui <a href="privacy-policy.html" style="font-weight:600">Kebijakan Privasi</a> dan
+                            memberikan izin kepada Cari tau yuk untuk memproses data saya guna merespons pesan ini.
+                        </label>
+                    </div>
+
+                    <!-- Hidden fields untuk Formspree -->
+                    <input type="hidden" name="_subject" value="Pesan Baru dari Website Cari tau yuk!">
+                    <input type="hidden" name="_next" value="https://yukcaritau.my.id/contact.html?success=true">
+
+                    <!-- Tombol Submit -->
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Kirim Pesan
+                    </button>
+                </form>
+                <!-- AKHIR FORM -->
+
+                <!-- Success State -->
+                <div class="success-state" id="successState">
+                    <div class="success-icon"><i class="fas fa-check"></i></div>
+                    <h3 style="margin-bottom:var(--sp-sm)">Pesan Terkirim! 🎉</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:var(--sp-xl)">
+                        Terima kasih sudah menghubungi kami. Tim kami akan membalas pesan Anda
+                        dalam 1–2 hari kerja ke email yang Anda daftarkan.
+                    </p>
+                    <a href="index.html" style="display:inline-flex;align-items:center;gap:var(--sp-sm);background:var(--grad-hero);color:#fff;padding:12px 24px;border-radius:var(--r-full);font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(74,144,226,.3)">
+                        <i class="fas fa-compass"></i> Kembali ke Beranda
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FAQ -->
+        <div class="faq-section">
+            <h2>Pertanyaan yang Sering Diajukan</h2>
+            <div class="faq-card">
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Berapa lama waktu respons setelah mengirim pesan?
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Tim kami biasanya membalas dalam 1–2 hari kerja. Untuk pertanyaan yang lebih
+                        kompleks mungkin memerlukan waktu lebih lama, namun kami selalu berusaha
+                        memberikan jawaban yang lengkap dan membantu.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Apakah saya bisa mengajukan permintaan topik konten?
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Tentu! Kami sangat terbuka terhadap saran konten dari pembaca. Pilih topik
+                        "Permintaan Konten" di form di atas dan jelaskan topik yang ingin Anda baca.
+                        Tim editorial kami akan mempertimbangkan setiap saran dengan serius.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Bagaimana cara bekerja sama atau memasang iklan di Cari tau yuk?
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Untuk kerja sama atau pemasangan iklan, pilih topik "Pemasangan Iklan / Kerja Sama"
+                        pada form kontak dan sertakan informasi tentang brand/produk Anda. Tim kami akan
+                        menghubungi Anda dengan detail lebih lanjut.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Bagaimana cara melaporkan konten yang tidak akurat?
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Kami sangat menghargai masukan terkait akurasi konten. Silakan hubungi kami
+                        melalui form di atas dengan memilih topik "Laporan Bug / Masalah Teknis" dan
+                        sertakan link artikel serta informasi yang perlu dikoreksi.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Bagaimana cara menghapus data pribadi saya?
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Sesuai dengan <a href="privacy-policy.html">Kebijakan Privasi</a> kami, Anda
+                        berhak meminta penghapusan data pribadi. Kirimkan permintaan melalui form
+                        dengan topik "Pertanyaan Privasi & Data", dan kami akan memprosesnya
+                        sesuai regulasi yang berlaku.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer>
+    <div class="container">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--sp-xl)">
+            <div>
+                <h5>Tentang Kami</h5>
+                <p style="color:var(--text-secondary);font-size:.9rem">
+                    Cari tau yuk adalah platform berbagi informasi menarik seputar film,
+                    teknologi, keuangan, dan kesehatan.
+                </p>
+            </div>
+            <div>
+                <h5>Navigasi</h5>
+                <ul style="list-style:none">
+                    <li><a href="index.html">🏠 Beranda</a></li>
+                    <li><a href="about.html">👋 Tentang Kami</a></li>
+                    <li><a href="contact.html">📬 Hubungi Kami</a></li>
+                    <li><a href="privacy-policy.html">🔒 Kebijakan Privasi</a></li>
+                    <li><a href="terms.html">📄 Syarat & Ketentuan</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>Kategori</h5>
+                <ul style="list-style:none">
+                    <li><a href="index.html?category=Film">🎬 Film Terbaru</a></li>
+                    <li><a href="index.html?category=Teknologi">💻 Review Teknologi</a></li>
+                    <li><a href="index.html?category=Keuangan">💰 Tips Investasi</a></li>
+                    <li><a href="index.html?category=Kesehatan">🏥 Hidup Sehat</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr style="margin:var(--sp-xl) 0;border:none;border-top:1px solid var(--border)">
+        <p style="text-align:center;color:var(--text-light);font-size:.85rem">
+            &copy; 2025 Cari tau yuk. All rights reserved. |
+            <a href="privacy-policy.html" style="color:var(--text-light)">Kebijakan Privasi</a> |
+            <a href="terms.html" style="color:var(--text-light)">Syarat & Ketentuan</a>
+        </p>
+    </div>
+</footer>
+
+<div id="toastContainer" class="toast-container"></div>
+
+<script>
+    // Toggle FAQ
+    function toggleFaq(btn) {
+        const answer = btn.nextElementSibling;
+        const isOpen = answer.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.faq-answer.open').forEach(a => a.classList.remove('open'));
+        document.querySelectorAll('.faq-question.open').forEach(b => b.classList.remove('open'));
+
+        if (!isOpen) {
+            answer.classList.add('open');
+            btn.classList.add('open');
+        }
+    }
+
+    // Cek parameter URL untuk menampilkan pesan sukses setelah redirect dari Formspree
+    window.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            // Sembunyikan form
+            const form = document.querySelector('.form-card form');
+            if (form) {
+                form.style.display = 'none';
+            }
+            // Tampilkan success state
+            const successState = document.getElementById('successState');
+            if (successState) {
+                successState.style.display = 'block';
+                successState.classList.add('show');
+            }
+            
+            // Bersihkan URL dari parameter (opsional)
+            // history.replaceState(null, '', window.location.pathname);
+        }
+    });
+</script>
+
+</body>
+</html>
