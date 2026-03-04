@@ -61,6 +61,7 @@
             <div class="sidebar-user">
                 <div class="user-avatar" id="userAvatar">A</div>
                 <div class="user-info">
+                    <!-- FIX: Hapus artefak Cloudflare email obfuscation, JS akan mengisi ini -->
                     <div class="user-name"  id="userName">Admin</div>
                     <div class="user-email" id="userEmail">admin@example.com</div>
                 </div>
@@ -123,7 +124,6 @@
                     <option value="Teknologi">💻 Teknologi</option>
                     <option value="Keuangan">💰 Keuangan</option>
                     <option value="Kesehatan">🏥 Kesehatan</option>
-                    <option value="Lainnya"> Lainnya </option>
                 </select>
             </div>
         </div>
@@ -153,6 +153,24 @@
         </div>
         <form id="contentForm">
             <input type="hidden" id="contentId">
+
+            <!-- Draft Restore Banner -->
+            <div id="draftBanner" class="draft-banner hidden">
+                <div class="draft-banner-icon"><i class="fas fa-history"></i></div>
+                <div class="draft-banner-text">
+                    <strong>Kamu punya draft yang belum selesai.</strong>
+                    <span>Ingin melanjutkan dari sesi sebelumnya?</span>
+                </div>
+                <div class="draft-banner-actions">
+                    <button type="button" class="btn btn-primary btn-sm" id="draftRestoreBtn">
+                        <i class="fas fa-redo"></i> Lanjutkan
+                    </button>
+                    <button type="button" class="btn btn-outline btn-sm" id="draftDiscardBtn">
+                        <i class="fas fa-times"></i> Buang
+                    </button>
+                </div>
+            </div>
+
             <div class="modal-body">
 
                 <!-- Info Utama -->
@@ -167,7 +185,6 @@
                                 <option value="Teknologi">💻 Teknologi</option>
                                 <option value="Keuangan">💰 Keuangan</option>
                                 <option value="Kesehatan">🏥 Kesehatan</option>
-                          <option value="Lainnya">📌 Lainnya</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -289,6 +306,9 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline" id="formCancelBtn">Batal</button>
+                <button type="button" class="btn btn-draft" id="saveDraftBtn">
+                    <i class="fas fa-bookmark"></i> Selesaikan Nanti
+                </button>
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-save"></i> Simpan Konten
                 </button>
@@ -325,11 +345,10 @@
 
 <div id="toastContainer" class="toast-container"></div>
 
-<!-- Scripts — semua event listener ada di admin.js, tidak ada duplikasi inline -->
+<!-- FIX: Script tags — sebelumnya file terpotong di sini, semua script tidak termuat -->
 <script src="js/config.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/db.js"></script>
 <script src="js/admin.js"></script>
-
 </body>
 </html>
