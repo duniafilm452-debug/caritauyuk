@@ -14,13 +14,12 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        /* Tambahan khusus halaman index */
         .loading { opacity: .5; pointer-events: none; transition: opacity .3s; }
     </style>
 </head>
 <body>
 
-<!-- ── Header ────────────────────────────────────────────── -->
+<!-- ── Header ────────────────────────────────────────────────── -->
 <header class="header">
     <div class="container header-content">
         <a href="index.html" class="logo">
@@ -39,7 +38,7 @@
     </div>
 </header>
 
-<!-- ── Hero ──────────────────────────────────────────────── -->
+<!-- ── Hero ──────────────────────────────────────────────────── -->
 <section class="hero-section">
     <div class="container">
         <h1 class="hero-title">Cari tau yuk! 👋</h1>
@@ -50,8 +49,9 @@
     </div>
 </section>
 
-<!-- ── Main ──────────────────────────────────────────────── -->
+<!-- ── Main ──────────────────────────────────────────────────── -->
 <main class="container">
+
     <!-- Filter Kategori -->
     <div class="category-filters">
         <button class="category-btn active" data-category="Semua">🌟 Semua</button>
@@ -59,6 +59,23 @@
         <button class="category-btn" data-category="Teknologi">💻 Teknologi</button>
         <button class="category-btn" data-category="Keuangan">💰 Keuangan</button>
         <button class="category-btn" data-category="Kesehatan">🏥 Kesehatan</button>
+        <button class="category-btn" data-category="Lainnya">📌 Lainnya</button>
+    </div>
+
+    <!-- ── Tab Rekomendasi ─────────────────────────────────── -->
+    <div class="feed-tabs-wrapper">
+        <div class="feed-tabs">
+            <button class="feed-tab active" data-tab="foryou">
+                <i class="fas fa-magic"></i> Untuk Kamu
+            </button>
+            <button class="feed-tab" data-tab="trending">
+                <i class="fas fa-fire"></i> Trending
+            </button>
+            <button class="feed-tab" data-tab="latest">
+                <i class="fas fa-clock"></i> Terbaru
+            </button>
+        </div>
+        <p id="tabDescription" class="tab-description"></p>
     </div>
 
     <!-- Iklan Atas -->
@@ -91,14 +108,15 @@
             
             <div>
                 <h5>Kategori Populer</h5>
-                <!-- FIX: Link kategori sebelumnya masih "#" -->
                 <ul style="list-style:none">
-                    <li><a href="index.html?category=Film">🎬 Film Terbaru</a></li>
-                    <li><a href="index.html?category=Teknologi">💻 Review Teknologi</a></li>
-                    <li><a href="index.html?category=Keuangan">💰 Tips Investasi</a></li>
-                    <li><a href="index.html?category=Kesehatan">🏥 Hidup Sehat</a></li>
+                    <li><a href="index.html?category=Film&tab=latest">🎬 Film Terbaru</a></li>
+                    <li><a href="index.html?category=Teknologi&tab=latest">💻 Review Teknologi</a></li>
+                    <li><a href="index.html?category=Keuangan&tab=latest">💰 Tips Investasi</a></li>
+                    <li><a href="index.html?category=Kesehatan&tab=latest">🏥 Hidup Sehat</a></li>
+                    <li><a href="index.html?category=Lainnya">📌 Konten Lainnya</a></li>
                 </ul>
             </div>
+            <!--
             <div>
                 <h5>Ikuti Kami</h5>
                 <div style="display:flex;gap:var(--sp-md)">
@@ -107,13 +125,15 @@
                     <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-instagram"></i></a>
                     <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-youtube"></i></a>
                 </div>
-            </div>
+            </div> -->
         </div>
         
-        <li><a href="about.html">Tentang Kami</a></li>
-        <li><a href="contact.html">Hubungi Kami</a></li>
-        <li><a href="privacy-policy.html">Kebijakan Privasi</a></li>
-        <li><a href="terms.html">Syarat & Ketentuan</a></li>
+        <ul style="list-style:none;display:flex;gap:var(--sp-lg);flex-wrap:wrap;margin-top:var(--sp-lg)">
+            <li><a href="about.html">Tentang Kami</a></li>
+            <li><a href="contact.html">Hubungi Kami</a></li>
+            <li><a href="privacy-policy.html">Kebijakan Privasi</a></li>
+            <li><a href="terms.html">Syarat &amp; Ketentuan</a></li>
+        </ul>
 
         <hr style="margin:var(--sp-xl) 0;border:none;border-top:1px solid var(--border)">
         <p style="text-align:center;color:var(--text-light);font-size:.85rem">
@@ -125,7 +145,7 @@
 <!-- Toast -->
 <div id="toastContainer" class="toast-container"></div>
 
-<!-- Scripts: urutan wajib benar -->
+<!-- Scripts -->
 <script src="js/config.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/db.js"></script>
