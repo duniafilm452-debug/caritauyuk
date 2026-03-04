@@ -228,7 +228,7 @@ nav a:hover { color: var(--primary); }
     display: flex;
     gap: var(--sp-sm);
     flex-wrap: wrap;
-    margin: var(--sp-lg) 0;
+    margin: var(--sp-lg) 0 var(--sp-md);
     animation: fadeIn .5s .1s var(--ease) both;
 }
 
@@ -258,6 +258,140 @@ nav a:hover { color: var(--primary); }
 }
 .category-btn:active { transform: scale(.96); }
 
+/* ── Feed Tabs ────────────────────────────────────────────── */
+.feed-tabs-wrapper {
+    margin-bottom: var(--sp-md);
+    animation: fadeIn .5s .15s var(--ease) both;
+}
+
+.feed-tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 5px;
+    width: fit-content;
+    box-shadow: var(--shadow-sm);
+}
+
+.feed-tab {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 22px;
+    border: none;
+    border-radius: calc(var(--r-lg) - 3px);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font);
+    font-weight: 600;
+    font-size: .9rem;
+    cursor: pointer;
+    transition: all .22s var(--ease);
+    white-space: nowrap;
+}
+
+.feed-tab i {
+    font-size: .85rem;
+    transition: transform .2s var(--spring);
+}
+
+.feed-tab:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.feed-tab:hover i { transform: scale(1.2); }
+
+.feed-tab.active {
+    background: var(--grad-hero);
+    color: #fff;
+    box-shadow: 0 3px 12px rgba(74,144,226,.3);
+}
+
+.feed-tab[data-tab="trending"].active {
+    background: linear-gradient(135deg, #ff6b35 0%, #f7c59f 100%);
+    box-shadow: 0 3px 12px rgba(255,107,53,.3);
+}
+
+.feed-tab[data-tab="latest"].active {
+    background: linear-gradient(135deg, #38a169 0%, #68d391 100%);
+    box-shadow: 0 3px 12px rgba(56,161,105,.3);
+}
+
+/* ── Tab Description ──────────────────────────────────────── */
+.tab-description {
+    margin: var(--sp-sm) 0 0 4px;
+    font-size: .875rem;
+    color: var(--text-secondary);
+    min-height: 22px;
+    transition: opacity .3s;
+    line-height: 1.5;
+}
+.tab-description strong { color: var(--primary); }
+
+/* ── New User Hint ────────────────────────────────────────── */
+.new-user-hint {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-md);
+    background: linear-gradient(135deg, rgba(74,144,226,.07) 0%, rgba(108,92,231,.07) 100%);
+    border: 1px dashed rgba(74,144,226,.35);
+    border-radius: var(--r-lg);
+    padding: var(--sp-lg);
+    margin-bottom: var(--sp-sm);
+    animation: fadeIn .4s var(--ease);
+}
+.hint-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+.new-user-hint strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+.new-user-hint p {
+    margin: 0;
+    font-size: .875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* ── Card Ribbon ──────────────────────────────────────────── */
+.card-ribbon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px 10px;
+    border-radius: var(--r-full);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    z-index: 2;
+}
+
+.trending-ribbon {
+    background: linear-gradient(135deg, rgba(255,107,53,.9), rgba(247,197,159,.9));
+    color: #fff;
+}
+
+.pick-ribbon {
+    background: linear-gradient(135deg, rgba(74,144,226,.9), rgba(108,92,231,.9));
+    color: #fff;
+}
+
+.new-ribbon {
+    background: linear-gradient(135deg, rgba(56,161,105,.9), rgba(104,211,145,.9));
+    color: #fff;
+}
+
 /* ── Content Grid ─────────────────────────────────────────── */
 .content-grid {
     display: grid;
@@ -277,7 +411,7 @@ nav a:hover { color: var(--primary); }
     border: 1px solid rgba(0,0,0,.04);
     display: flex;
     flex-direction: column;
-    /* Stagger via CSS custom property --i set in JS */
+    cursor: pointer;
     animation: cardIn .5s var(--ease) both;
     animation-delay: calc(var(--i, 0) * 55ms);
     transition: transform .28s var(--ease), box-shadow .28s var(--ease);
@@ -578,10 +712,14 @@ footer a:hover { color: var(--primary); }
     .content-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--sp-md); }
     .toast-container { left: var(--sp-md); right: var(--sp-md); }
     .toast { max-width: 100%; min-width: unset; }
+    .feed-tabs { width: 100%; }
+    .feed-tab { flex: 1; justify-content: center; padding: 9px 12px; }
 }
 
 @media (max-width: 480px) {
     .hero-section { padding: var(--sp-xl) 0; }
     .category-filters { justify-content: center; }
     .card-content { padding: var(--sp-md); }
+    .feed-tab { font-size: .8rem; gap: 5px; }
+    .feed-tab i { display: none; }
 }

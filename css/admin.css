@@ -874,3 +874,107 @@ body { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; }
     gap: .5rem;
     flex-wrap: wrap;
 }
+
+/* ============================================================
+   DRAFT — Selesaikan Nanti
+   ============================================================ */
+
+/* Tombol Selesaikan Nanti */
+.btn-draft {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    padding: .55rem 1.1rem;
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    color: #7c4a00;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: .9rem;
+    cursor: pointer;
+    transition: opacity .2s, transform .15s, box-shadow .2s;
+    box-shadow: 0 2px 10px rgba(253,160,133,.35);
+}
+.btn-draft:hover {
+    opacity: .9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(253,160,133,.45);
+}
+.btn-draft:active { transform: scale(.97); }
+
+/* Draft dot badge pada tombol Tambah Konten */
+.draft-dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background: #fda085;
+    border-radius: 50%;
+    margin-left: 6px;
+    box-shadow: 0 0 0 2px rgba(253,160,133,.4);
+    animation: draftPulse 1.8s infinite;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+@keyframes draftPulse {
+    0%, 100% { box-shadow: 0 0 0 2px rgba(253,160,133,.4); }
+    50%       { box-shadow: 0 0 0 5px rgba(253,160,133,.1); }
+}
+
+/* Banner restore draft */
+.draft-banner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, #fff8ee 0%, #fff3e0 100%);
+    border: 1.5px solid #f6d365;
+    border-radius: 10px;
+    padding: .85rem 1.1rem;
+    margin: 0 1.5rem 0 1.5rem;
+    margin-top: 1.25rem;
+    animation: slideDown .3s cubic-bezier(.4,0,.2,1);
+}
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.draft-banner.hidden { display: none !important; }
+
+.draft-banner-icon {
+    font-size: 1.4rem;
+    color: #e6a817;
+    flex-shrink: 0;
+}
+
+.draft-banner-text {
+    flex: 1;
+    min-width: 0;
+}
+.draft-banner-text strong {
+    display: block;
+    font-size: .9rem;
+    color: #7c4a00;
+    margin-bottom: 2px;
+}
+.draft-banner-text span {
+    font-size: .8rem;
+    color: #a0670a;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.draft-banner-actions {
+    display: flex;
+    gap: .5rem;
+    flex-shrink: 0;
+}
+
+@media (max-width: 540px) {
+    .draft-banner {
+        flex-wrap: wrap;
+        margin: 1rem 1rem 0;
+    }
+    .draft-banner-actions { width: 100%; }
+}
