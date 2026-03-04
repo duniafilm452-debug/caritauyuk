@@ -144,13 +144,19 @@ if (typeof window.ContentDB === 'undefined') {
 
         // ── Likes ─────────────────────────────────────────────────
 
-        /** Cek 1 like — dipakai di halaman detail */
+        /**
+         * Cek status like satu konten.
+         * FIX: Gunakan maybeSingle() agar tidak throw error saat row tidak ada.
+         * .single() melempar PGRST116 jika 0 row ditemukan — rawan false positive.
+         */
         async checkLikeStatus(contentId, sessionId) {
             try {
                 const { data, error } = await this.supabase
-                    .from('content_likes').select('*')
-                    .eq('content_id', contentId).eq('session_id', sessionId).single();
-                if (error && error.code !== 'PGRST116') throw error;
+                    .from('content_likes').select('id')
+                    .eq('content_id', contentId)
+                    .eq('session_id', sessionId)
+                    .maybeSingle();             // aman: return null jika tidak ada
+                if (error) throw error;
                 return { liked: !!data, error: null };
             } catch (error) {
                 console.error('Error checking like status:', error);
@@ -159,7 +165,7 @@ if (typeof window.ContentDB === 'undefined') {
         }
 
         /**
-         * FIX: Cek banyak like sekaligus (1 request) — dipakai di halaman index
+         * Cek banyak like sekaligus (1 request) — dipakai di halaman index.
          * Menggantikan loop N+1 query.
          */
         async checkMultipleLikeStatus(contentIds, sessionId) {
@@ -169,7 +175,8 @@ if (typeof window.ContentDB === 'undefined') {
             try {
                 const { data, error } = await this.supabase
                     .from('content_likes').select('content_id')
-                    .in('content_id', contentIds).eq('session_id', sessionId);
+                    .in('content_id', contentIds)
+                    .eq('session_id', sessionId);
                 if (error) throw error;
                 const likedIds = new Set((data || []).map(r => r.content_id));
                 return { likedIds, error: null };
@@ -179,16 +186,29 @@ if (typeof window.ContentDB === 'undefined') {
             }
         }
 
+        /**
+         * Toggle like / unlike sebuah konten.
+         * FIX: Gunakan maybeSingle() alih-alih single() untuk menghindari
+         * false error saat baris belum ada. Ini juga mengurangi risiko
+         * race condition akibat pola check-then-act.
+         */
         async likeContent(contentId, sessionId) {
             try {
-                const { data: existing } = await this.supabase
-                    .from('content_likes').select('*')
-                    .eq('content_id', contentId).eq('session_id', sessionId).single();
+                // Cek apakah sudah pernah like
+                const { data: existing, error: checkErr } = await this.supabase
+                    .from('content_likes').select('id')
+                    .eq('content_id', contentId)
+                    .eq('session_id', sessionId)
+                    .maybeSingle();
+
+                if (checkErr) throw checkErr;
 
                 if (existing) {
+                    // === UNLIKE ===
                     const { error: delErr } = await this.supabase
                         .from('content_likes').delete()
-                        .eq('content_id', contentId).eq('session_id', sessionId);
+                        .eq('content_id', contentId)
+                        .eq('session_id', sessionId);
                     if (delErr) throw delErr;
 
                     const { error: rpcErr } = await this.supabase
@@ -197,8 +217,10 @@ if (typeof window.ContentDB === 'undefined') {
 
                     return { liked: false, error: null };
                 } else {
+                    // === LIKE ===
                     const { error: insErr } = await this.supabase
-                        .from('content_likes').insert([{ content_id: contentId, session_id: sessionId }]);
+                        .from('content_likes')
+                        .insert([{ content_id: contentId, session_id: sessionId }]);
                     if (insErr) throw insErr;
 
                     const { error: rpcErr } = await this.supabase
@@ -232,7 +254,7 @@ if (typeof window.ContentDB === 'undefined') {
                         stats.perCategory[item.category] = { total: 0, totalLikes: 0 };
                     }
                     stats.perCategory[item.category].total++;
-                    stats.perCategory[item.category].totalLikes += item.likes || 0;
+                    stats.perCategory[item.category].totalLikes += (item.likes || 0);
                 });
 
                 return { data: stats, error: null };

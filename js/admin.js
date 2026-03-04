@@ -21,6 +21,98 @@ var currentUser   = null;
 var contentList   = [];
 var currentFilter = { search: '', category: 'Semua' };
 
+// ── Draft ─────────────────────────────────────────────────────
+var DRAFT_KEY = 'cty_admin_draft';
+
+function collectFormData() {
+    rteSync();
+    return {
+        category       : (document.getElementById('category')        || {}).value || '',
+        title          : (document.getElementById('title')           || {}).value || '',
+        year           : (document.getElementById('year')            || {}).value || '',
+        duration       : (document.getElementById('duration')        || {}).value || '',
+        rating         : (document.getElementById('rating')          || {}).value || '',
+        thumbnail_url  : (document.getElementById('thumbnail_url')   || {}).value || '',
+        youtube_id     : (document.getElementById('youtube_id')      || {}).value || '',
+        video_url      : (document.getElementById('video_url')       || {}).value || '',
+        description    : (document.getElementById('description')     || {}).value || '',
+        tags           : JSON.parse((document.getElementById('tags') || {dataset:{tags:'[]'}}).dataset.tags || '[]'),
+        affiliate_url  : (document.getElementById('affiliate_url')   || {}).value || '',
+        affiliate_label: (document.getElementById('affiliate_label') || {}).value || '',
+        affiliate_desc : (document.getElementById('affiliate_desc')  || {}).value || '',
+        affiliate_badge: (document.getElementById('affiliate_badge') || {}).value || '',
+    };
+}
+
+function saveDraft() {
+    var data = collectFormData();
+    // Hanya simpan jika ada setidaknya judul atau kategori
+    if (!data.title && !data.category && !data.description) {
+        window.showToast('Isi setidaknya judul atau kategori sebelum menyimpan draft', 'warning');
+        return;
+    }
+    data._savedAt = new Date().toISOString();
+    try {
+        localStorage.setItem(DRAFT_KEY, JSON.stringify(data));
+        window.showToast('Draft tersimpan! Kamu bisa melanjutkan kapan saja 📌', 'success');
+        closeAllModals();
+        updateAddBtnDraftBadge();
+    } catch (err) {
+        window.showToast('Gagal menyimpan draft', 'error');
+    }
+}
+
+function loadDraft() {
+    try {
+        var raw = localStorage.getItem(DRAFT_KEY);
+        return raw ? JSON.parse(raw) : null;
+    } catch(e) { return null; }
+}
+
+function clearDraft() {
+    localStorage.removeItem(DRAFT_KEY);
+    updateAddBtnDraftBadge();
+}
+
+function fillFormFromDraft(draft) {
+    var fields = ['category','title','year','duration','rating',
+                  'thumbnail_url','youtube_id','video_url',
+                  'affiliate_url','affiliate_label','affiliate_desc','affiliate_badge'];
+    fields.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el && draft[id] !== undefined) el.value = draft[id];
+    });
+    var editor = document.getElementById('rteEditor');
+    var hidden  = document.getElementById('description');
+    if (editor) { editor.innerHTML = draft.description || ''; rteUpdateCharCount(); }
+    if (hidden)  hidden.value = draft.description || '';
+    var tagsEl = document.getElementById('tags');
+    var tags   = Array.isArray(draft.tags) ? draft.tags : [];
+    if (tagsEl) { tagsEl.dataset.tags = JSON.stringify(tags); renderTags(tags); }
+    updateThumbnailPreview(draft.thumbnail_url || '');
+}
+
+function showDraftBanner(show) {
+    var banner = document.getElementById('draftBanner');
+    if (banner) banner.classList.toggle('hidden', !show);
+}
+
+function updateAddBtnDraftBadge() {
+    var hasDraft = !!loadDraft();
+    ['addContentBtn', 'addContentBtnMobile'].forEach(function (btnId) {
+        var btn = document.getElementById(btnId);
+        if (!btn) return;
+        var badge = btn.querySelector('.draft-dot');
+        if (hasDraft && !badge) {
+            var dot = document.createElement('span');
+            dot.className = 'draft-dot';
+            btn.appendChild(dot);
+        } else if (!hasDraft && badge) {
+            badge.remove();
+        }
+    });
+}
+
 // ── Event Listeners (selalu jalan) ────────────────────────────
 function setupEventListeners() {
 
@@ -94,6 +186,29 @@ function setupEventListeners() {
     if (formCancelBtn)   formCancelBtn.addEventListener('click',   closeAllModals);
     if (deleteModalClose) deleteModalClose.addEventListener('click', closeAllModals);
     if (deleteCancelBtn)  deleteCancelBtn.addEventListener('click',  closeAllModals);
+
+    // Tombol Selesaikan Nanti
+    var saveDraftBtn = document.getElementById('saveDraftBtn');
+    if (saveDraftBtn) saveDraftBtn.addEventListener('click', saveDraft);
+
+    // Draft banner — Lanjutkan
+    var draftRestoreBtn = document.getElementById('draftRestoreBtn');
+    if (draftRestoreBtn) {
+        draftRestoreBtn.addEventListener('click', function () {
+            var draft = loadDraft();
+            if (draft) fillFormFromDraft(draft);
+            showDraftBanner(false);
+        });
+    }
+
+    // Draft banner — Buang
+    var draftDiscardBtn = document.getElementById('draftDiscardBtn');
+    if (draftDiscardBtn) {
+        draftDiscardBtn.addEventListener('click', function () {
+            clearDraft();
+            showDraftBanner(false);
+        });
+    }
 
     // Klik backdrop modal = tutup
     document.querySelectorAll('.modal').forEach(function (modal) {
@@ -217,6 +332,7 @@ function showAdminPanel() {
         if (emailEl)  emailEl.textContent  = currentUser.email || '';
         if (avatarEl) avatarEl.textContent = ((currentUser.email || 'A')[0]).toUpperCase();
     }
+    updateAddBtnDraftBadge();
 }
 
 // ── Load Data ─────────────────────────────────────────────────
@@ -228,10 +344,15 @@ async function loadAdminData() {
 }
 
 async function loadContentList() {
-    var res = await window.contentDB.getAllContent();
-    if (res.error) { window.showToast('Gagal memuat konten', 'error'); return; }
-    contentList = res.data || [];
-    renderContentTable(contentList);
+    try {
+        var res = await window.contentDB.getAllContent();
+        if (res.error) { window.showToast('Gagal memuat konten', 'error'); return; }
+        contentList = res.data || [];
+        renderContentTable(contentList);
+    } catch (err) {
+        console.error('loadContentList error:', err);
+        window.showToast('Gagal memuat konten dari server', 'error');
+    }
 }
 
 // ── Render Table ──────────────────────────────────────────────
@@ -248,7 +369,7 @@ function renderContentTable(list) {
         var color = (typeof CATEGORY_COLORS !== 'undefined' && CATEGORY_COLORS[item.category]) || '#4A90E2';
         var thumb = (typeof DEFAULT_THUMBNAIL !== 'undefined') ? DEFAULT_THUMBNAIL : '';
         var src   = item.thumbnail_url || thumb;
-        var date  = new Date(item.created_at).toLocaleDateString('id-ID');
+        var date  = item.created_at ? new Date(item.created_at).toLocaleDateString('id-ID') : '-';
 
         return '<tr>' +
             '<td><img src="' + src + '" class="table-thumb" alt="" onerror="this.src=\'' + thumb + '\'"></td>' +
@@ -271,7 +392,7 @@ function filterContent() {
     var cat = currentFilter.category;
 
     var filtered = contentList.filter(function (item) {
-        var matchSearch = !q || item.title.toLowerCase().includes(q) || (item.description || '').toLowerCase().includes(q);
+        var matchSearch = !q || (item.title || '').toLowerCase().includes(q) || (item.description || '').toLowerCase().includes(q);
         var matchCat    = !cat || cat === 'Semua' || item.category === cat;
         return matchSearch && matchCat;
     });
@@ -309,12 +430,31 @@ function openFormModal(content) {
     var modalTitle = document.getElementById('modalTitle');
     if (!modal) return;
 
+    var draftBtn = document.getElementById('saveDraftBtn');
     if (content) {
+        // Mode Edit — draft tidak relevan
         if (modalTitle) modalTitle.textContent = 'Edit Konten';
         fillForm(content);
+        showDraftBanner(false);
+        // Sembunyikan tombol Selesaikan Nanti saat edit
+        if (draftBtn) draftBtn.style.display = 'none';
     } else {
         if (modalTitle) modalTitle.textContent = 'Tambah Konten Baru';
         resetForm();
+        // Tampilkan tombol Selesaikan Nanti
+        if (draftBtn) draftBtn.style.display = '';
+        // Cek apakah ada draft
+        var draft = loadDraft();
+        if (draft && draft._savedAt) {
+            var savedDate = new Date(draft._savedAt).toLocaleString('id-ID', {
+                day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'
+            });
+            var bannerText = document.querySelector('#draftBanner .draft-banner-text span');
+            if (bannerText) bannerText.textContent = 'Terakhir disimpan: ' + savedDate + (draft.title ? ' — "' + draft.title + '"' : '');
+            showDraftBanner(true);
+        } else {
+            showDraftBanner(false);
+        }
     }
     modal.classList.add('show');
     setTimeout(function () {
@@ -417,6 +557,7 @@ async function handleContentSubmit(e) {
 
         if (res.error) throw res.error;
         window.showToast(id ? 'Konten berhasil diupdate ✅' : 'Konten berhasil ditambahkan ✅', 'success');
+        if (!id) clearDraft(); // hapus draft setelah berhasil simpan baru
         closeAllModals();
         await loadAdminData();
     } catch (err) {
@@ -485,7 +626,8 @@ function setupTagsInput() {
 function addTag(tag) {
     var input = document.getElementById('tags');
     if (!input) return;
-    var tags = JSON.parse(input.dataset.tags || '[]');
+    var tags;
+    try { tags = JSON.parse(input.dataset.tags || '[]'); } catch(e) { tags = []; }
     if (tag && !tags.includes(tag)) {
         tags.push(tag);
         input.dataset.tags = JSON.stringify(tags);
@@ -496,7 +638,8 @@ function addTag(tag) {
 function removeTag(tag) {
     var input = document.getElementById('tags');
     if (!input) return;
-    var tags  = JSON.parse(input.dataset.tags || '[]');
+    var tags;
+    try { tags = JSON.parse(input.dataset.tags || '[]'); } catch(e) { tags = []; }
     var idx   = tags.indexOf(tag);
     if (idx > -1) {
         tags.splice(idx, 1);
