@@ -7,14 +7,20 @@
     
     <link rel="icon" type="image/png" href="https://film.yukcaritau.my.id/logo%20cari%20tau%20yuk.webp">
 
-    <!-- Preconnect untuk mempercepat koneksi ke domain eksternal -->
-    <link rel="preconnect" href="https://ucguioolhvytinvqnirk.supabase.co">
+    <!-- Preconnect: maks 4 origin paling penting untuk LCP -->
+    <link rel="preconnect" href="https://film.yukcaritau.my.id">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome — non-blocking (hemat ~900ms render-blocking) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+
+    <!-- Google Fonts — non-blocking (hemat ~750ms render-blocking) -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 
     <link rel="stylesheet" href="css/style.css">

@@ -9,6 +9,33 @@
     box-sizing: border-box;
 }
 
+/* ── Font Awesome font-display override ───────────────────
+   CDN Font Awesome tidak menyertakan font-display:swap.
+   Override di sini agar teks fallback tampil saat font belum siap,
+   mengurangi layout shift dan memenuhi audit PageSpeed "Tampilan font".
+   ─────────────────────────────────────────────────────────── */
+@font-face {
+    font-family: "Font Awesome 6 Free";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-regular-400.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Font Awesome 6 Free";
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-solid-900.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Font Awesome 6 Brands";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-brands-400.woff2") format("woff2");
+}
+
 /* ── CSS Variables ────────────────────────────────────────── */
 :root {
     --primary     : #4A90E2;
