@@ -20,9 +20,12 @@ const OUTPUT_FILE       = "sitemap.xml";
 
 // Halaman statis — tambah/hapus sesuai halaman di website kamu
 const STATIC_PAGES = [
-  { url: "/",         changefreq: "daily",   priority: "1.0" },
-  { url: "/kategori", changefreq: "weekly",  priority: "0.8" },
-  { url: "/about",    changefreq: "monthly", priority: "0.5" },
+  { url: "/",                  changefreq: "daily",   priority: "1.0" },
+  { url: "/kategori",          changefreq: "weekly",  priority: "0.8" },
+  { url: "/about.html",        changefreq: "monthly", priority: "0.5" },
+  { url: "/contact.html",      changefreq: "monthly", priority: "0.5" },
+  { url: "/privacy-policy.html", changefreq: "monthly", priority: "0.3" },
+  { url: "/terms.html",        changefreq: "monthly", priority: "0.3" },
 ];
 
 // ── Ambil semua konten dari Supabase ────────────────────────
