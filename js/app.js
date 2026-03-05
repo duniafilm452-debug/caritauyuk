@@ -283,7 +283,7 @@ async function renderContentGrid(showNewUserHint = false) {
             <div class="hint-icon">🎯</div>
             <div>
                 <strong>Bangun profil rekomendasimu!</strong>
-                <p>Klik kategori favorit, like konten yang kamu suka, atau buka artikel — sistem kami akan belajar seleramu secara otomatis.</p>
+                <p>Klik kategori favorit, like konten yang kamu suka, atau buka artikel sistem kami akan belajar seleramu secara otomatis.</p>
             </div>
         </div>`;
     }
