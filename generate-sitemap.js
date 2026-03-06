@@ -1,5 +1,5 @@
-import { createClient } from "@supabase/supabase-js"
-import fs from "fs"
+const { createClient } = require("@supabase/supabase-js")
+const fs = require("fs")
 
 const SITE_URL = "https://yukcaritau.my.id"
 
