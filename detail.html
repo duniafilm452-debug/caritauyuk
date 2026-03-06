@@ -1,234 +1,125 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="no-referrer-when-downgrade" />
-  <title>Detail Video - Vid18+</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="detail.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Konten — Cari tau yuk</title>
+    
+    <link rel="icon" type="image/png" href="https://film.yukcaritau.my.id/logo%20cari%20tau%20yuk.webp">
 
-  <!-- Google IMA SDK untuk VAST -->
-  <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+    <!-- Preconnect: maks 4 origin paling penting untuk LCP -->
+    <link rel="preconnect" href="https://film.yukcaritau.my.id">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Font Awesome — non-blocking (hemat ~900ms render-blocking) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+
+    <!-- Google Fonts — non-blocking (hemat ~750ms render-blocking) -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/detail.css">
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="main-header">
-    <div class="header-container">
-      <div class="logo">
-        <a href="index.html" style="text-decoration:none;">
-          <h1>Vid18+</h1>
+<!-- ── Header ────────────────────────────────────────────── -->
+<header class="header">
+    <div class="container header-content">
+        <a href="index.html" class="logo">
+            <i class="fas fa-compass"></i> Cari tau yuk
         </a>
-      </div>
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" class="search-input"
+                   placeholder="Cari judul atau deskripsi…"
+                   onkeypress="if(event.key==='Enter')window.location.href='index.html?search='+encodeURIComponent(this.value)">
+        </div>
+        <nav>
+            <a href="admin.html" style="color:var(--text-secondary);font-weight:600;font-size:.9rem">
+                <i class="fas fa-user-cog"></i> Admin
+            </a>
+        </nav>
     </div>
-  </header>
+</header>
 
-  <!-- Main -->
-  <main class="main-content">
+<!-- ── Main ──────────────────────────────────────────────── -->
+<main class="container" style="padding-top:var(--sp-xl)">
+    <a href="#" class="back-button">
+        <i class="fas fa-arrow-left"></i> Kembali
+    </a>
+
     <div class="detail-container">
-
-      <!-- Navigasi -->
-      <div class="nav-buttons">
-        <button class="back-btn" onclick="history.back()">← Kembali</button>
-        <button class="home-btn" onclick="window.location.href='index.html'">🏠 Beranda</button>
-      </div>
-
-      <!-- Wrapper Video + Overlay Iklan -->
-      <div class="video-wrapper">
-
-        <!-- Overlay (tampil sebelum play) -->
-        <div id="ad-overlay" class="ad-overlay">
-          <div class="ad-overlay-inner">
-            <p class="ad-label">⚡ Konten siap diputar</p>
-            <button id="play-with-ad" class="play-ad-btn">▶ Putar Video</button>
-          </div>
-        </div>
-
-        <!-- Container untuk IMA SDK merender iklan -->
-        <div id="ad-container" style="
-          position: absolute;
-          inset: 0;
-          z-index: 5;
-          pointer-events: none;
-          display: none;
-        "></div>
-
-        <!-- Video Player utama — controls wajib ada agar bisa skip/seek -->
-        <div class="video-container">
-          <video id="video-player" class="video-player" controls preload="metadata" playsinline></video>
-        </div>
-
-      </div>
-
-      <!-- Info Video -->
-      <div class="video-info">
-        <h1 id="video-title" class="video-title">Memuat...</h1>
-        <div class="video-meta">
-          <span id="video-views">▶ 0 penonton</span>
-          <span id="video-category" class="video-category">—</span>
-        </div>
-        <p id="video-description" class="video-description"></p>
-      </div>
-
-      <!-- Action Buttons -->
-      <div class="action-buttons">
-        <button id="share-btn" class="action-btn share-btn">
-          <span class="btn-icon">📤</span>
-          <span class="btn-text">Share</span>
-        </button>
-        <button id="download-btn" class="action-btn download-btn">
-          <span class="btn-icon">⬇️</span>
-          <span class="btn-text">Download</span>
-        </button>
-      </div>
-
-      <!-- Related Videos -->
-      <section class="related-videos">
-        <h2 class="section-title">Video Lainnya</h2>
-        <div id="related-grid" class="movies-grid">
-          <div class="loading-movies">
-            <div class="spinner"></div>
-            <p>Memuat video lainnya...</p>
-          </div>
-        </div>
-      </section>
-
+        <div class="detail-main"></div>
+        <aside class="detail-sidebar"></aside>
     </div>
-  </main>
 
-  <script type="module" src="detail.js"></script>
+    <div class="comments-section"></div>
 
-  <!-- HilltopAds VAST via Google IMA SDK -->
-  <script>
-    (function () {
-      var VAST_URL  = 'https://aptpassage.com/d.mEFLzOdsGXNWv/ZnGEUm/Tesmr9ou/ZLUxlKknP/TiYR3GMTDlMZ4JMTD_Ydt/N/jMcAwtM/zIgjwjNQyzZgsNacW/1-p/d/DM0LxZ';
-      var adFired   = false;
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+</main>
 
-      var overlay     = document.getElementById('ad-overlay');
-      var playBtn     = document.getElementById('play-with-ad');
-      var player      = document.getElementById('video-player');
-      var adContainer = document.getElementById('ad-container');
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer>
+    <div class="container">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--sp-xl)">
+            <div>
+                <h5>Tentang Kami</h5>
+                <p style="color:var(--text-secondary);font-size:.9rem">
+                    Cari tau yuk adalah platform berbagi informasi menarik seputar film,
+                    teknologi, keuangan, dan kesehatan.
+                </p>
+            </div>
+            <div>
+                <h5>Kategori Populer</h5>
+                <ul style="list-style:none">
+                    <li><a href="index.html?category=Film">🎬 Film Terbaru</a></li>
+                    <li><a href="index.html?category=Teknologi">💻 Review Teknologi</a></li>
+                    <li><a href="index.html?category=Keuangan">💰 Tips Investasi</a></li>
+                    <li><a href="index.html?category=Kesehatan">🏥 Hidup Sehat</a></li>
+                    <li><a href="index.html?category=Lainnya">📌 Konten Lainnya</a></li>
+                </ul>
+            </div>
+      <!--      
+            <div>
+                <h5>Ikuti Kami</h5>
+                <div style="display:flex;gap:var(--sp-md)">
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div> -->
+        </div>
+        
+        <ul style="list-style:none;display:flex;gap:var(--sp-lg);flex-wrap:wrap;margin-top:var(--sp-lg)">
+            <li><a href="about.html">Tentang Kami</a></li>
+            <li><a href="contact.html">Hubungi Kami</a></li>
+            <li><a href="privacy-policy.html">Kebijakan Privasi</a></li>
+            <li><a href="terms.html">Syarat &amp; Ketentuan</a></li>
+        </ul>
+        
+        <hr style="margin:var(--sp-xl) 0;border:none;border-top:1px solid var(--border)">
+        <p style="text-align:center;color:var(--text-light);font-size:.85rem">
+            &copy; 2026 Cari tau yuk. All rights reserved.
+        </p>
+    </div>
+</footer>
 
-      var adsLoader, adsManager;
+<!-- Toast -->
+<div id="toastContainer" class="toast-container"></div>
 
-      // Setelah iklan selesai: sembunyikan ad-container, kembalikan kontrol video
-      function adDone() {
-        adContainer.style.display      = 'none';
-        adContainer.style.pointerEvents = 'none';
-        player.play().catch(function () {});
-      }
-
-      function initIMA() {
-        // Tampilkan ad-container hanya saat iklan berjalan
-        adContainer.style.display = 'block';
-
-        var adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, player);
-        adDisplayContainer.initialize();
-
-        adsLoader = new google.ima.AdsLoader(adDisplayContainer);
-
-        adsLoader.addEventListener(
-          google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,
-          onAdsManagerLoaded,
-          false
-        );
-
-        adsLoader.addEventListener(
-          google.ima.AdErrorEvent.Type.AD_ERROR,
-          onAdError,
-          false
-        );
-
-        var adsRequest                   = new google.ima.AdsRequest();
-        adsRequest.adTagUrl              = VAST_URL;
-        adsRequest.linearAdSlotWidth     = player.clientWidth  || 640;
-        adsRequest.linearAdSlotHeight    = player.clientHeight || 360;
-
-        adsLoader.requestAds(adsRequest);
-      }
-
-      function onAdsManagerLoaded(event) {
-        adsManager = event.getAdsManager(player);
-
-        // Saat iklan mulai tayang: aktifkan klik (untuk tombol skip & klik iklan)
-        adsManager.addEventListener(google.ima.AdEvent.Type.STARTED, function () {
-          adContainer.style.pointerEvents = 'auto';
-        });
-
-        // Iklan selesai atau di-skip → putar video utama
-        adsManager.addEventListener(
-          google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED,
-          adDone
-        );
-
-        // Semua event error → fallback putar video
-        adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
-
-        try {
-          adsManager.init(
-            player.clientWidth  || 640,
-            player.clientHeight || 360,
-            google.ima.ViewMode.NORMAL
-          );
-          adsManager.start();
-        } catch (e) {
-          adDone();
-        }
-      }
-
-      function onAdError(event) {
-        console.warn('IMA Ad Error:', event.getError ? event.getError().toString() : event);
-        if (adsManager) adsManager.destroy();
-        adDone(); // Gagal muat iklan → tetap putar video
-      }
-
-      function fireAd() {
-        if (adFired) return;
-        adFired = true;
-
-        // Sembunyikan overlay tombol play
-        if (overlay) overlay.style.display = 'none';
-
-        // Jalankan IMA SDK
-        if (window.google && window.google.ima) {
-          initIMA();
-        } else {
-          // IMA SDK belum termuat → langsung putar video
-          player.play().catch(function () {});
-        }
-      }
-
-      // Klik tombol overlay → jalankan iklan VAST
-      if (playBtn) {
-        playBtn.addEventListener('click', function () {
-          fireAd();
-        });
-      }
-
-      // Fallback: user bypass overlay → tahan video, jalankan iklan dulu
-      if (player) {
-        player.addEventListener('play', function () {
-          if (!adFired) {
-            player.pause();
-            fireAd();
-          }
-        }, { once: true });
-      }
-
-      // Resize handler agar iklan tetap pas di layar
-      window.addEventListener('resize', function () {
-        if (adsManager) {
-          adsManager.resize(
-            player.clientWidth  || 640,
-            player.clientHeight || 360,
-            google.ima.ViewMode.NORMAL
-          );
-        }
-      });
-
-    })();
-  </script>
-
+<!-- FIX: app.js DIHAPUS — tidak dibutuhkan di halaman detail -->
+<script src="js/config.js" defer></script>
+<script src="js/utils.js" defer></script>
+<script src="js/db.js" defer></script>
+<script src="js/detail.js" defer></script>
 </body>
 </html>

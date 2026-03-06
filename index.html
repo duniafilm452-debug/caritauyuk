@@ -1,160 +1,230 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="no-referrer-when-downgrade" />
-  <meta name="robots" content="noindex,nofollow" />
-  <title>Vid18+ - Nonton Video Gratis</title>
 
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!--
-    ══════════════════════════════════════════════════════
-    ADSTERRA ADS — Strategi CPM Tinggi, Tidak Mengganggu:
-    1. Popunder   → Adsterra kelola sendiri (first-click)
-    2. Social Bar → Widget mengambang, non-intrusive
-    3. Sticky 320×50 → Muncul 3 detik setelah load, bisa ditutup
-    4. Native Banner → Menyatu dengan konten, non-blocking
-    ══════════════════════════════════════════════════════
-  -->
+<title>Cari tau yuk — Temukan Informasi Menarik</title>
 
-  <!-- [1] Adsterra Popunder (CPM tertinggi, hanya trigger 1x per sesi) -->
-  <script src="https://pl28053454.effectivegatecpm.com/a9/88/3f/a9883f0a4a1e79d5a54609491435ce4a.js"></script>
+<meta name="description" content="Cari tau yuk adalah platform untuk menemukan informasi menarik seputar film, teknologi, keuangan, dan kesehatan dalam satu tempat.">
 
-  <!-- [2] Adsterra Social Bar (floating widget, tidak blokir konten) -->
-  <script src="https://pl28168949.effectivegatecpm.com/a6/94/41/a69441794dcf56d859536a0ba5d0f378.js"></script>
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://yukcaritau.my.id/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Cari tau yuk — Temukan Informasi Menarik">
+<meta property="og:description" content="Temukan informasi menarik seputar film, teknologi, keuangan, dan kesehatan dalam satu tempat.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yukcaritau.my.id/">
+<meta property="og:image" content="https://film.yukcaritau.my.id/logo%20cari%20tau%20yuk.webp">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cari tau yuk">
+<meta name="twitter:description" content="Temukan informasi menarik seputar film, teknologi, keuangan, dan kesehatan.">
+<meta name="twitter:image" content="https://film.yukcaritau.my.id/logo%20cari%20tau%20yuk.webp">
+
+<link rel="icon" type="image/png" href="https://film.yukcaritau.my.id/logo%20cari%20tau%20yuk.webp">
+
+<!-- Preconnect -->
+<link rel="preconnect" href="https://film.yukcaritau.my.id">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+<!-- Font Awesome -->
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</noscript>
+
+<!-- Google Fonts -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</noscript>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+.loading {
+opacity:.5;
+pointer-events:none;
+transition:opacity .3s;
+}
+</style>
+
+<!-- Schema SEO -->
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"WebSite",
+"name":"Cari tau yuk",
+"url":"https://yukcaritau.my.id/",
+"description":"Platform informasi menarik tentang film, teknologi, keuangan dan kesehatan.",
+"potentialAction":{
+"@type":"SearchAction",
+"target":"https://yukcaritau.my.id/?search={search_term_string}",
+"query-input":"required name=search_term_string"
+}
+}
+</script>
+
 </head>
+
 <body>
 
-  <!-- Header -->
-  <header class="main-header">
-    <div class="header-container">
-      <div class="logo">
-        <h1>Vid18+</h1>
-      </div>
-      <div class="search-box">
-        <input type="text" id="search-input" placeholder="Cari film...">
-        <button id="search-btn">🔍</button>
-      </div>
-    </div>
-  </header>
+<header class="header">
+<div class="container header-content">
 
-<script>
-  atOptions = {
-    'key' : '817fc1b491510c6a8e09a78db3eb483e',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/817fc1b491510c6a8e09a78db3eb483e/invoke.js"></script>
+<a href="index.html" class="logo">
+<i class="fas fa-compass"></i> Cari tau yuk
+</a>
 
-<script>
-  atOptions = {
-    'key' : '817fc1b491510c6a8e09a78db3eb483e',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/817fc1b491510c6a8e09a78db3eb483e/invoke.js"></script>
+<div class="search-container">
+<i class="fas fa-search search-icon"></i>
+<input
+type="text"
+id="searchInput"
+class="search-input"
+placeholder="Cari judul atau deskripsi…">
+</div>
 
-  <!-- Main Content -->
-  <main class="main-content">
+<nav>
+<a href="admin.html" style="color:var(--text-secondary);font-weight:600;font-size:.9rem;">
+<i class="fas fa-user-cog"></i> Admin
+</a>
+</nav>
 
-    <!-- Kategori -->
-    <section class="categories-section">
-      <div class="categories-container">
-        <button class="category-btn active" data-category="all">Semua</button>
-        <button class="category-btn" data-category="colmek">Colmek</button>
-        <button class="category-btn" data-category="berdua">Berdua</button>
-        <button class="category-btn" data-category="bergilir">Bergilir</button>
-        <button class="category-btn" data-category="lainnya">Lainnya</button>
-      </div>
-    </section>
-  
-  <script>
-  atOptions = {
-    'key' : '817fc1b491510c6a8e09a78db3eb483e',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/817fc1b491510c6a8e09a78db3eb483e/invoke.js"></script>
+</div>
+</header>
 
-    <!-- Tabs -->
-    <section class="tabs-section">
-      <div class="tabs-container">
-        <button class="tab-btn active" data-tab="recommended">Rekomendasi</button>
-        <button class="tab-btn" data-tab="latest">Terbaru</button>
-        <button class="tab-btn" data-tab="popular">Populer</button>
-      </div>
-    </section>
+<section class="hero-section">
+<div class="container">
 
-    <!-- Movies Grid -->
-    <section class="movies-section">
-      <div id="movies-grid" class="movies-grid">
-        <div class="loading-movies">
-          <div class="spinner"></div>
-          <p>Memuat film...</p>
-        </div>
-      </div>
-    </section>
+<h1 class="hero-title">Cari tau yuk! 👋</h1>
 
-    <!-- [4] Adsterra Native Banner (menyatu dengan konten, CPM tinggi) -->
-    <div class="native-ad-wrapper">
-      <script async="async" data-cfasync="false" src="https://pl28053467.effectivegatecpm.com/687ab1e399abdbd3f73a936640405295/invoke.js"></script>
-      <div id="container-687ab1e399abdbd3f73a936640405295"></div>
-    </div>
+<p class="hero-subtitle">
+Temukan informasi menarik seputar Film, Teknologi, Keuangan, dan Kesehatan dalam satu tempat
+</p>
 
-    <!-- Tombol Selanjutnya (Pagination) -->
-    <div class="pagination-wrapper" id="pagination-wrapper" style="display:none;">
-      <button id="next-page-btn" class="next-page-btn">Selanjutnya ▶</button>
-    </div>
+</div>
+</section>
 
-  </main>
+<main class="container">
 
-  <!-- [3] Adsterra Sticky Bottom Banner 320×50 (muncul 3 detik setelah load, bisa ditutup) -->
-  <div class="ad-sticky-bar" id="ad-sticky-bar" style="display:none;">
-    <button class="ad-close" id="ad-close-btn" title="Tutup">✕</button>
-    <div id="sticky-ad-inner">
-      <script>
-        atOptions = {
-          'key' : '817fc1b491510c6a8e09a78db3eb483e',
-          'format' : 'iframe',
-          'height' : 50,
-          'width' : 320,
-          'params' : {}
-        };
-      </script>
-      <script src="https://www.highperformanceformat.com/817fc1b491510c6a8e09a78db3eb483e/invoke.js"></script>
-    </div>
-  </div>
+<div class="category-filters">
 
-  <script type="module" src="script.js"></script>
+<button class="category-btn active" data-category="Semua">🌟 Semua</button>
+<button class="category-btn" data-category="Film">🎬 Film</button>
+<button class="category-btn" data-category="Teknologi">💻 Teknologi</button>
+<button class="category-btn" data-category="Keuangan">💰 Keuangan</button>
+<button class="category-btn" data-category="Kesehatan">🏥 Kesehatan</button>
+<button class="category-btn" data-category="Lainnya">📌 Lainnya</button>
 
-  <!-- Sticky bar: tampil setelah 3 detik, bisa ditutup -->
-  <script>
-    (function () {
-      var bar      = document.getElementById('ad-sticky-bar');
-      var closeBtn = document.getElementById('ad-close-btn');
+</div>
 
-      setTimeout(function () {
-        if (bar) bar.style.display = 'flex';
-      }, 3000);
+<div class="feed-tabs-wrapper">
 
-      if (closeBtn) {
-        closeBtn.addEventListener('click', function () {
-          if (bar) bar.style.display = 'none';
-        });
-      }
-    })();
-  </script>
+<div class="feed-tabs">
+
+<button class="feed-tab active" data-tab="foryou">
+<i class="fas fa-magic"></i> Untuk Kamu
+</button>
+
+<button class="feed-tab" data-tab="trending">
+<i class="fas fa-fire"></i> Trending
+</button>
+
+<button class="feed-tab" data-tab="latest">
+<i class="fas fa-clock"></i> Terbaru
+</button>
+
+</div>
+
+<p id="tabDescription" class="tab-description"></p>
+
+</div>
+
+<div class="ad-slot">
+<span>Iklan 728×90</span>
+</div>
+
+<div id="contentGrid" class="content-grid"></div>
+
+<div id="loadingSpinner" class="loading-spinner hidden">
+<div class="spinner"></div>
+</div>
+
+<div class="ad-slot" style="margin-top:var(--sp-xl)">
+<span>Iklan 728×90</span>
+</div>
+
+</main>
+
+<footer>
+
+<div class="container">
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--sp-xl)">
+
+<div>
+
+<h5>Tentang Kami</h5>
+
+<p style="color:var(--text-secondary);font-size:.9rem">
+Cari tau yuk adalah platform berbagi informasi menarik seputar film, teknologi, keuangan, dan kesehatan.
+</p>
+
+</div>
+
+<div>
+
+<h5>Kategori Populer</h5>
+
+<ul style="list-style:none">
+
+<li><a href="index.html?category=Film&tab=latest">🎬 Film Terbaru</a></li>
+<li><a href="index.html?category=Teknologi&tab=latest">💻 Review Teknologi</a></li>
+<li><a href="index.html?category=Keuangan&tab=latest">💰 Tips Investasi</a></li>
+<li><a href="index.html?category=Kesehatan&tab=latest">🏥 Hidup Sehat</a></li>
+<li><a href="index.html?category=Lainnya">📌 Konten Lainnya</a></li>
+
+</ul>
+
+</div>
+
+</div>
+
+<ul style="list-style:none;display:flex;gap:var(--sp-lg);flex-wrap:wrap;margin-top:var(--sp-lg)">
+
+<li><a href="about.html">Tentang Kami</a></li>
+<li><a href="contact.html">Hubungi Kami</a></li>
+<li><a href="privacy-policy.html">Kebijakan Privasi</a></li>
+<li><a href="terms.html">Syarat & Ketentuan</a></li>
+
+</ul>
+
+<hr style="margin:var(--sp-xl) 0;border:none;border-top:1px solid var(--border)">
+
+<p style="text-align:center;color:var(--text-light);font-size:.85rem">
+© 2026 Cari tau yuk. All rights reserved.
+</p>
+
+</div>
+
+</footer>
+
+<div id="toastContainer" class="toast-container"></div>
+
+<script src="js/config.js" defer></script>
+<script src="js/utils.js" defer></script>
+<script src="js/db.js" defer></script>
+<script src="js/app.js" defer></script>
 
 </body>
 </html>
