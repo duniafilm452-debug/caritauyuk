@@ -313,17 +313,28 @@ async function renderContentGrid(showNewUserHint = false) {
         const safeId       = window.escapeHtml(content.id);
         const safeCategory = window.escapeHtml(content.category);
         const safeTitle    = window.escapeHtml(content.title);
+        // SEO clean URL: /kategori/slug-artikel
+        const articleUrl   = window.escapeHtml(window.buildArticleUrl(content));
+
+        // Kartu pertama adalah kandidat LCP — jangan lazy load, prioritaskan fetch.
+        // Kartu lainnya tetap lazy + decoding async agar tidak blokir main thread.
+        const isFirstCard  = index === 0;
+        const loadingAttr  = isFirstCard ? 'eager' : 'lazy';
+        const extraImgAttr = isFirstCard ? 'fetchpriority="high"' : 'decoding="async"';
 
         html += `
             <div class="card"
                  data-id="${safeId}"
                  data-category="${safeCategory}"
                  style="--i:${index}">
-                <a href="detail.html?id=${safeId}" class="card-link" aria-label="${safeTitle}">
+                <a href="${articleUrl}" class="card-link" aria-label="${safeTitle}">
                     <div class="card-thumbnail">
                         <img src="${content.thumbnail_url || DEFAULT_THUMBNAIL}"
                              alt="${safeTitle}"
-                             loading="lazy"
+                             width="362"
+                             height="204"
+                             loading="${loadingAttr}"
+                             ${extraImgAttr}
                              onerror="this.src='${DEFAULT_THUMBNAIL}'">
                         <span class="category-badge" style="background:${color}">
                             ${safeCategory}
@@ -351,7 +362,7 @@ async function renderContentGrid(showNewUserHint = false) {
                         <i class="${liked ? 'fas' : 'far'} fa-heart"></i>
                         <span class="like-count">${content.likes || 0}</span>
                     </button>
-                    <a href="detail.html?id=${safeId}" class="read-more">
+                    <a href="${articleUrl}" class="read-more">
                         Selengkapnya <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>

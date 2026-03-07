@@ -12,16 +12,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     await initializeDetail();
 });
 
-// ── URL Params & DOM ──────────────────────────────────────────
-const urlParams      = new URLSearchParams(window.location.search);
-const contentId      = urlParams.get('id');
+// ── URL Parsing ───────────────────────────────────────────────
+// Mendukung 3 format URL:
+//   1. Clean URL  : /keuangan/panduan-investasi-saham-untuk-pemula  (baru)
+//   2. Query slug : /detail.html?slug=panduan-investasi-...          (lama)
+//   3. Query id   : /detail.html?id=UUID                             (paling lama)
+const _urlParams   = new URLSearchParams(window.location.search);
+const _pathParts   = window.location.pathname.replace(/^\//, '').split('/').filter(Boolean);
+
+// Clean URL: path punya 2 segmen → /kategori/slug
+const contentSlug  = (_pathParts.length === 2)
+    ? _pathParts[1]
+    : _urlParams.get('slug');
+
+const contentId    = _urlParams.get('id');   // fallback UUID lama
+
 const detailMain     = document.querySelector('.detail-main');
 const detailSidebar  = document.querySelector('.detail-sidebar');
 const loadingSpinner = document.getElementById('loadingSpinner');
 
 // ── Init ──────────────────────────────────────────────────────
 async function initializeDetail() {
-    if (!contentId) { window.location.href = '404.html'; return; }
+    // Dukung ?slug= (baru) dan ?id= (lama/backward compat)
+    if (!contentSlug && !contentId) { window.location.href = '404.html'; return; }
     await loadContentDetail();
     setupEventListeners();
 }
@@ -36,16 +49,37 @@ function setupEventListeners() {
 async function loadContentDetail() {
     showLoading(true);
 
-    const { data: content, error } = await window.contentDB.getContentById(contentId);
+    let content, error;
+
+    if (contentSlug) {
+        // ── Query by slug (SEO-friendly URL) ──────────────────
+        // Gunakan Supabase client langsung dengan .eq('slug', slug)
+        // CATATAN: ganti 'content' dengan nama tabel yang sesuai di Supabase Anda
+        const sb = getSupabaseClient();
+        if (!sb) { showLoading(false); window.location.href = '404.html'; return; }
+        const res = await sb
+            .from('content')        // ← sesuaikan dengan nama tabel Anda
+            .select('*')
+            .eq('slug', contentSlug)
+            .maybeSingle();
+        content = res.data;
+        error   = res.error;
+    } else {
+        // ── Fallback: query by UUID (URL lama / backward compat)
+        const res = await window.contentDB.getContentById(contentId);
+        content = res.data;
+        error   = res.error;
+    }
+
     if (error || !content) { showLoading(false); window.location.href = '404.html'; return; }
 
     const sessionId             = window.getSessionId();
-    const { liked }             = await window.contentDB.checkLikeStatus(contentId, sessionId);
-    const { data: related }     = await window.contentDB.getRelatedContent(content.category, contentId, 5);
+    const { liked }             = await window.contentDB.checkLikeStatus(content.id, sessionId);
+    const { data: related }     = await window.contentDB.getRelatedContent(content.category, content.id, 5);
 
     renderMainContent(content, liked);
     renderSidebar(related || []);
-    initCommentSystem(contentId);   // non-blocking — tidak di-await
+    initCommentSystem(content.id);   // non-blocking — tidak di-await
 
     showLoading(false);
 }
@@ -149,7 +183,7 @@ function renderSidebar(relatedContent) {
                                  class="related-thumbnail"
                                  onerror="this.src='${DEFAULT_THUMBNAIL}'">
                             <div class="related-info">
-                                <a href="detail.html?id=${esc(item.id)}" class="related-title">${esc(item.title)}</a>
+                                <a href="${window.buildArticleUrl(item)}" class="related-title">${esc(item.title)}</a>
                                 <div class="related-meta">
                                     <span><i class="fas fa-heart"></i> ${item.likes || 0}</span>
                                     <span><i class="far fa-clock"></i> ${esc(item.duration || 'N/A')}</span>

@@ -547,6 +547,12 @@ async function handleContentSubmit(e) {
         return;
     }
 
+    // ── Slug: hanya buat untuk konten BARU, tidak ubah slug konten yang sudah ada
+    // (mengubah slug konten lama akan merusak link yang sudah beredar)
+    if (!id) {
+        formData.slug = window.createSlug(formData.title);
+    }
+
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
 
@@ -570,7 +576,13 @@ async function handleContentSubmit(e) {
 }
 
 // ── CRUD Actions ──────────────────────────────────────────────
-function viewContent(id)  { window.open('detail.html?id=' + id, '_blank'); }
+function viewContent(id) {
+    var item = contentList.find(function (c) { return String(c.id) === String(id); });
+    var url = item
+        ? window.buildArticleUrl(item)
+        : 'detail.html?id=' + id;   // fallback jika item tidak ditemukan
+    window.open(url, '_blank');
+}
 
 function editContent(id) {
     var item = contentList.find(function (c) { return String(c.id) === String(id); });

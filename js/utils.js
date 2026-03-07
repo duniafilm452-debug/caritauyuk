@@ -116,3 +116,52 @@ window.escapeHtml = function (str) {
     d.appendChild(document.createTextNode(String(str || '')));
     return d.innerHTML;
 };
+
+// ── Slug Generator ───────────────────────────────────────────
+// "10 Kebiasaan Sehat yang Meningkatkan Kualitas Hidup"
+//  → "10-kebiasaan-sehat-yang-meningkatkan-kualitas-hidup"
+window.createSlug = function (title) {
+    if (!title || typeof title !== 'string') return '';
+    return title
+        .toLowerCase()
+        .trim()
+        .replace(/[àáâãäå]/g, 'a')
+        .replace(/[èéêë]/g, 'e')
+        .replace(/[ìíîï]/g, 'i')
+        .replace(/[òóôõö]/g, 'o')
+        .replace(/[ùúûü]/g, 'u')
+        .replace(/[ñ]/g, 'n')
+        .replace(/[ç]/g, 'c')
+        // Hapus semua karakter selain huruf, angka, spasi
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-+|-+$/g, '');
+};
+
+// ── Category → URL Path ──────────────────────────────────────
+// Mapping kategori Indonesia → segment URL
+// Tambahkan kategori baru di sini jika diperlukan
+const _CATEGORY_PATH_MAP = {
+    'Film'      : 'film',
+    'Teknologi' : 'teknologi',
+    'Keuangan'  : 'keuangan',
+    'Kesehatan' : 'kesehatan',
+    'Lainnya'   : 'lainnya',
+};
+
+window.categoryToPath = function (category) {
+    return _CATEGORY_PATH_MAP[category]
+        || window.createSlug(category)
+        || 'artikel';
+};
+
+// ── Build Article URL (clean SEO URL) ────────────────────────
+// Output: /keuangan/panduan-investasi-saham-untuk-pemula
+window.buildArticleUrl = function (content) {
+    if (!content) return '#';
+    const cat  = window.categoryToPath(content.category || '');
+    const slug = content.slug || window.createSlug(content.title || '');
+    if (!slug) return '#';
+    return '/' + cat + '/' + slug;
+};
