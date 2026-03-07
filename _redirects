@@ -1,21 +1,28 @@
 # ============================================================
-# _redirects — Cloudflare Pages URL Rewriting
-# Taruh file ini di ROOT folder project (sejajar index.html)
+# Static files (JANGAN di-rewrite)
 # ============================================================
 
-# ── Redirect URL lama ke clean URL (301 permanent) ──────────
-# Agar link lama tidak 404 dan Google tahu URL sudah pindah
-/detail.html    /    301
+/css/*        /css/:splat        200
+/js/*         /js/:splat         200
+/images/*     /images/:splat     200
+/*.css        /:splat            200
+/*.js         /:splat            200
 
-# ── Rewrite clean URL artikel → detail.html (200 = rewrite) ─
-# URL browser tetap: /keuangan/panduan-investasi-saham-untuk-pemula
-# Server membaca:    /detail.html (tanpa mengubah URL di browser)
-#
-# Pola ini menangkap semua: /kategori/slug-artikel
-/:category/:slug    /detail.html    200
+# ============================================================
+# Redirect URL lama
+# ============================================================
 
-# ── Halaman statis tetap berjalan normal ─────────────────────
-# (Cloudflare Pages otomatis melayani file .html yang ada,
-#  aturan di bawah hanya sebagai pengaman eksplisit)
-/admin.html         /admin.html     200
-/404.html           /404.html       200
+/detail.html   /   301
+
+# ============================================================
+# Clean URL artikel
+# ============================================================
+
+/:category/:slug   /detail.html   200
+
+# ============================================================
+# Static pages
+# ============================================================
+
+/admin.html        /admin.html    200
+/404.html          /404.html      200
