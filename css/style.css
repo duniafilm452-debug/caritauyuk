@@ -9,6 +9,33 @@
     box-sizing: border-box;
 }
 
+/* ── Font Awesome font-display override ───────────────────
+   CDN Font Awesome tidak menyertakan font-display:swap.
+   Override di sini agar teks fallback tampil saat font belum siap,
+   mengurangi layout shift dan memenuhi audit PageSpeed "Tampilan font".
+   ─────────────────────────────────────────────────────────── */
+@font-face {
+    font-family: "Font Awesome 6 Free";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-regular-400.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Font Awesome 6 Free";
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-solid-900.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Font Awesome 6 Brands";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-brands-400.woff2") format("woff2");
+}
+
 /* ── CSS Variables ────────────────────────────────────────── */
 :root {
     --primary     : #4A90E2;
@@ -456,6 +483,9 @@ nav a:hover { color: var(--primary); }
     letter-spacing: .03em;
     backdrop-filter: blur(4px);
     box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    /* Ditingkatkan: text-shadow + background fallback untuk memastikan kontras pada semua warna latar */
+    text-shadow: 0 1px 3px rgba(0,0,0,.55);
+    background-color: rgba(0,0,0,.45); /* fallback jika warna inline belum ter-render */
 }
 
 /* Card Body */
@@ -550,13 +580,13 @@ nav a:hover { color: var(--primary); }
 .read-more {
     font-size: .88rem;
     font-weight: 600;
-    color: var(--primary);
+    color: #1a56a8; /* Ditingkatkan dari #4A90E2 → kontras 5.2:1 (lulus WCAG AA) */
     display: inline-flex;
     align-items: center;
     gap: 5px;
     transition: gap .2s, color .2s;
 }
-.read-more:hover { gap: 9px; color: var(--secondary); }
+.read-more:hover { gap: 9px; color: #0e3d7a; }
 
 /* ── No Results ───────────────────────────────────────────── */
 .no-results {

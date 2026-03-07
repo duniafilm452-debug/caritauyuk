@@ -2,6 +2,33 @@
    detail.css — Halaman Detail Konten
    ============================================================ */
 
+/* ── Font Awesome font-display override ───────────────────
+   Override @font-face CDN agar mendapat font-display:swap
+   (sama seperti di style.css — diperlukan karena detail.css
+    di-load terpisah dan browser mengevaluasi cascade per-file)
+   ─────────────────────────────────────────────────────────── */
+@font-face {
+    font-family: "Font Awesome 6 Free";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-regular-400.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Font Awesome 6 Free";
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-solid-900.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Font Awesome 6 Brands";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-brands-400.woff2") format("woff2");
+}
+
 /* ── Layout ───────────────────────────────────────────────── */
 .detail-container {
     display: grid;
@@ -159,7 +186,7 @@
 .btn-outline {
     background: transparent;
     border: 2px solid var(--primary);
-    color: var(--primary);
+    color: #1a56a8; /* Ditingkatkan dari var(--primary)/#4A90E2 → kontras 5.2:1 (lulus WCAG AA) */
 }
 .btn-outline:hover {
     background: var(--primary);
@@ -677,7 +704,7 @@
     flex-shrink: 0;
 }
 .comment-chip-label { font-size: .75rem; color: var(--text-light); line-height: 1.2; }
-.comment-chip-name  { font-size: .88rem; color: var(--primary); }
+.comment-chip-name  { font-size: .88rem; color: #1a56a8; /* Ditingkatkan dari var(--primary) → kontras 5.2:1 */ }
 
 /* ── Textarea + Char Counter ──────────────────────────────── */
 .comment-textarea-wrap {
