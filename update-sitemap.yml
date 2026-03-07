@@ -1,0 +1,46 @@
+name: Auto Update Sitemap
+
+on:
+  # Otomatis jalan setiap hari jam 07.00 WIB (00.00 UTC)
+  schedule:
+    - cron: "0 0 * * *"
+
+  # Bisa dijalankan manual dari tab Actions di GitHub
+  workflow_dispatch:
+
+jobs:
+  update-sitemap:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Ambil kode dari repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # 3. Install dependency Supabase
+      - name: Install dependencies
+        run: npm install @supabase/supabase-js
+
+      # 4. Jalankan script generate sitemap
+      # FIX: gunakan SUPABASE_SERVICE_ROLE_KEY (bukan ANON_KEY)
+      - name: Generate sitemap files
+        run: node generate-sitemap.js
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+      # 5. Commit & push SEMUA file sitemap ke repository
+      # FIX: sebelumnya hanya commit sitemap.xml, sekarang semua 4 file
+      - name: Commit & Push sitemap files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml sitemap-posts.xml sitemap-pages.xml sitemap-categories.xml
+          git diff --staged --quiet || git commit -m "chore: auto-update sitemap [$(date +'%Y-%m-%d %H:%M')]"
+          git push
