@@ -1,5 +1,5 @@
 # ============================================================
-# Static files (JANGAN di-rewrite)
+# Jangan rewrite file static
 # ============================================================
 
 /css/*        /css/:splat        200
@@ -7,26 +7,27 @@
 /images/*     /images/:splat     200
 /*.css        /:splat            200
 /*.js         /:splat            200
+/*.png        /:splat            200
+/*.jpg        /:splat            200
+/*.webp       /:splat            200
 
 # ============================================================
-# Redirect URL lama
+# Redirect lama
 # ============================================================
 
-/detail.html   /   301
+/detail.html    /    301
 
 # ============================================================
-# Clean URL artikel
+# Halaman artikel clean URL
 # ============================================================
 
-/:category/:slug   /detail.html   200
+/:category/:slug    /detail.html    200
+/:category          /index.html     200  # jika ingin halaman kategori
+/*                  /index.html     200  # fallback semua URL lain
 
 # ============================================================
 # Static pages
 # ============================================================
 
-/about.html           /about.html           200
-/contact.html         /contact.html         200
-/privacy-policy.html  /privacy-policy.html  200
-/terms.html           /terms.html     
-/admin.html        /admin.html    200
-/404.html          /404.html      200
+/admin.html       /admin.html       200
+/404.html         /404.html         200
