@@ -63,7 +63,7 @@
                 <div class="user-info">
                     <!-- FIX: Hapus artefak Cloudflare email obfuscation, JS akan mengisi ini -->
                     <div class="user-name"  id="userName">Admin</div>
-                    <div class="user-email" id="userEmail">admin@example.com</div>
+                    <div class="user-email" id="userEmail"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5031343d393e103528313d203c357e333f3d">[email&#160;protected]</a></div>
                 </div>
             </div>
         </div>
@@ -345,10 +345,11 @@
 
 <div id="toastContainer" class="toast-container"></div>
 
-<!-- FIX: Script tags — sebelumnya file terpotong di sini, semua script tidak termuat -->
+<!-- Scripts — urutan penting: supabase → config → utils → db → admin -->
 <script src="js/config.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/db.js"></script>
 <script src="js/admin.js"></script>
+
 </body>
 </html>
