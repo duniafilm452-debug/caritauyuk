@@ -24,5 +24,9 @@
 # Static pages
 # ============================================================
 
+/about.html           /about.html           200
+/contact.html         /contact.html         200
+/privacy-policy.html  /privacy-policy.html  200
+/terms.html           /terms.html     
 /admin.html        /admin.html    200
 /404.html          /404.html      200
