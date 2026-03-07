@@ -79,9 +79,41 @@ async function loadContentDetail() {
 
     renderMainContent(content, liked);
     renderSidebar(related || []);
+
+    // ── Update meta tags & title untuk SEO ───────────────────
+    updatePageMeta(content);
+
     initCommentSystem(content.id);   // non-blocking — tidak di-await
 
     showLoading(false);
+}
+
+// ── Update Meta Tags Dinamis (SEO) ───────────────────────────
+function updatePageMeta(content) {
+    const cleanUrl  = window.buildArticleUrl(content);
+    const fullUrl   = 'https://yukcaritau.my.id' + cleanUrl;
+    const pageTitle = (content.title || 'Detail') + ' — Cari tau yuk';
+    const desc      = (content.description || '').replace(/<[^>]+>/g, '').slice(0, 160);
+    const img       = content.thumbnail_url || '';
+
+    // Update <title>
+    document.title = pageTitle;
+
+    // Update canonical
+    const canonical = document.getElementById('canonicalUrl');
+    if (canonical) canonical.href = fullUrl;
+
+    // Update Open Graph
+    const set = (id, attr, val) => {
+        const el = document.getElementById(id);
+        if (el) el.setAttribute(attr, val);
+    };
+    set('ogTitle',           'content', pageTitle);
+    set('ogDescription',     'content', desc);
+    set('ogUrl',             'content', fullUrl);
+    set('ogImage',           'content', img);
+    set('twitterTitle',      'content', pageTitle);
+    set('twitterDescription','content', desc);
 }
 
 // ── Render Main ───────────────────────────────────────────────
