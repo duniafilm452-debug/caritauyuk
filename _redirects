@@ -3,24 +3,24 @@
 # ============================================================
 
 # ── 1. Static files — selalu dilayani langsung ───────────────
-css/*                  css/:splat                200
-js/*                   js/:splat                 200
-images/*               images/:splat             200
+/css/*                  /css/:splat                200
+/js/*                   /js/:splat                 200
+/images/*               /images/:splat             200
 
 # ── 2. Static pages — HARUS sebelum rule artikel ─────────────
-index.html             index.html                200
-detail.html            detail.html               200
-admin.html             admin.html                200
-about.html             about.html                200
-contact.html           contact.html              200
-privacy-policy.html    privacy-policy.html       200
-terms.html             terms.html                200
-404.html               404.html                  200
-robots.txt             robots.txt                200
-sitemap.xml            sitemap.xml               200
-sitemap-posts.xml      sitemap-posts.xml         200
-sitemap-pages.xml      sitemap-pages.xml         200
-sitemap-categories.xml sitemap-categories.xml    200
+/index.html             /index.html                200
+/detail.html            /detail.html               200
+/admin.html             /admin.html                200
+/about.html             /about.html                200
+/contact.html           /contact.html              200
+/privacy-policy.html    /privacy-policy.html       200
+/terms.html             /terms.html                200
+/404.html               /404.html                  200
+/robots.txt             /robots.txt                200
+/sitemap.xml            /sitemap.xml               200
+/sitemap-posts.xml      /sitemap-posts.xml         200
+/sitemap-pages.xml      /sitemap-pages.xml         200
+/sitemap-categories.xml /sitemap-categories.xml    200
 
 # ── 3. Clean URL artikel → rewrite ke detail.html ────────────
-:slug                  detail.html               200
+/:slug                  /detail.html               200
