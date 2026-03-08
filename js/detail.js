@@ -20,12 +20,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 const _urlParams   = new URLSearchParams(window.location.search);
 const _pathParts   = window.location.pathname.replace(/^\//, '').split('/').filter(Boolean);
 
+// Daftar nama halaman statis — JANGAN dianggap sebagai slug artikel
+const _STATIC_PAGES = ['detail', 'index', 'admin', 'about', 'contact',
+                        'privacy-policy', 'terms', '404', 'sitemap',
+                        'robots', 'generate-sitemap'];
+
 // Clean URL: path punya 1 segmen → /slug-artikel
-// Abaikan jika segmen adalah file .html
+// Abaikan jika: (1) file .html, atau (2) nama halaman statis
 const _firstPart   = _pathParts[0] || '';
-const contentSlug  = (_pathParts.length === 1 && !_firstPart.endsWith('.html'))
-    ? _firstPart
-    : _urlParams.get('slug');
+const contentSlug  = (
+    _pathParts.length === 1 &&
+    !_firstPart.endsWith('.html') &&
+    !_STATIC_PAGES.includes(_firstPart)
+) ? _firstPart : _urlParams.get('slug');
 
 const contentId    = _urlParams.get('id');   // fallback UUID lama
 
@@ -36,7 +43,7 @@ const loadingSpinner = document.getElementById('loadingSpinner');
 // ── Init ──────────────────────────────────────────────────────
 async function initializeDetail() {
     // Dukung ?slug= (baru) dan ?id= (lama/backward compat)
-    if (!contentSlug && !contentId) { window.location.href = '404.html'; return; }
+    if (!contentSlug && !contentId) { window.location.href = '/404.html'; return; }
     await loadContentDetail();
     setupEventListeners();
 }
@@ -58,7 +65,7 @@ async function loadContentDetail() {
         // Gunakan Supabase client langsung dengan .eq('slug', slug)
         // CATATAN: ganti 'content' dengan nama tabel yang sesuai di Supabase Anda
         const sb = getSupabaseClient();
-        if (!sb) { showLoading(false); window.location.href = '404.html'; return; }
+        if (!sb) { showLoading(false); window.location.href = '/404.html'; return; }
         const res = await sb
             .from('content')        // ← sesuaikan dengan nama tabel Anda
             .select('*')
@@ -73,7 +80,7 @@ async function loadContentDetail() {
         error   = res.error;
     }
 
-    if (error || !content) { showLoading(false); window.location.href = '404.html'; return; }
+    if (error || !content) { showLoading(false); window.location.href = '/404.html'; return; }
 
     const sessionId             = window.getSessionId();
     const { liked }             = await window.contentDB.checkLikeStatus(content.id, sessionId);
