@@ -13,28 +13,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // ── URL Parsing ───────────────────────────────────────────────
-// Mendukung 3 format URL:
-//   1. Clean URL  : /panduan-investasi-saham-untuk-pemula  (baru)
-//   2. Query slug : /detail.html?slug=panduan-investasi-...  (lama)
-//   3. Query id   : /detail.html?id=UUID                     (paling lama)
-const _urlParams   = new URLSearchParams(window.location.search);
-const _pathParts   = window.location.pathname.replace(/^\//, '').split('/').filter(Boolean);
-
-// Daftar nama halaman statis — JANGAN dianggap sebagai slug artikel
-const _STATIC_PAGES = ['detail', 'index', 'admin', 'about', 'contact',
-                        'privacy-policy', 'terms', '404', 'sitemap',
-                        'robots', 'generate-sitemap'];
-
-// Clean URL: path punya 1 segmen → /slug-artikel
-// Abaikan jika: (1) file .html, atau (2) nama halaman statis
-const _firstPart   = _pathParts[0] || '';
-const contentSlug  = (
-    _pathParts.length === 1 &&
-    !_firstPart.endsWith('.html') &&
-    !_STATIC_PAGES.includes(_firstPart)
-) ? _firstPart : _urlParams.get('slug');
-
-const contentId    = _urlParams.get('id');   // fallback UUID lama
+// Mendukung 2 format URL:
+//   1. Query slug : /detail?slug=panduan-investasi-...  (utama)
+//   2. Query id   : /detail?id=UUID                     (fallback lama)
+const _urlParams  = new URLSearchParams(window.location.search);
+const contentSlug = _urlParams.get('slug');
+const contentId   = _urlParams.get('id');
 
 const detailMain     = document.querySelector('.detail-main');
 const detailSidebar  = document.querySelector('.detail-sidebar');

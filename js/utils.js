@@ -156,11 +156,11 @@ window.categoryToPath = function (category) {
         || 'artikel';
 };
 
-// ── Build Article URL (clean SEO URL) ────────────────────────
-// Output: /panduan-investasi-saham-untuk-pemula
+// ── Build Article URL ────────────────────────────────────────
+// Output: /detail?slug=panduan-investasi-saham-untuk-pemula
 window.buildArticleUrl = function (content) {
     if (!content) return '#';
     const slug = content.slug || window.createSlug(content.title || '');
     if (!slug) return '#';
-    return '/' + slug;
+    return '/detail?slug=' + encodeURIComponent(slug);
 };
