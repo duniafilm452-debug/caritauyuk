@@ -8,22 +8,6 @@ const supabase = createClient(
     process.env.SUPABASE_SERVICE_ROLE_KEY
 )
 
-// ── Mapping kategori → path URL ──────────────────────────────
-// Harus sama persis dengan yang ada di utils.js
-const CATEGORY_PATH_MAP = {
-    "Film"      : "film",
-    "Teknologi" : "teknologi",
-    "Keuangan"  : "keuangan",
-    "Kesehatan" : "kesehatan",
-    "Lainnya"   : "lainnya",
-}
-
-function categoryToPath(category) {
-    return CATEGORY_PATH_MAP[category]
-        || category.toLowerCase().replace(/\s+/g, "-")
-        || "artikel"
-}
-
 // ── Fallback slug dari title ──────────────────────────────────
 function slugify(title) {
     return title
@@ -51,8 +35,7 @@ function generatePosts(posts) {
         const slug = post.slug || slugify(post.title || "")
         if (!slug) return
 
-        const catPath = categoryToPath(post.category)
-        const url = `${SITE_URL}/${catPath}/${slug}`
+        const url = `${SITE_URL}/detail?slug=${encodeURIComponent(slug)}`
 
         urls += `
   <url>
@@ -145,7 +128,7 @@ async function main() {
     fs.writeFileSync("sitemap-categories.xml", generateCategories(posts))
     fs.writeFileSync("sitemap.xml",            generateIndex())
 
-    console.log("✅ Sitemap berhasil dibuat dengan clean URL!")
+    console.log("✅ Sitemap berhasil dibuat!")
 }
 
 main()
