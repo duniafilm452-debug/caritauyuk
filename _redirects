@@ -23,4 +23,4 @@ sitemap-pages.xml      sitemap-pages.xml         200
 sitemap-categories.xml sitemap-categories.xml    200
 
 # ── 3. Clean URL artikel → rewrite ke detail.html ────────────
-/:slug                  detail.html               200
+:slug                  detail.html               200
