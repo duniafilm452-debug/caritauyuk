@@ -1,33 +1,26 @@
 # ============================================================
-# Jangan rewrite file static
+# _redirects — Cloudflare Pages
 # ============================================================
 
-/css/*        /css/:splat        200
-/js/*         /js/:splat         200
-/images/*     /images/:splat     200
-/*.css        /:splat            200
-/*.js         /:splat            200
-/*.png        /:splat            200
-/*.jpg        /:splat            200
-/*.webp       /:splat            200
+# ── 1. Static files — selalu dilayani langsung ───────────────
+/css/*                /css/:splat                200
+/js/*                 /js/:splat                 200
+/images/*             /images/:splat             200
 
-# ============================================================
-# Redirect lama
-# ============================================================
+# ── 2. Static pages — HARUS sebelum rule artikel ─────────────
+/index.html           /index.html                200
+/admin.html           /admin.html                200
+/about.html           /about.html                200
+/contact.html         /contact.html              200
+/privacy-policy.html  /privacy-policy.html       200
+/terms.html           /terms.html                200
+/404.html             /404.html                  200
+/robots.txt           /robots.txt                200
+/sitemap.xml          /sitemap.xml               200
+/sitemap-posts.xml    /sitemap-posts.xml         200
+/sitemap-pages.xml    /sitemap-pages.xml         200
+/sitemap-categories.xml /sitemap-categories.xml  200
 
-/detail.html    /    301
-
-# ============================================================
-# Halaman artikel clean URL
-# ============================================================
-
-/:category/:slug    /detail.html    200
-/:category          /index.html     200  # jika ingin halaman kategori
-/*                  /index.html     200  # fallback semua URL lain
-
-# ============================================================
-# Static pages
-# ============================================================
-
-/admin.html       /admin.html       200
-/404.html         /404.html         200
+# ── 3. Clean URL artikel → rewrite ke detail.html ────────────
+# Format: /slug-artikel → detail.html
+/:slug                /detail.html               200
