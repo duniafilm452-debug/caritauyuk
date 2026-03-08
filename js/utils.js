@@ -157,11 +157,10 @@ window.categoryToPath = function (category) {
 };
 
 // ── Build Article URL (clean SEO URL) ────────────────────────
-// Output: /keuangan/panduan-investasi-saham-untuk-pemula
+// Output: /panduan-investasi-saham-untuk-pemula
 window.buildArticleUrl = function (content) {
     if (!content) return '#';
-    const cat  = window.categoryToPath(content.category || '');
     const slug = content.slug || window.createSlug(content.title || '');
     if (!slug) return '#';
-    return '/' + cat + '/' + slug;
+    return '/' + slug;
 };

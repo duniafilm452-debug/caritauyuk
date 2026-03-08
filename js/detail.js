@@ -14,15 +14,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // ── URL Parsing ───────────────────────────────────────────────
 // Mendukung 3 format URL:
-//   1. Clean URL  : /keuangan/panduan-investasi-saham-untuk-pemula  (baru)
-//   2. Query slug : /detail.html?slug=panduan-investasi-...          (lama)
-//   3. Query id   : /detail.html?id=UUID                             (paling lama)
+//   1. Clean URL  : /panduan-investasi-saham-untuk-pemula  (baru)
+//   2. Query slug : /detail.html?slug=panduan-investasi-...  (lama)
+//   3. Query id   : /detail.html?id=UUID                     (paling lama)
 const _urlParams   = new URLSearchParams(window.location.search);
 const _pathParts   = window.location.pathname.replace(/^\//, '').split('/').filter(Boolean);
 
-// Clean URL: path punya 2 segmen → /kategori/slug
-const contentSlug  = (_pathParts.length === 2)
-    ? _pathParts[1]
+// Clean URL: path punya 1 segmen → /slug-artikel
+// Abaikan jika segmen adalah file .html
+const _firstPart   = _pathParts[0] || '';
+const contentSlug  = (_pathParts.length === 1 && !_firstPart.endsWith('.html'))
+    ? _firstPart
     : _urlParams.get('slug');
 
 const contentId    = _urlParams.get('id');   // fallback UUID lama
