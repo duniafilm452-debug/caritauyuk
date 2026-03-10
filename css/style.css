@@ -111,6 +111,13 @@ a {
 }
 a:hover { color: var(--secondary); }
 
+/* Aksesibilitas: link di dalam paragraf/teks harus punya underline
+   agar bisa dibedakan tanpa bergantung pada warna saja (WCAG 1.4.1) */
+p a, .tab-description a, .new-user-hint a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
 img { display: block; max-width: 100%; }
 
 /* ── Layout ───────────────────────────────────────────────── */
@@ -700,7 +707,7 @@ footer {
     padding: var(--sp-xl) 0;
     margin-top: var(--sp-xxl);
 }
-footer h5 { font-size: 1rem; margin-bottom: var(--sp-md); }
+footer h4 { font-size: 1rem; margin-bottom: var(--sp-md); }
 footer ul { list-style: none; }
 footer ul li { margin-bottom: var(--sp-sm); }
 footer a { color: var(--text-secondary); transition: color .2s; }
