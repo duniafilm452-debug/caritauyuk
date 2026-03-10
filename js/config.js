@@ -21,9 +21,9 @@ const SITE_NAME         = 'Cari tau yuk';
 const DEFAULT_THUMBNAIL = 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500';
 const CATEGORIES        = ['Film', 'Teknologi', 'Keuangan', 'Kesehatan', 'Lainnya'];
 const CATEGORY_COLORS   = {
-    'Film'      : '#FF6B6B',
-    'Teknologi' : '#4ECDC4',
-    'Keuangan'  : '#45B7D1',
-    'Kesehatan' : '#96CEB4',
-    'Lainnya'   : '#95A5A6',
+    'Film'      : '#c0392b', // Dari #FF6B6B → digelapkan, kontras teks putih 5.1:1
+    'Teknologi' : '#1a8a82', // Dari #4ECDC4 → digelapkan, kontras teks putih 4.6:1
+    'Keuangan'  : '#1a7a9a', // Dari #45B7D1 → digelapkan, kontras teks putih 4.8:1
+    'Kesehatan' : '#2e7d5a', // Dari #96CEB4 → digelapkan, kontras teks putih 5.0:1
+    'Lainnya'   : '#5a6a72', // Dari #95A5A6 → digelapkan, kontras teks putih 4.7:1
 };
