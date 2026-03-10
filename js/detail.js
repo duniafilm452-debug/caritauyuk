@@ -193,8 +193,6 @@ function renderAffiliateBlock(content) {
 function renderSidebar(relatedContent) {
     if (!detailSidebar) return;
     const esc = window.escapeHtml;
-    const adHtml = `<div class="ad-slot sidebar-widget"><span>Iklan 300x250</span></div>`;
-
     let relatedHtml = '';
     if (relatedContent.length > 0) {
         relatedHtml = `
@@ -219,7 +217,7 @@ function renderSidebar(relatedContent) {
             </div>`;
     }
 
-    detailSidebar.innerHTML = adHtml + relatedHtml + adHtml;
+    detailSidebar.innerHTML = relatedHtml;
 }
 
 // ── Share ─────────────────────────────────────────────────────
