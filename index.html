@@ -28,24 +28,27 @@
 
 <link rel="icon" type="image/png" href="https://film.yukcaritau.my.id/logo%20cari%20tau%20yuk.webp">
 
-<!-- Preconnect -->
+<!-- Preconnect: maks 3 origin paling penting (lebih dari ini justru membuang koneksi) -->
 <link rel="preconnect" href="https://film.yukcaritau.my.id">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<!-- DNS-prefetch sebagai fallback ringan untuk origin sekunder -->
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
-<!-- Font Awesome -->
+<!-- Google Fonts — non-blocking, hanya weight yang dipakai -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</noscript>
+
+<!-- Font Awesome — non-blocking -->
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </noscript>
 
-<!-- Google Fonts -->
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-</noscript>
-
+<!-- Supabase SDK — defer agar tidak blokir render -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 
 <link rel="stylesheet" href="/css/style.css">
@@ -215,7 +218,7 @@ Cari tau yuk adalah platform berbagi informasi menarik seputar film, teknologi, 
 
 <script src="/js/config.js" defer></script>
 <script src="/js/utils.js" defer></script>
-<script src="/js/db.js" defer></script>
+<script src="/js/db-public.js" defer></script>
 <script src="/js/app.js" defer></script>
 
 </body>

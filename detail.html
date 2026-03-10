@@ -1,135 +1,225 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Konten — Cari tau yuk</title>
-    <!-- Canonical & OG diupdate dinamis oleh detail.js setelah konten dimuat -->
-    <link rel="canonical" href="https://yukcaritau.my.id/" id="canonicalUrl">
-    <meta property="og:title"       content="Cari tau yuk" id="ogTitle">
-    <meta property="og:description" content="Temukan informasi menarik seputar film, teknologi, keuangan, dan kesehatan." id="ogDescription">
-    <meta property="og:url"         content="https://yukcaritau.my.id/" id="ogUrl">
-    <meta property="og:image"       content="" id="ogImage">
-    <meta property="og:type"        content="article">
-    <meta name="twitter:card"       content="summary_large_image">
-    <meta name="twitter:title"      content="Cari tau yuk" id="twitterTitle">
-    <meta name="twitter:description" content="" id="twitterDescription">
-    
-    <link rel="icon" type="image/png" href="https://film.yukcaritau.my.id/logo%20cari%20tau%20yuk.webp">
 
-    <!-- Preconnect: maks 4 origin paling penting untuk LCP -->
-    <link rel="preconnect" href="https://film.yukcaritau.my.id">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Font Awesome — non-blocking (hemat ~900ms render-blocking) -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+<title>Cari tau yuk — Temukan Informasi Menarik</title>
 
-    <!-- Google Fonts — non-blocking (hemat ~750ms render-blocking) -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+<meta name="description" content="Cari tau yuk adalah platform untuk menemukan informasi menarik seputar film, teknologi, keuangan, dan kesehatan dalam satu tempat.">
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<meta name="robots" content="index, follow">
 
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/detail.css">
+<link rel="canonical" href="https://yukcaritau.my.id/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Cari tau yuk — Temukan Informasi Menarik">
+<meta property="og:description" content="Temukan informasi menarik seputar film, teknologi, keuangan, dan kesehatan dalam satu tempat.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yukcaritau.my.id/">
+<meta property="og:image" content="https://film.yukcaritau.my.id/logo%20cari%20tau%20yuk.webp">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cari tau yuk">
+<meta name="twitter:description" content="Temukan informasi menarik seputar film, teknologi, keuangan, dan kesehatan.">
+<meta name="twitter:image" content="https://film.yukcaritau.my.id/logo%20cari%20tau%20yuk.webp">
+
+<link rel="icon" type="image/png" href="https://film.yukcaritau.my.id/logo%20cari%20tau%20yuk.webp">
+
+<!-- Preconnect: maks 3 origin paling penting (lebih dari ini justru membuang koneksi) -->
+<link rel="preconnect" href="https://film.yukcaritau.my.id">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- DNS-prefetch sebagai fallback ringan untuk origin sekunder -->
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+<!-- Google Fonts — non-blocking, hanya weight yang dipakai -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</noscript>
+
+<!-- Font Awesome — non-blocking -->
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</noscript>
+
+<!-- Supabase SDK — defer agar tidak blokir render -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+
+<link rel="stylesheet" href="/css/style.css">
+
+<style>
+.loading {
+opacity:.5;
+pointer-events:none;
+transition:opacity .3s;
+}
+</style>
+
+<!-- Schema SEO -->
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"WebSite",
+"name":"Cari tau yuk",
+"url":"https://yukcaritau.my.id/",
+"description":"Platform informasi menarik tentang film, teknologi, keuangan dan kesehatan.",
+"potentialAction":{
+"@type":"SearchAction",
+"target":"https://yukcaritau.my.id/?search={search_term_string}",
+"query-input":"required name=search_term_string"
+}
+}
+</script>
+
 </head>
+
 <body>
 
-<!-- ── Header ────────────────────────────────────────────── -->
 <header class="header">
-    <div class="container header-content">
-        <a href="index.html" class="logo">
-            <i class="fas fa-compass"></i> Cari tau yuk
-        </a>
-        <div class="search-container">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" id="searchInput" class="search-input"
-                   placeholder="Cari judul atau deskripsi…"
-                   onkeypress="if(event.key==='Enter')window.location.href='index.html?search='+encodeURIComponent(this.value)">
-        </div>
-     <!--   <nav>
-            <a href="admin.html" style="color:var(--text-secondary);font-weight:600;font-size:.9rem">
-                <i class="fas fa-user-cog"></i> Admin
-            </a>
-        </nav>  -->
-    </div>
+<div class="container header-content">
+
+<a href="index.html" class="logo">
+<i class="fas fa-compass"></i> Cari tau yuk
+</a>
+
+<div class="search-container">
+<i class="fas fa-search search-icon"></i>
+<input
+type="text"
+id="searchInput"
+class="search-input"
+placeholder="Cari judul atau deskripsi…">
+</div>
+
+<nav>
+<a href="admin.html" style="color:var(--text-secondary);font-weight:600;font-size:.9rem;">
+<i class="fas fa-user-cog"></i> Admin
+</a>
+</nav>
+
+</div>
 </header>
 
-<!-- ── Main ──────────────────────────────────────────────── -->
-<main class="container" style="padding-top:var(--sp-xl)">
-    <a href="#" class="back-button">
-        <i class="fas fa-arrow-left"></i> Kembali
-    </a>
+<section class="hero-section">
+<div class="container">
 
-    <div class="detail-container">
-        <div class="detail-main"></div>
-        <aside class="detail-sidebar"></aside>
-    </div>
+<h1 class="hero-title">Cari tau yuk! 👋</h1>
 
-    <div class="comments-section"></div>
+<p class="hero-subtitle">
+Temukan informasi menarik seputar Film, Teknologi, Keuangan, dan Kesehatan dalam satu tempat
+</p>
 
-    <div id="loadingSpinner" class="loading-spinner">
-        <div class="spinner"></div>
-    </div>
+</div>
+</section>
+
+<main class="container">
+
+<div class="category-filters">
+
+<button class="category-btn active" data-category="Semua">🌟 Semua</button>
+<button class="category-btn" data-category="Film">🎬 Film</button>
+<button class="category-btn" data-category="Teknologi">💻 Teknologi</button>
+<button class="category-btn" data-category="Keuangan">💰 Keuangan</button>
+<button class="category-btn" data-category="Kesehatan">🏥 Kesehatan</button>
+<button class="category-btn" data-category="Lainnya">📌 Lainnya</button>
+
+</div>
+
+<div class="feed-tabs-wrapper">
+
+<div class="feed-tabs">
+
+<button class="feed-tab active" data-tab="foryou">
+<i class="fas fa-magic"></i> Untuk Kamu
+</button>
+
+<button class="feed-tab" data-tab="trending">
+<i class="fas fa-fire"></i> Trending
+</button>
+
+<button class="feed-tab" data-tab="latest">
+<i class="fas fa-clock"></i> Terbaru
+</button>
+
+</div>
+
+<p id="tabDescription" class="tab-description"></p>
+
+</div>
+
+<div id="contentGrid" class="content-grid"></div>
+
+<div id="loadingSpinner" class="loading-spinner hidden">
+<div class="spinner"></div>
+</div>
+
 </main>
 
-<!-- ── Footer ─────────────────────────────────────────────── -->
 <footer>
-    <div class="container">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--sp-xl)">
-            <div>
-                <h5>Tentang Kami</h5>
-                <p style="color:var(--text-secondary);font-size:.9rem">
-                    Cari tau yuk adalah platform berbagi informasi menarik seputar film,
-                    teknologi, keuangan, dan kesehatan.
-                </p>
-            </div>
-            <div>
-                <h5>Kategori Populer</h5>
-                <ul style="list-style:none">
-                    <li><a href="index.html?category=Film">🎬 Film Terbaru</a></li>
-                    <li><a href="index.html?category=Teknologi">💻 Review Teknologi</a></li>
-                    <li><a href="index.html?category=Keuangan">💰 Tips Investasi</a></li>
-                    <li><a href="index.html?category=Kesehatan">🏥 Hidup Sehat</a></li>
-                    <li><a href="index.html?category=Lainnya">📌 Konten Lainnya</a></li>
-                </ul>
-            </div>
-      <!--      
-            <div>
-                <h5>Ikuti Kami</h5>
-                <div style="display:flex;gap:var(--sp-md)">
-                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-facebook"></i></a>
-                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-twitter"></i></a>
-                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-instagram"></i></a>
-                    <a href="#" style="color:var(--text-secondary);font-size:1.5rem"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div> -->
-        </div>
-        
-        <ul style="list-style:none;display:flex;gap:var(--sp-lg);flex-wrap:wrap;margin-top:var(--sp-lg)">
-            <li><a href="about.html">Tentang Kami</a></li>
-            <li><a href="contact.html">Hubungi Kami</a></li>
-            <li><a href="privacy-policy.html">Kebijakan Privasi</a></li>
-            <li><a href="terms.html">Syarat &amp; Ketentuan</a></li>
-        </ul>
-        
-        <hr style="margin:var(--sp-xl) 0;border:none;border-top:1px solid var(--border)">
-        <p style="text-align:center;color:var(--text-light);font-size:.85rem">
-            &copy; 2026 Cari tau yuk. All rights reserved.
-        </p>
-    </div>
+
+<div class="container">
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--sp-xl)">
+
+<div>
+
+<h5>Tentang Kami</h5>
+
+<p style="color:var(--text-secondary);font-size:.9rem">
+Cari tau yuk adalah platform berbagi informasi menarik seputar film, teknologi, keuangan, dan kesehatan.
+</p>
+
+</div>
+
+<div>
+
+<h5>Kategori Populer</h5>
+
+<ul style="list-style:none">
+
+<li><a href="index.html?category=Film&tab=latest">🎬 Film Terbaru</a></li>
+<li><a href="index.html?category=Teknologi&tab=latest">💻 Review Teknologi</a></li>
+<li><a href="index.html?category=Keuangan&tab=latest">💰 Tips Investasi</a></li>
+<li><a href="index.html?category=Kesehatan&tab=latest">🏥 Hidup Sehat</a></li>
+<li><a href="index.html?category=Lainnya">📌 Konten Lainnya</a></li>
+
+</ul>
+
+</div>
+
+</div>
+
+<ul style="list-style:none;display:flex;gap:var(--sp-lg);flex-wrap:wrap;margin-top:var(--sp-lg)">
+
+<li><a href="about.html">Tentang Kami</a></li>
+<li><a href="contact.html">Hubungi Kami</a></li>
+<li><a href="privacy-policy.html">Kebijakan Privasi</a></li>
+<li><a href="terms.html">Syarat & Ketentuan</a></li>
+
+</ul>
+
+<hr style="margin:var(--sp-xl) 0;border:none;border-top:1px solid var(--border)">
+
+<p style="text-align:center;color:var(--text-light);font-size:.85rem">
+© 2026 Cari tau yuk. All rights reserved.
+</p>
+
+</div>
+
 </footer>
 
-<!-- Toast -->
 <div id="toastContainer" class="toast-container"></div>
 
-<!-- FIX: app.js DIHAPUS — tidak dibutuhkan di halaman detail -->
 <script src="/js/config.js" defer></script>
 <script src="/js/utils.js" defer></script>
-<script src="/js/db.js" defer></script>
-<script src="/js/detail.js" defer></script>
+<script src="/js/db-public.js" defer></script>
+<script src="/js/app.js" defer></script>
+
 </body>
 </html>
