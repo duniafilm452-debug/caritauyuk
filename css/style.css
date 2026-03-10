@@ -38,15 +38,15 @@
 
 /* ── CSS Variables ────────────────────────────────────────── */
 :root {
-    --primary     : #4A90E2;
-    --primary-dark: #2f72c4;
+    --primary     : #1a6fc4; /* Ditingkatkan dari #4A90E2 → kontras 5.1:1 di latar putih (lulus WCAG AA) */
+    --primary-dark: #1455a0;
     --secondary   : #F5A623;
     --accent      : #7ED321;
     --grad-hero   : linear-gradient(135deg, #4A90E2 0%, #6c5ce7 100%);
 
     --text-primary  : #1a202c;
     --text-secondary: #4a5568;
-    --text-light    : #a0aec0;
+    --text-light    : #666666; /* Ditingkatkan dari #a0aec0 → kontras lebih baik untuk metadata */
 
     --bg-primary  : #ffffff;
     --bg-secondary: #f7f8fc;
@@ -490,10 +490,23 @@ nav a:hover { color: var(--primary); }
     letter-spacing: .03em;
     backdrop-filter: blur(4px);
     box-shadow: 0 2px 8px rgba(0,0,0,.15);
-    /* Ditingkatkan: text-shadow + background fallback untuk memastikan kontras pada semua warna latar */
     text-shadow: 0 1px 3px rgba(0,0,0,.55);
-    background-color: rgba(0,0,0,.45); /* fallback jika warna inline belum ter-render */
+    background-color: rgba(0,0,0,.45);
 }
+
+/* Override warna badge per kategori agar kontras teks putih lulus WCAG AA.
+   Warna asli terlalu terang (#4ECDC4, #96CEB4, #45B7D1, #FF6B6B) → digelapkan. */
+.category-badge[style*="#4ECDC4"],   /* Teknologi */
+.category-badge[style*="4ECDC4"]     { background-color: #1a8a82 !important; }
+
+.category-badge[style*="#96CEB4"],   /* Kesehatan */
+.category-badge[style*="96CEB4"]     { background-color: #2e7d5a !important; }
+
+.category-badge[style*="#45B7D1"],   /* Keuangan */
+.category-badge[style*="45B7D1"]     { background-color: #1a7a9a !important; }
+
+.category-badge[style*="#FF6B6B"],   /* Film */
+.category-badge[style*="FF6B6B"]     { background-color: #c0392b !important; }
 
 /* Card Body */
 .card-content {
