@@ -1,0 +1,82 @@
+# ============================================================
+# .htaccess — yukcaritau.my.id
+# Cache + Kompresi untuk meningkatkan PageSpeed
+# ============================================================
+
+# ── Kompresi Gzip ────────────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ── Browser Cache ────────────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # HTML — cache singkat agar konten terbaru cepat tampil
+  ExpiresByType text/html                        "access plus 1 hour"
+
+  # CSS & JS — cache 1 bulan
+  ExpiresByType text/css                         "access plus 1 month"
+  ExpiresByType application/javascript           "access plus 1 month"
+  ExpiresByType text/javascript                  "access plus 1 month"
+
+  # Gambar — cache 1 tahun (paling lama karena jarang berubah)
+  ExpiresByType image/webp                       "access plus 1 year"
+  ExpiresByType image/jpeg                       "access plus 1 year"
+  ExpiresByType image/jpg                        "access plus 1 year"
+  ExpiresByType image/png                        "access plus 1 year"
+  ExpiresByType image/gif                        "access plus 1 year"
+  ExpiresByType image/svg+xml                    "access plus 1 year"
+  ExpiresByType image/x-icon                     "access plus 1 year"
+  ExpiresByType image/vnd.microsoft.icon         "access plus 1 year"
+
+  # Font — cache 1 tahun
+  ExpiresByType font/woff                        "access plus 1 year"
+  ExpiresByType font/woff2                       "access plus 1 year"
+  ExpiresByType application/font-woff            "access plus 1 year"
+  ExpiresByType application/font-woff2           "access plus 1 year"
+
+  # JSON/API — jangan di-cache
+  ExpiresByType application/json                 "access plus 0 seconds"
+</IfModule>
+
+# ── Cache-Control Header ─────────────────────────────────────
+<IfModule mod_headers.c>
+  # Gambar
+  <FilesMatch "\.(webp|jpg|jpeg|png|gif|svg|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # CSS & JS
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+
+  # Font
+  <FilesMatch "\.(woff|woff2|ttf|eot)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # HTML
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+
+  # Keamanan tambahan
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# ── Keep-Alive ───────────────────────────────────────────────
+<IfModule mod_headers.c>
+  Header set Connection keep-alive
+</IfModule>
