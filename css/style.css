@@ -129,6 +129,20 @@ img { display: block; max-width: 100%; }
 
 .hidden { display: none !important; }
 
+/* Screen reader only — elemen tidak tampil secara visual
+   tapi tetap terbaca oleh screen reader & dikenali PageSpeed */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* ── Header ───────────────────────────────────────────────── */
 .header {
     position: sticky;
@@ -490,23 +504,9 @@ nav a:hover { color: var(--primary); }
     letter-spacing: .03em;
     backdrop-filter: blur(4px);
     box-shadow: 0 2px 8px rgba(0,0,0,.15);
-    text-shadow: 0 1px 3px rgba(0,0,0,.55);
+    text-shadow: 0 1px 3px rgba(0,0,0,.35);
     background-color: rgba(0,0,0,.45);
 }
-
-/* Override warna badge per kategori agar kontras teks putih lulus WCAG AA.
-   Warna asli terlalu terang (#4ECDC4, #96CEB4, #45B7D1, #FF6B6B) → digelapkan. */
-.category-badge[style*="#4ECDC4"],   /* Teknologi */
-.category-badge[style*="4ECDC4"]     { background-color: #1a8a82 !important; }
-
-.category-badge[style*="#96CEB4"],   /* Kesehatan */
-.category-badge[style*="96CEB4"]     { background-color: #2e7d5a !important; }
-
-.category-badge[style*="#45B7D1"],   /* Keuangan */
-.category-badge[style*="45B7D1"]     { background-color: #1a7a9a !important; }
-
-.category-badge[style*="#FF6B6B"],   /* Film */
-.category-badge[style*="FF6B6B"]     { background-color: #c0392b !important; }
 
 /* Card Body */
 .card-content {
