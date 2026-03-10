@@ -693,27 +693,6 @@ nav a:hover { color: var(--primary); }
     to { transform: scale(2.5); opacity: 0; }
 }
 
-/* ── Ad Slot ──────────────────────────────────────────────── */
-.ad-slot {
-    background: var(--bg-secondary);
-    border: 2px dashed var(--border);
-    border-radius: var(--r-md);
-    padding: var(--sp-lg);
-    text-align: center;
-    color: var(--text-light);
-    font-size: .8rem;
-    margin: var(--sp-lg) 0;
-}
-.ad-slot::before {
-    content: 'Iklan';
-    display: block;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    font-size: .7rem;
-    margin-bottom: 4px;
-    opacity: .7;
-}
-
 /* ── Footer ───────────────────────────────────────────────── */
 footer {
     background: var(--bg-primary);
