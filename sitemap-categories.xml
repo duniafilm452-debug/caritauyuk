@@ -2,17 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://yukcaritau.my.id/index.html?category=Keuangan</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://yukcaritau.my.id/index.html?category=Film</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://yukcaritau.my.id/index.html?category=Kesehatan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yukcaritau.my.id/index.html?category=Teknologi</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yukcaritau.my.id/index.html?category=Keuangan</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
