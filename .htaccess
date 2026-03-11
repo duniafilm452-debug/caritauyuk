@@ -74,6 +74,15 @@
   # Keamanan tambahan
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Izinkan Supabase JS (jsdelivr) & Cloudflare Insights di CSP
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://static.cloudflareinsights.com; connect-src 'self' https://supabase-proxy.galchin7.workers.dev https://cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; frame-ancestors 'self'"
+
+  # Isolasi origin antar tab/popup
+  Header always set Cross-Origin-Opener-Policy "same-origin-allow-popups"
+
+  # Kontrol referrer agar tidak bocor ke origin eksternal
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
 # ── Keep-Alive ───────────────────────────────────────────────
