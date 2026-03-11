@@ -2,7 +2,7 @@
 // config.js — Konfigurasi Supabase & Konstanta Global
 // ============================================================
 
-const supabaseUrl      = 'https://supabase-proxy.galchin7.workers.dev';
+const supabaseUrl      = 'https://api.yukcaritau.my.id';
 const supabaseAnonKey  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjZ3Vpb29saHZ5dGludnFuaXJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3NjM0MTksImV4cCI6MjA4NzMzOTQxOX0.Y9ETtIB6QMj5D6Wp278TOLGWKFKf04ecpLHzQ3Wq2cg';
 
 // ── Inisialisasi Supabase client ──────────────────────────────
@@ -27,3 +27,4 @@ const CATEGORY_COLORS   = {
     'Kesehatan' : '#2e7d5a', // Dari #96CEB4 → digelapkan, kontras teks putih 5.0:1
     'Lainnya'   : '#5a6a72', // Dari #95A5A6 → digelapkan, kontras teks putih 4.7:1
 };
+ 
