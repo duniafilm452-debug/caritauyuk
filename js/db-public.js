@@ -177,6 +177,9 @@ if (typeof window.ContentDB === 'undefined') {
 }
 
 // Inisialisasi instance (sekali saja)
-if (typeof window.contentDB === 'undefined' && typeof supabaseClient !== 'undefined') {
-    window.contentDB = new window.ContentDB(supabaseClient);
+// FIX: Gunakan window._supabase (bukan const supabaseClient) karena
+// variabel const di file lain tidak masuk scope global secara otomatis.
+// config.js sudah meng-assign: window._supabase = supabaseClient;
+if (typeof window.contentDB === 'undefined' && typeof window._supabase !== 'undefined') {
+    window.contentDB = new window.ContentDB(window._supabase);
 }
